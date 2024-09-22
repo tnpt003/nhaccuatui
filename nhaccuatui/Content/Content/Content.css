@@ -1,0 +1,398 @@
+﻿body {
+    background-color: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+    font-family: NhacCuaTui, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    min-width: 1009px;
+    overflow-y: scroll;
+}
+
+.box-content {
+    margin-top: 70px !important;
+    width: 1008.99px; /* Maintain width */
+    background-color: rgb(255, 255, 255);
+}
+
+    .box-content .wrap {
+        position: relative;
+        background-color: rgb(255, 255, 255);
+    }
+
+        .box-content .wrap .content-wrap {
+            padding: 0 10px;
+            max-width: 998px;
+            position: relative;
+            background-color: rgb(255, 255, 255);
+        }
+
+.content-slider-slick {
+    margin: 0 0 25px;
+    width: 997.988px;
+    background-color: rgb(255, 255, 255);
+}
+
+#slickModeCenter.center.slick-initialized.slick-slider {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    touch-action: pan-y;
+    user-select: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.slick-list {
+    padding: 0 134.5px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.slick-track {
+    padding: 20px 0 40px;
+    display: block;
+    left: 0;
+    position: relative;
+    opacity: 1;
+}
+
+.slick-slide {
+    display: block;
+    float: left;
+    height: 294.199px;
+    min-height: 1px;
+    transition: 0.3s;
+    position: relative; /* Add relative positioning */
+}
+
+.slide {
+    position: relative;
+    z-index: auto;
+}
+
+    /* Image styles inside anchor tags */
+    .slide a img {
+        max-width: 100%;
+        vertical-align: middle;
+        display: block;
+        width: 728.984px; /* Maintain width */
+        cursor: default;
+        background-color: rgb(255, 255, 255);
+    }
+
+.slick-prev, .slick-next {
+    font-family: NhacCuaTui, sans-serif;
+    font-size: 16px; /* Adjust as needed */
+    color: rgba(255, 255, 255, 0.8); /* Change to your preferred color */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border: none;
+    border-radius: 50%; /* Round buttons */
+    width: 40px; /* Width of the button */
+    height: 40px; /* Height of the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    z-index: 1000; /* Ensure buttons are on top of other elements */
+    transition: background-color 0.3s;
+}
+
+.slick-prev {
+    left: 10px; /* Position the previous button */
+}
+
+.slick-next {
+    right: 10px; /* Position the next button */
+}
+
+    .slick-prev:hover, .slick-next:hover {
+        background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+    }
+
+
+
+
+
+
+
+
+/* Global Styles */
+.box-left {
+    float: left;
+    width: 667.986px;
+    color: rgb(51, 51, 51);
+    font-family: NhacCuaTui, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    background-color: rgb(255, 255, 255);
+}
+
+.fram_select {
+    overflow: hidden;
+    width: 100%;
+}
+
+.tile_box_key h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgb(35, 38, 45);
+    line-height: 36px;
+    text-transform: uppercase;
+}
+
+    .tile_box_key h2 a {
+        outline: none;
+        color: rgb(45, 170, 237);
+        text-decoration: none;
+        transition: 0.2s linear;
+        padding-right: 20px;
+    }
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    margin: 0; /* Remove default margin */
+}
+
+    ul li {
+        margin: 0 10px 10px 0;
+        width: calc(20% - 10px);
+        height: auto; /* Allow height to adjust */
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+    }
+
+.box-left-album {
+    margin: 0 0 8px;
+    height: 127.986px;
+    overflow: hidden;
+    width: 127.986px;
+    background: rgb(0, 0, 0);
+}
+
+.box_absolute {
+    color: rgba(0, 0, 0, 0.88);
+    transition: 0.2s linear;
+    height: 152px;
+    position: relative;
+    width: 152px;
+    background: rgb(0, 0, 0);
+}
+
+.bg_action_info {
+    height: 127.986px;
+    position: absolute;
+    width: 127.986px;
+    z-index: 2;
+    background: rgb(0, 0, 0);
+}
+
+.icon_play {
+    display: block;
+    height: 47.9861px;
+    width: 47.9861px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    z-index: 1001;
+}
+
+.name_song, .name_singer, .h3seo {
+    outline: none;
+    color: rgb(45, 170, 237);
+    text-decoration: none;
+    transition: 0.2s linear;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    line-height: 19px;
+    background-color: rgb(255, 255, 255);
+    white-space: normal; /* Allow text to wrap */
+    word-break: break-word; /* Break long words */
+    overflow-wrap: break-word; /* Allow overflow wrapping */
+}
+
+.name_song {
+    font-size: 14px;
+    margin: 0 0 5px;
+    width: 100%;
+}
+
+.h3seo {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(35, 38, 45);
+    width: 100%;
+}
+
+.info_album {
+    bottom: 0;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    line-height: 19px;
+    width: 100%;
+    z-index: 10;
+    font-family: NhacCuaTui, sans-serif;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.albumHot {
+    margin: 0 0 10px;
+    float: left;
+    width: 667.988px;
+}
+
+.name_singer {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    list-style: none;
+    font-family: NhacCuaTui, sans-serif;
+    background-color: rgb(255, 255, 255);
+    max-width: 100%; /* Ensure it doesn't exceed container */
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Show ellipsis when text overflows */
+}
+
+
+h4 {
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 400;
+    width: 151.997px;
+    color: rgb(172, 172, 172);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent wrapping */
+    line-height: 19px;
+    list-style: none;
+    font-family: NhacCuaTui, sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+
+/* Additional Flexbox Adjustments */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+/*RIGHT*/
+.box-right {
+    float: right;
+    height: 1809.41px;
+    overflow: hidden;
+    width: 300px;
+    color: rgb(51, 51, 51);
+    font-family: NhacCuaTui, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    background-color: rgb(255, 255, 255);
+}
+    .box-right .box_chart_music {
+        padding: 0px 0px 10px;
+        float: left;
+        width: 300px;
+        color: rgb(51, 51, 51);
+        font-family: NhacCuaTui, sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 18.2px;
+        background-color: rgb(255, 255, 255);
+    }
+
+        .box-right .box_chart_music #top20-content .list_chart_music {
+            float: left;
+            width: 300px;
+            color: rgb(51, 51, 51);
+            font-family: NhacCuaTui, sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18.2px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .box-right .box_chart_music #top20-content .list_chart_music ul {
+            color: rgb(51, 51, 51);
+            font-family: NhacCuaTui, sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18.2px;
+            background-color: rgb(255, 255, 255);
+        }
+            .box-right .box_chart_music #top20-content .list_chart_music ul li {
+                margin: 0px 0px 10px;
+                padding: 0px 0px 10px;
+                list-style: outside none none;
+                border-bottom: 1.11111px solid rgb(243, 243, 243);
+                float: left;
+                width: 300px;
+                color: rgb(51, 51, 51);
+                font-family: NhacCuaTui, sans-serif;
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 18.2px;
+                background-color: rgb(255, 255, 255);
+            }
+
+                .box-right .box_chart_music #top20-content .list_chart_music ul li .info_data {
+                    float: left;
+                    width: 252.986px;
+                    list-style: outside none none;
+                    color: rgb(51, 51, 51);
+                    font-family: NhacCuaTui, sans-serif;
+                    font-size: 13px;
+                    font-weight: 400;
+                    line-height: 18.2px;
+                    background-color: rgb(255, 255, 255);
+                }
+
+                .box-right .box_chart_music #top20-content .list_chart_music ul li .info_data h3 {
+                    margin: 0px;
+                    font-size: 13px;
+                    font-weight: 400;
+                    list-style: outside none none;
+                    color: rgb(51, 51, 51);
+                    font-family: NhacCuaTui, sans-serif;
+                    line-height: 18.2px;
+                    background-color: rgb(255, 255, 255);
+                }
+                    .box-right .box_chart_music #top20-content .list_chart_music ul li .info_data h3 .name_song {
+                        outline: rgba(0, 0, 0, 0.88) none 0px;
+                        color: rgba(0, 0, 0, 0.88);
+                        text-decoration: none solid rgba(0, 0, 0, 0.88);
+                        transition: 0.2s linear;
+                        margin: 0px 0px 4px;
+                        display: -webkit-box;
+                        font-size: 14px;
+                        line-height: 18.2px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 190px;
+                        font-weight: 400;
+                        list-style: outside none none;
+                        font-family: NhacCuaTui, sans-serif;
+                        background-color: rgb(255, 255, 255);
+                    }

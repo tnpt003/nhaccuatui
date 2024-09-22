@@ -1,0 +1,83 @@
+﻿/* CSS cho phần footer */
+footer {
+    background-color: #2f2f2f !important; /* Use !important to override conflicting styles */
+    color: #fff;
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.footer-logo {
+    width: 120px !important;
+    margin-bottom: 10px !important;
+}
+
+.footer-section h3 {
+    color: #00ccff;
+    margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section ul, .footer-section li {
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+    .footer-section ul li {
+        margin-bottom: 10px;
+    }
+
+        .footer-section ul li a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+            .footer-section ul li a:hover {
+                color: #00ccff;
+            }
+
+.social-icons {
+    margin-top: 15px;
+}
+
+    .social-icons a {
+        margin-right: 10px;
+    }
+
+    .social-icons img {
+        /* Adjust width and height to match the desired size */
+        width: 35px;
+        height: 35px;
+        filter: invert(1);
+        transition: transform 0.3s;
+    }
+
+        .social-icons img:hover {
+            transform: scale(1.2);
+        }
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    margin-top: 20px;
+}
+
+    .footer-bottom p {
+        margin: 0;
+        font-size: 13px;
+    }

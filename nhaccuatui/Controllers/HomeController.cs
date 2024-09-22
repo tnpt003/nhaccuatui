@@ -26,5 +26,11 @@ namespace nhaccuatui.Controllers
 
             return View();
         }
+        public ActionResult Core()
+        {
+            ViewBag.Message = "Your core page.";
+
+            return View();
+        }
     }
 }

@@ -1,0 +1,144 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #1f1f1f;
+    color: #e1e1e1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 20px; /* Added padding to prevent content from sticking to the top */
+}
+
+.playlist-content {
+    padding: 20px;
+    margin-bottom: 50px; /* Clear separation between the playlist and the footer */
+}
+
+.playlist-container {
+    width: 600px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 40px; /* Adds separation from the footer */
+}
+
+.playlist-header {
+    display: flex;
+    padding: 20px;
+}
+
+.album-art img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.playlist-info {
+    margin-left: 20px;
+    flex: 1;
+}
+
+    .playlist-info h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #e1e1e1;
+    }
+
+.song-lyrics {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #a1a1a1;
+}
+
+    .song-lyrics .highlighted {
+        color: #3bb9ff;
+    }
+
+.audio-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.song-list ul {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.song-list li {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #3a3a3a;
+    background-color: #2a2a2a;
+    transition: background-color 0.2s;
+}
+
+    .song-list li:hover {
+        background-color: #3b3b3b;
+    }
+
+.song-list .song-number {
+    margin-right: 10px;
+}
+
+.song-list .song-title {
+    flex: 1;
+}
+
+.song-list .song-actions button {
+    background: none;
+    border: none;
+    color: #e1e1e1;
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.song-list .song.active {
+    background-color: #404040;
+}
+
+.playlist-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-top: 1px solid #3a3a3a;
+}
+
+.creator {
+    display: flex;
+    align-items: center;
+}
+
+    .creator img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+.playlist-actions button {
+    background-color: #3bb9ff;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+    .playlist-actions button:hover {
+        background-color: #349bd8;
+    }
