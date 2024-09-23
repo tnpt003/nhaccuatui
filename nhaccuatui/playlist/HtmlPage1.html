@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NhacCuaTui Compact Player</title>
+    <link href="playlist.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="nct-music-player">
+        <div class="player-header">
+            <img src="thuynga.jpg"  alt="Album Cover" class="album-cover">
+            <div class="track-info">
+                <h2 class="track-title">Ngáo Ngơ</h2>
+                <p class="track-artist">Anh Trai "Say Hi", ERIK, JSOL, Orange</p>
+            </div>
+        </div>
+
+        <audio id="audio-player" controls>
+                <source src="playlist/EmCuaNgayHomQua-SonTungMTP-2882720.mp3" type="audio/mpeg" />
+            </audio>
+
+ 
+
+        
+        <div class="playlist-container">
+            <ul class="playlist">
+                <li data-src="song1.mp3" class="active">
+                    <span class="track-number">1</span>
+                    <span class="track-title">Ngáo Ngơ</span>
+                    <span class="track-artist">Anh Trai "Say Hi"</span>
+                    <button class="play-button">Play</button>
+                    <button class="download-button">Tải xuống</button>
+                    <button class="favorite-button">Yêu thích</button>
+                </li>
+                <li data-src="song2.mp3">
+                    <span class="track-number">2</span>
+                    <span class="track-title">Vừa Hận Vừa Yêu</span>
+                    <span class="track-artist">Trung Tự</span>
+                    <button class="play-button">Play</button>
+                    <button class="download-button">Tải xuống</button>
+                    <button class="favorite-button">Yêu thích</button>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="social-actions">
+            <button class="add-to-playlist">Thêm vào Playlist</button>
+            <button class="share-song">Chia sẻ</button>
+        </div>
+    </div>
+
+    <script src="playlist.js"></script></body>
+</html>
