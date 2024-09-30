@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập & Đăng Ký</title>
+    <link rel="stylesheet" href="login-register.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <div class="form-toggle">
+                <button id="loginBtn">Đăng Nhập</button>
+                <button id="registerBtn">Đăng Ký</button>
+            </div>
+
+            <form id="loginForm" class="form active">
+                <h2>Đăng Nhập</h2>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mật khẩu" required>
+                <button type="submit">Đăng Nhập</button>
+
+
+                <div class="social-login">
+                    <button class="social-btn google-btn">
+                        <img src="Google-Plus-Logo.png" alt="Google logo" width="50" />
+                        Đăng nhập bằng Google
+                    </button>
+
+                    <button class="social-btn facebook-btn">
+                        <img src="facebook.png"  alt="Facebook logo" width="50" />
+                        Đăng nhập bằng Facebook
+                    </button>
+                </div>
+
+                <p>Chưa có tài khoản? <span id="showRegister">Đăng ký tại đây</span></p>
+            </form>
+
+            <form id="registerForm" class="form">
+                <h2>Đăng Ký</h2>
+                <input type="text" placeholder="Tên đăng nhập" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mật khẩu" required>
+                <input type="password" placeholder="Xác nhận mật khẩu" required>
+                <input type="text" placeholder="Họ và tên" required>
+                <input type="text" placeholder="Số điện thoại" required>
+                <button type="submit">Đăng Ký</button>
+
+                <p>Đã có tài khoản? <span id="showLogin">Đăng nhập tại đây</span></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="login-register.js"></script>
+   
+</body>
+</html>
