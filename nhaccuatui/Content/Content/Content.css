@@ -1,4 +1,4 @@
-﻿* {
+﻿﻿* {
     box-sizing: border-box;
 }
 
@@ -212,39 +212,11 @@ h4 {
 
 /*RIGHT*/
 .box-right {
-    width: 30%; /* Takes up 30% of the container */
+    width: 30%; /* or max-width: 300px for better responsiveness */
     float: right;
     margin: 0;
     padding: 0;
-}
-    .box-right .box_chart_music {
-        padding: 0px 0px 10px;
-        float: left;
-        width: 300px;
-        color: rgb(51, 51, 51);
-        font-family: NhacCuaTui, sans-serif;
-        font-size: 13px;
-        font-weight: 400;
-        line-height: 18.2px;
-        background-color: rgb(255, 255, 255);
-    }
-.box_chart_music .list_chart_music li .img {
-    float: left;
-    margin-right: 10px;
-    width: 100px;
-    height: 100px;
-}
-
-.one .info_data {
-    width: 300px;
-}
-.info_data {
-    float: left;
-}
-
-.box_chart_music .list_chart_music {
-    float: left;
-    width: 300px;
+    box-sizing: border-box;
 }
 
 /* Container for the tab buttons */
@@ -287,98 +259,103 @@ h4 {
         color: #000;
     }
 
-/* General list styling */
 .list_chart_music ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%; /* Ensure the list takes up full width */
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
 }
 
-.list_chart_music li {
+    .list_chart_music ul li {
+        display: grid; /* Use CSS Grid for layout */
+        grid-template-columns: auto 1fr; /* Auto for number, remaining space for info */
+        align-items: start; /* Align items to the start (top) */
+        padding: 10px 0; /* Space between list items */
+        border-bottom: 1px solid #ddd; /* Optional: Border for separation */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+        width: 100%; /* Each li takes full width */
+    }
+
+.img-container {
+    position: relative; /* Enable absolute positioning for children */
+    width: 100px; /* Set fixed width for the image container */
+    max-width: 100px; /* Prevent it from exceeding this width */
+    margin-right: 10px; /* Space between the image container and song info */
+}
+
+    .img-container img {
+        display: block; /* Make image a block element */
+        width: 100%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+        z-index: 1; /* Image should be behind the number */
+    }
+
+.one .number {
+    position: absolute; /* Position the number absolutely within the container */
+    top: 5px; /* Adjust the top position */
+    left: 5px; /* Adjust the left position */
+    font-size: 24px; /* Adjust font size for the number */
+    font-weight: bold; /* Bold for the number */
+    color: #ff3333; /* Color for the number */
+    background-color: rgba(255, 255, 255, 0.7); /* Optional: background for contrast */
+    padding: 5px; /* Optional: padding around the number */
+    border-radius: 5px; /* Optional: rounded corners */
+    z-index: 2; /* Ensure number is above the image */
+}
+
+.song-info {
     display: flex;
-    align-items: flex-start; /* Align items at the top */
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Full width for each item */
+    flex-direction: column; /* Stack title and artist info vertically */
 }
 
-    .list_chart_music li:hover {
-        background-color: #f9f9f9;
+    .song-info h3 {
+        margin: 0; /* Remove default margin */
+        font-size: 16px; /* Size for the song title */
     }
 
-/* Number placement on the left */
-.list_chart_music .number {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff3333;
-    margin-right: 20px;
-    width: 40px;
-    text-align: center;
-    align-self: flex-start; /* Keep number at the top */
-}
-
-/* Highlight for the special numbers */
-.list_chart_music .special-1 {
-    font-size: 28px;
-    background-color: #ff3333;
-    color: #fff;
-    padding: 5px;
-    border-radius: 50%;
-}
-
-.list_chart_music .special-2, .list_chart_music .special-3, .list_chart_music .special-4 {
-    color: #ff3333;
-}
-
-/* Image and info container */
-.list_chart_music .info_data {
-    flex: 1; /* Take up the remaining space */
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 60px); /* Ensure it fills the remaining space minus the number width */
-}
-
-/* Image styling inside the list */
-.list_chart_music li .img {
-    margin-bottom: 10px;
-    width: 100px; /* Set image width */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 15px; /* Space between image and text */
-}
-
-    .list_chart_music li .img img {
-        max-width: 100%; /* Make sure image doesn't overflow */
-        height: auto;
+    .song-info h4 {
+        margin-top: 5px; /* Space between title and artist info */
+        font-size: 14px; /* Size for artist info */
+        color: #666; /* Color for artist info */
     }
 
-/* Title and artist information */
-.list_chart_music .info_data h3 {
-    margin: 0 0 5px 0; /* Space between title and artist */
-    font-size: 18px;
+
+.number {
+    font-size: 24px; /* Adjust font size for the number */
+    font-weight: bold; /* Bold for the number */
+    color: #ff3333; /* Color for the number */
+    margin-right: 15px; /* Space between number and info data */
+    flex-shrink: 0; /* Prevent number from shrinking */
 }
 
-    .list_chart_music .info_data h3 a {
-        text-decoration: none;
-        color: #333;
-        font-weight: bold;
-        transition: color 0.3s ease;
+.info_data {
+    display: flex; /* Keep flex for stacking info vertically */
+    flex-direction: column; /* Stack title and artist info vertically */
+    justify-content: flex-start; /* Align content to the top */
+    flex-grow: 1; /* Allow info data to grow */
+}
+    .info_data.img {
+    position: relative; /* Position relative for child elements */
+}
+
+    .info_data h3 {
+        margin: 0; /* Remove default margin */
+        font-size: 16px; /* Size for the song title */
     }
 
-        .list_chart_music .info_data h3 a:hover {
-            color: #ff3333; /* Red on hover */
-        }
+    .info_data h4 {
+        margin-top: 5px; /* Space between title and artist info */
+        font-size: 14px; /* Size for artist info */
+        color: #666; /* Color for artist info */
+    }
 
-/* Artist name below the title */
-.list_chart_music .info_data h4 {
-    margin: 0;
-    color: #666;
-    font-size: 14px;
+.name_song {
+    text-decoration: none; /* Remove underline from link */
+    color: #333; /* Default text color */
+    font-weight: bold; /* Bold for song title */
 }
 
-/* Remove border for the last item */
-.list_chart_music ul li:last-child {
-    border-bottom: none;
-}
+    .name_song:hover {
+        color: #ff3333; /* Change color on hover */
+    }
+
 

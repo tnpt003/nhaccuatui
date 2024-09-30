@@ -327,6 +327,11 @@
     <Content Include="Content\Content\Menu.css" />
     <Content Include="Content\Core\Core.css" />
     <Content Include="Content\main.css" />
+    <Content Include="dangkydangnhap\facebook.png" />
+    <Content Include="dangkydangnhap\Google-Plus-Logo.png" />
+    <Content Include="dangkydangnhap\login-register.css" />
+    <Content Include="dangkydangnhap\login-register.html" />
+    <Content Include="dangkydangnhap\login-register.js" />
     <Content Include="favicon.ico" />
     <Content Include="BackupCode\Footer\Footer.css" />
     <Content Include="BackupCode\Footer\Footer.html" />
