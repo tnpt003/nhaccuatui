@@ -328,17 +328,17 @@
     <Content Include="Content\Core\Core.css" />
     <Content Include="Content\main.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Footer\Footer.css" />
-    <Content Include="Footer\Footer.html" />
-    <Content Include="Footer\NhacCuaTui_2022logo.png" />
+    <Content Include="BackupCode\Footer\Footer.css" />
+    <Content Include="BackupCode\Footer\Footer.html" />
+    <Content Include="BackupCode\Footer\NhacCuaTui_2022logo.png" />
     <Content Include="Image\Logo.jpg" />
     <Content Include="Image\NhacCuaTui_2022logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="playlist\EmCuaNgayHomQua-SonTungMTP-2882720.mp3" />
-    <Content Include="playlist\HtmlPage1.html" />
-    <Content Include="playlist\playlist.css" />
-    <Content Include="playlist\thuynga.jpg" />
+    <Content Include="BackupCode\playlist\EmCuaNgayHomQua-SonTungMTP-2882720.mp3" />
+    <Content Include="BackupCode\playlist\HtmlPage1.html" />
+    <Content Include="BackupCode\playlist\playlist.css" />
+    <Content Include="BackupCode\playlist\thuynga.jpg" />
     <Content Include="Scripts\3 dots.js" />
     <Content Include="bin\nhaccuatui.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
@@ -351,7 +351,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="playlist\EmCuaNgayHomQuamp3" />
+    <Content Include="BackupCode\playlist\EmCuaNgayHomQuamp3" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -409,7 +409,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Playlists\Core.cshtml" />
-    <Content Include="Views\Home\index backup.cshtml" />
+    <Content Include="BackupCode\index backup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

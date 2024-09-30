@@ -1,98 +1,101 @@
-﻿/* CSS for footer */
+﻿/* Styles for footer */
 footer {
     padding: 5px 0 6px 0;
     background-color: #2f2f2f;
     color: #f00;
 }
 
+/* Footer content container */
+.footer-content {
+    padding: 0 20px;
+    margin-bottom: 20px; /* Adds space between footer content and footer bottom */
+}
+
+/* Flexbox container for footer sections */
 .footer-container {
     display: flex;
-    justify-content: space-between; /* Distribute space evenly between columns */
-    padding: 0 20px;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
+/* Individual footer sections */
 .footer-section {
-    flex: 1; /* Allow each section to grow equally */
-    min-width: 200px; /* Ensure a minimum width to maintain the column layout */
-    margin-right: 20px; /* Space between columns */
+    flex: 1;
+    min-width: 200px;
+    margin-right: 20px;
 }
 
-/* Remove margin from the last column to prevent overflow */
-.footer-section:last-child {
-    margin-right: 0; /* No margin on the last section */
-}
+    .footer-section:last-child {
+        margin-right: 0;
+    }
 
+/* Footer logo */
 .footer-logo {
-    width: 120px; /* Ensure the image doesn't exceed the width of the column */
-    height: auto;    /* Maintain aspect ratio */
-    margin-bottom: 10px; /* Space below the logo */
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
 }
 
+/* Footer headings */
 .footer-section h3 {
     color: #00ccff;
     margin-bottom: 15px;
 }
 
+/* Footer text */
 .footer-section p, .footer-section ul, .footer-section li {
     font-size: 14px;
 }
 
+/* Links and contact sections */
 .footer-section.links ul, .footer-section.contact ul {
-    display: block; /* Ensure the ul behaves like a block */
+    display: block;
 }
 
-.footer-section.links ul li, .footer-section.contact ul li {
-    margin-bottom: 10px; /* Space between items */
-}
+    .footer-section.links ul li, .footer-section.contact ul li {
+        margin-bottom: 10px;
+    }
 
+/* List styles */
 .footer-section ul {
     list-style: none;
     padding: 0;
 }
 
-.footer-section ul li {
-    margin-bottom: 10px;
-}
+    .footer-section ul li a {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s;
+    }
 
-.footer-section ul li a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s;
-}
+        .footer-section ul li a:hover {
+            color: #00ccff;
+        }
 
-.footer-section ul li a:hover {
-    color: #00ccff;
-}
-
+/* Social icons */
 .social-icons {
     margin-top: 15px;
-    display: flex; /* Flexbox for social icons */
+    display: flex;
 }
 
-.social-icons a {
-    margin-right: 10px; /* Space between social icons */
-}
+    .social-icons a {
+        margin-right: 10px;
+    }
 
-.social-icons img {
-    width: 30px;
-    height: 30px;
-    filter: invert(1); /* Make icons white */
-    transition: transform 0.3s;
-}
+    .social-icons img {
+        width: 30px;
+        height: 30px;
+        filter: invert(1);
+        transition: transform 0.3s;
+    }
 
-.social-icons img:hover {
-    transform: scale(1.2);
-}
+        .social-icons img:hover {
+            transform: scale(1.2);
+        }
 
+/* Footer bottom section */
 .footer-bottom {
     text-align: center;
     padding: 20px;
     background-color: #222;
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    margin: 0;
-    font-size: 13px;
-}
+    margin-top: 20px

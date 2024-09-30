@@ -1,4 +1,8 @@
-﻿body {
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
     background-color: rgb(255, 255, 255);
     color: rgb(51, 51, 51);
     font-family: NhacCuaTui, sans-serif;
@@ -11,6 +15,8 @@
 
 .box-content {
     margin-top: 70px !important;
+    width: 100%; /* Ensures it takes the full width of the content-wrap */
+    box-sizing: border-box; /* Includes padding and borders in the width */
 }
 
 .wrap {
@@ -18,20 +24,24 @@
 }
 
 .content-wrap {
-    padding: 0 10px;
+    justify-content: space-between;
     max-width: 1280px;
-    position: relative;
     margin: 0 auto;
+    overflow: hidden;
 }
+
+    .content-wrap::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
 /* Global Styles */
 .box-left {
+    width: 70%; /* Takes up 60% of the container */
     float: left;
-    width: 667.986px;
-    color: rgb(51, 51, 51);
-    font-family: NhacCuaTui, sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18.2px;
+    margin: 0;
+    padding-right: 50px;
 }
 
 .fram_select {
@@ -202,16 +212,10 @@ h4 {
 
 /*RIGHT*/
 .box-right {
+    width: 30%; /* Takes up 30% of the container */
     float: right;
-    height: 1809.41px;
-    overflow: hidden;
-    width: 300px;
-    color: rgb(51, 51, 51);
-    font-family: NhacCuaTui, sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18.2px;
-    background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
 }
     .box-right .box_chart_music {
         padding: 0px 0px 10px;
@@ -224,77 +228,157 @@ h4 {
         line-height: 18.2px;
         background-color: rgb(255, 255, 255);
     }
+.box_chart_music .list_chart_music li .img {
+    float: left;
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+}
 
-        .box-right .box_chart_music #top20-content .list_chart_music {
-            float: left;
-            width: 300px;
-            color: rgb(51, 51, 51);
-            font-family: NhacCuaTui, sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            line-height: 18.2px;
-            background-color: rgb(255, 255, 255);
+.one .info_data {
+    width: 300px;
+}
+.info_data {
+    float: left;
+}
+
+.box_chart_music .list_chart_music {
+    float: left;
+    width: 300px;
+}
+
+/* Container for the tab buttons */
+.box_chart_music .btn_tab_select {
+    float: right;
+    padding: 0;
+    width: 300px;
+    margin-bottom: 20px;
+    height: 32px;
+    background: #e5e5e5;
+    line-height: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* Space the three tabs evenly */
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Style for each tab link */
+.btn_tab_select a {
+    flex: 1; /* Make each link occupy equal space */
+    text-align: center; /* Center the text within the link */
+    color: #333;
+    text-decoration: none;
+    padding: 0 10px; /* Add some padding to the left and right */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+    /* Active tab style */
+    .btn_tab_select a.active {
+        background-color: #333;
+        color: #fff;
+        border-radius: 16px; /* Give rounded corners for the active tab */
+    }
+
+    /* Hover effect for tab links */
+    .btn_tab_select a:hover {
+        background-color: #ccc;
+        color: #000;
+    }
+
+/* General list styling */
+.list_chart_music ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Ensure the list takes up full width */
+}
+
+.list_chart_music li {
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width for each item */
+}
+
+    .list_chart_music li:hover {
+        background-color: #f9f9f9;
+    }
+
+/* Number placement on the left */
+.list_chart_music .number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff3333;
+    margin-right: 20px;
+    width: 40px;
+    text-align: center;
+    align-self: flex-start; /* Keep number at the top */
+}
+
+/* Highlight for the special numbers */
+.list_chart_music .special-1 {
+    font-size: 28px;
+    background-color: #ff3333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.list_chart_music .special-2, .list_chart_music .special-3, .list_chart_music .special-4 {
+    color: #ff3333;
+}
+
+/* Image and info container */
+.list_chart_music .info_data {
+    flex: 1; /* Take up the remaining space */
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 60px); /* Ensure it fills the remaining space minus the number width */
+}
+
+/* Image styling inside the list */
+.list_chart_music li .img {
+    margin-bottom: 10px;
+    width: 100px; /* Set image width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 15px; /* Space between image and text */
+}
+
+    .list_chart_music li .img img {
+        max-width: 100%; /* Make sure image doesn't overflow */
+        height: auto;
+    }
+
+/* Title and artist information */
+.list_chart_music .info_data h3 {
+    margin: 0 0 5px 0; /* Space between title and artist */
+    font-size: 18px;
+}
+
+    .list_chart_music .info_data h3 a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+        .list_chart_music .info_data h3 a:hover {
+            color: #ff3333; /* Red on hover */
         }
 
-        .box-right .box_chart_music #top20-content .list_chart_music ul {
-            color: rgb(51, 51, 51);
-            font-family: NhacCuaTui, sans-serif;
-            font-size: 13px;
-            font-weight: 400;
-            line-height: 18.2px;
-            background-color: rgb(255, 255, 255);
-        }
-            .box-right .box_chart_music #top20-content .list_chart_music ul li {
-                margin: 0px 0px 10px;
-                padding: 0px 0px 10px;
-                list-style: outside none none;
-                border-bottom: 1.11111px solid rgb(243, 243, 243);
-                float: left;
-                width: 300px;
-                color: rgb(51, 51, 51);
-                font-family: NhacCuaTui, sans-serif;
-                font-size: 13px;
-                font-weight: 400;
-                line-height: 18.2px;
-                background-color: rgb(255, 255, 255);
-            }
+/* Artist name below the title */
+.list_chart_music .info_data h4 {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
 
-                .box-right .box_chart_music #top20-content .list_chart_music ul li .info_data {
-                    float: left;
-                    width: 252.986px;
-                    list-style: outside none none;
-                    color: rgb(51, 51, 51);
-                    font-family: NhacCuaTui, sans-serif;
-                    font-size: 13px;
-                    font-weight: 400;
-                    line-height: 18.2px;
-                    background-color: rgb(255, 255, 255);
-                }
+/* Remove border for the last item */
+.list_chart_music ul li:last-child {
+    border-bottom: none;
+}
 
-                .box-right .box_chart_music #top20-content .list_chart_music ul li .info_data h3 {
-                    margin: 0px;
-                    font-size: 13px;
-                    font-weight: 400;
-                    list-style: outside none none;
-                    color: rgb(51, 51, 51);
-                    font-family: NhacCuaTui, sans-serif;
-                    line-height: 18.2px;
-                    background-color: rgb(255, 255, 255);
-                }
-                    .box-right .box_chart_music #top20-content .list_chart_music ul li .info_data h3 .name_song {
-                        outline: rgba(0, 0, 0, 0.88) none 0px;
-                        color: rgba(0, 0, 0, 0.88);
-                        text-decoration: none solid rgba(0, 0, 0, 0.88);
-                        transition: 0.2s linear;
-                        margin: 0px 0px 4px;
-                        display: -webkit-box;
-                        font-size: 14px;
-                        line-height: 18.2px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        width: 190px;
-                        font-weight: 400;
-                        list-style: outside none none;
-                        font-family: NhacCuaTui, sans-serif;
-                        background-color: rgb(255, 255, 255);
-                    }
