@@ -228,6 +228,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -307,6 +308,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\Admin\Admin.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -336,6 +338,7 @@
     <Content Include="BackupCode\Footer\Footer.css" />
     <Content Include="BackupCode\Footer\Footer.html" />
     <Content Include="BackupCode\Footer\NhacCuaTui_2022logo.png" />
+    <Content Include="Image\Assets\favicon.ico" />
     <Content Include="Image\Logo.jpg" />
     <Content Include="Image\NhacCuaTui_2022logo.png" />
     <Content Include="Global.asax" />
@@ -357,6 +360,7 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="BackupCode\playlist\EmCuaNgayHomQuamp3" />
+    <Content Include="Scripts\Admin\Admin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -415,6 +419,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Playlists\Core.cshtml" />
     <Content Include="BackupCode\index backup.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
