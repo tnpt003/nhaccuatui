@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Admin</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <div class="form-container">
+        <form id="loginForm" method="post">
+            <h2>Đăng Nhập Admin</h2>
+            <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
+            <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+            <button type="submit">Đăng Nhập</button>
+            <p id="loginMessage" style="color: red;"></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const adminUsername = "admin";
+            const adminPassword = "password";
+
+            if (username === adminUsername && password === adminPassword) {
+                alert("Đăng nhập thành công!"); 
+                window.location.href = "AdminDashboard.html"; 
+            } else {
+                document.getElementById("loginMessage").textContent = "Sai tên đăng nhập hoặc mật khẩu";
+            }
+        });
+    </script>
+</body>
+</html>

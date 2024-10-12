@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Lý Admin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Chào mừng đến với Trang Quản Lý Admin</h1>
+        </header>
+        <div class="menu">
+            <h2>Chức Năng</h2>
+            <ul>
+                <li><a href="#manage-employees">Quản Lý Nhân Viên</a></li>
+                <li><a href="#manage-songs">Quản Lý Bài Hát</a></li>
+                <li><a href="#manage-users">Quản Lý Người Dùng</a></li>
+            </ul>
+        </div>
+
+        <div id="manage-employees" class="section">
+            <h2>Quản Lý Nhân Viên</h2>
+            <button onclick="document.getElementById('addEmployeeForm').style.display='block'">Thêm Nhân Viên</button>
+            <div id="addEmployeeForm" style="display:none;">
+                <h3>Thêm Nhân Viên Mới</h3>
+                <form>
+                    <input type="text" placeholder="Tên Nhân Viên" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Số Điện Thoại" required>
+                    <button type="submit">Thêm</button>
+                </form>
+            </div>
+            <h3>Danh Sách Nhân Viên</h3>
+            <table>
+                <tr>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Số Điện Thoại</th>
+                </tr>
+                <tr>
+                    <td>Nguyễn Văn A</td>
+                    <td>a@gmail.com</td>
+                    <td>0123456789</td>
+                </tr>
+                <tr>
+                    <td>Trần Thị B</td>
+                    <td>b@gmail.com</td>
+                    <td>0987654321</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="manage-songs" class="section">
+            <h2>Quản Lý Bài Hát</h2>
+            <button onclick="document.getElementById('addSongForm').style.display='block'">Thêm Bài Hát</button>
+            <div id="addSongForm" style="display:none;">
+                <h3>Thêm Bài Hát Mới</h3>
+                <form>
+                    <input type="text" placeholder="Tên Bài Hát" required>
+                    <input type="text" placeholder="Ca Sĩ" required>
+                    <input type="text" placeholder="Thể Loại" required>
+                    <button type="submit">Thêm</button>
+                </form>
+            </div>
+            <h3>Danh Sách Bài Hát</h3>
+            <table>
+                <tr>
+                    <th>Tên Bài Hát</th>
+                    <th>Ca Sĩ</th>
+                    <th>Thể Loại</th>
+                    <th>Hành Động</th>
+                </tr>
+                <tr>
+                    <td>Bài Hát A</td>
+                    <td>Ca Sĩ A</td>
+                    <td>Thể Loại A</td>
+                    <td><button class="delete-btn">Xóa</button></td>
+                </tr>
+                <tr>
+                    <td>Bài Hát B</td>
+                    <td>Ca Sĩ B</td>
+                    <td>Thể Loại B</td>
+                    <td><button class="delete-btn">Xóa</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="manage-users" class="section">
+            <h2>Quản Lý Người Dùng</h2>
+            <button onclick="document.getElementById('addUserForm').style.display='block'">Thêm Người Dùng</button>
+            <div id="addUserForm" style="display:none;">
+                <h3>Thêm Người Dùng Mới</h3>
+                <form>
+                    <input type="text" placeholder="Tài Khoản" required>
+                    <input type="password" placeholder="Mật Khẩu" required>
+                    <select required>
+                        <option value="" disabled selected>Chọn Hạng Thành Viên</option>
+                        <option value="Đồng">Đồng</option>
+                        <option value="Vàng">Vàng</option>
+                        <option value="Kim Cương">Kim Cương</option>
+                    </select>
+                    <button type="submit">Thêm</button>
+                </form>
+            </div>
+            <h3>Danh Sách Người Dùng</h3>
+            <table>
+                <tr>
+                    <th>Tài Khoản</th>
+                    <th>Mật Khẩu</th>
+                    <th>Hạng Thành Viên</th>
+                    <th>Hành Động</th>
+                </tr>
+                <tr>
+                    <td>user1</td>
+                    <td>password1</td>
+                    <td>Đồng</td>
+                    <td><button class="delete-btn">Xóa</button></td>
+                </tr>
+                <tr>
+                    <td>user2</td>
+                    <td>password2</td>
+                    <td>Vàng</td>
+                    <td><button class="delete-btn">Xóa</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
