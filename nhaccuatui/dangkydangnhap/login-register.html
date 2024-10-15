@@ -16,10 +16,9 @@
 
             <form id="loginForm" class="form active">
                 <h2>Đăng Nhập</h2>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mật khẩu" required>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
                 <button type="submit">Đăng Nhập</button>
-
 
                 <div class="social-login">
                     <button class="social-btn google-btn">
@@ -28,7 +27,7 @@
                     </button>
 
                     <button class="social-btn facebook-btn">
-                        <img src="facebook.png"  alt="Facebook logo" width="50" />
+                        <img src="facebook.png" alt="Facebook logo" width="50" />
                         Đăng nhập bằng Facebook
                     </button>
                 </div>
@@ -51,7 +50,26 @@
         </div>
     </div>
 
-    <script src="login-register.js"></script>
-   
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const adminEmail = "admin@gmail.com";
+            const adminPassword = "admin123";
+
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (email === adminEmail && password === adminPassword) {
+                alert("Đăng nhập thành công");
+                
+                window.location.href = "../admindangnhap/AdminDashboard.html"; 
+
+
+            } else {
+                alert("Sai tên đăng nhập hoặc mật khẩu");
+            }
+        });
+    </script>
 </body>
 </html>
