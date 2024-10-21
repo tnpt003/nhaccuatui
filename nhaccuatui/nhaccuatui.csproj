@@ -239,6 +239,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admindangnhap\AdminDashboard.html" />
+    <Content Include="admindangnhap\AdminLogin.html" />
+    <Content Include="admindangnhap\style.css" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
