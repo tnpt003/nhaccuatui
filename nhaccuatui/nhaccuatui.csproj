@@ -230,6 +230,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginRegisterController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -331,25 +332,16 @@
     <Content Include="Content\Content\Footer.css" />
     <Content Include="Content\Content\Menu.css" />
     <Content Include="Content\Core\Core.css" />
+    <Content Include="Content\LoginRegister\login-register.css" />
     <Content Include="Content\main.css" />
-    <Content Include="dangkydangnhap\facebook.png" />
-    <Content Include="dangkydangnhap\Google-Plus-Logo.png" />
-    <Content Include="dangkydangnhap\login-register.css" />
-    <Content Include="dangkydangnhap\login-register.html" />
-    <Content Include="dangkydangnhap\login-register.js" />
     <Content Include="favicon.ico" />
-    <Content Include="BackupCode\Footer\Footer.css" />
-    <Content Include="BackupCode\Footer\Footer.html" />
-    <Content Include="BackupCode\Footer\NhacCuaTui_2022logo.png" />
     <Content Include="Image\Assets\favicon.ico" />
+    <Content Include="Image\LoginRegister\facebook.png" />
+    <Content Include="Image\LoginRegister\Google-Plus-Logo.png" />
     <Content Include="Image\Logo.jpg" />
     <Content Include="Image\NhacCuaTui_2022logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="BackupCode\playlist\EmCuaNgayHomQua-SonTungMTP-2882720.mp3" />
-    <Content Include="BackupCode\playlist\HtmlPage1.html" />
-    <Content Include="BackupCode\playlist\playlist.css" />
-    <Content Include="BackupCode\playlist\thuynga.jpg" />
     <Content Include="Scripts\3 dots.js" />
     <Content Include="bin\nhaccuatui.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
@@ -362,7 +354,6 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="BackupCode\playlist\EmCuaNgayHomQuamp3" />
     <Content Include="Scripts\Admin\Admin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -421,8 +412,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Playlists\Core.cshtml" />
-    <Content Include="BackupCode\index backup.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\LoginRegister\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
