@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using nhaccuatui.Models;
 
 namespace nhaccuatui.Controllers
 {
@@ -32,5 +33,21 @@ namespace nhaccuatui.Controllers
 
             return View();
         }
+        // Search Action
+        public ActionResult SearchSongsByTitle(string title)
+        {
+            // Initialize the database model
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            // Use the EXEC command with the provided title parameter
+            ViewBag.list = db.get($"EXEC SearchSongsByTitle '{title}'");
+
+            // Return the SearchResults view
+            return View("SearchResults");
+        }
+
+
+
+
     }
 }

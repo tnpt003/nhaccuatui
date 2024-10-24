@@ -15,12 +15,13 @@
     <link rel="icon" type="image/x-icon" href="~/Image/Assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/Content/Admin/Admin.css" rel="stylesheet" />
+    <link href="~/Content/Admin/Data.css" rel="stylesheet" />
 </head>
 <body>
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+            <div class="sidebar-heading border-bottom bg-light">Chào mừng đến với Trang Quản Lý Admin</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
@@ -56,19 +57,65 @@
             </nav>
             <!-- Page content-->
             <div class="container-fluid">
-                @foreach (var a in ViewBag.list)
-                {
-                    <p> @a[3] </p>
-                }
-                <h1 class="mt-4">Simple Sidebar</h1>
-                <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                <p>
-                    Make sure to keep all page content within the
-                    <code>#page-content-wrapper</code>
-                    . The top navbar is optional, and just for demonstration. Just create an element with the
-                    <code>#sidebarToggle</code>
-                    ID which will toggle the menu when clicked.
-                </p>
+                <div id="manage-songs" class="section">
+                    <h2>Quản Lý Bài Hát</h2>
+                    <button onclick="document.getElementById('addSongForm').style.display='block'">Thêm Bài Hát</button>
+                    <div id="addSongForm" style="display:none;">
+                        <h3>Thêm Bài Hát Mới</h3>
+                        <form action="/Admin/AddSong" method="post">
+                            <input type="text" name="Title" placeholder="Tên Bài Hát" required>
+                            <input type="time" name="Duration" placeholder="Thời Lượng" required>
+                            <input type="date" name="ReleaseDate" placeholder="Ngày Phát Hành" required>
+                            <input type="url" name="FileUrl" placeholder="URL File Nhạc" required>
+                            <input type="url" name="ImageUrl" placeholder="URL Hình Ảnh" required> <!-- New ImageUrl input -->
+                            <select name="AlbumID" required>
+                                <option value="">Chọn Album</option>
+                                <!-- Dynamic Album options from database -->
+                                <option value="1">Album 1</option>
+                                <option value="2">Album 2</option>
+                                <!-- Add options dynamically from your database -->
+                            </select>
+                            <select name="GenreID" required>
+                                <option value="">Chọn Thể Loại</option>
+                                <!-- Dynamic Genre options from database -->
+                                <option value="1">Pop</option>
+                                <option value="2">Rock</option>
+                                <!-- Add options dynamically from your database -->
+                            </select>
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Danh Sách Bài Hát</h3>
+                <table border="1">
+                    <tr>
+                        <th>Hình</th>
+                        <th>Tên Bài Hát</th>
+                        <th>Thời Lượng</th>
+                        <th>Ngày Phát Hành</th>
+                        <th>Thể Loại</th>
+                        <th>Album</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var song in ViewBag.list)
+                     {
+                        <tr>
+                            <td>
+                                <!-- Ensure the image URL is correct -->
+                                <img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" />
+                            </td>
+                            <td>@song[2]</td> <!-- Assuming Title is at index 2 -->
+                            <td>@song[3]</td> <!-- Assuming Duration is at index 3 -->
+                            <td>@song[4]</td> <!-- Assuming ReleaseDate is at index 4 -->
+                            <td>@song[5]</td> <!-- Assuming GenreID (you might want to replace this with Genre Name) -->
+                            <td>@song[1]</td> <!-- Assuming AlbumID (you might want to replace this with Album Name) -->
+                            <td>
+                                <a href="~/Admin/DeleteSong?id=@song[0]">Xóa</a>
+                            </td>
+                        </tr>
+                     }
+                </table>
             </div>
         </div>
     </div>

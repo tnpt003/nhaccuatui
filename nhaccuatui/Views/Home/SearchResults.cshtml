@@ -1,0 +1,39 @@
+﻿@using System.Collections
+@{
+    ViewBag.Title = "Kết quả tìm kiếm bài hát";
+}
+
+<h2>Kết quả tìm kiếm</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Tên Bài Hát</th>
+            <th>Thời Lượng</th>
+            <th>Ngày Phát Hành</th>
+            <th>Album</th>
+            <th>Thể Loại</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.list != null && ViewBag.list.Count > 0)
+        {
+            foreach (var row in ViewBag.list)
+            {
+                <tr>
+                    <td>@row[2]</td> <!-- Assuming Title is at index 2 -->
+                    <td>@row[3]</td> <!-- Duration -->
+                    <td>@row[4]</td> <!-- ReleaseDate -->
+                    <td>@row[0]</td> <!-- AlbumID (replace with Album name if available) -->
+                    <td>@row[1]</td> <!-- GenreID (replace with Genre name if available) -->
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">Không có kết quả tìm kiếm nào cho "@Request.QueryString["title"]".</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -17,5 +17,12 @@ namespace nhaccuatui.Controllers
             ViewBag.list = db.get("SELECT * FROM Songs");
             return View();
         }
+        public ActionResult DeleteSong(string id)
+        {
+            NhaccuatuiModel db = new NhaccuatuiModel();
+            ViewBag.list = db.get("EXEC DeleteSong " + id);
+            return RedirectToAction("Index","Admin");
+        }
+
     }
 }

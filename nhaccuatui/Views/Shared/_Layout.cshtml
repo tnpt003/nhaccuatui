@@ -34,7 +34,10 @@
                     </div>
 
                     <div class="navbar-right">
-                        <input type="text" placeholder="Tìm kiếm">
+                        <form action="~/Home/SearchSongsByTitle" method="get" class="search-form">
+                            <input type="text" name="title" placeholder="Tìm kiếm bài hát" required />
+                            <button type="submit">Tìm kiếm</button>
+                        </form>
                         <i class="fa-solid fa-house"></i>
                         <i class="fa-solid fa-cloud"></i>
                         <a href="#" class="login">Đăng nhập</a>
