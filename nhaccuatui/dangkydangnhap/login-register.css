@@ -46,7 +46,6 @@ body {
         .form-toggle button:hover {
             background-color: #0056b3;
         }
-
 .form {
     display: none;
 }
@@ -136,3 +135,4 @@ form span {
 .social-btn img {
     margin-right: 10px;
 }
+
