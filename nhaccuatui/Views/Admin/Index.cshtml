@@ -62,29 +62,33 @@
                     <button onclick="document.getElementById('addSongForm').style.display='block'">Thêm Bài Hát</button>
                     <div id="addSongForm" style="display:none;">
                         <h3>Thêm Bài Hát Mới</h3>
-                        <form action="/Admin/AddSong" method="post">
-                            <input type="text" name="Title" placeholder="Tên Bài Hát" required>
-                            <input type="time" name="Duration" placeholder="Thời Lượng" required>
-                            <input type="date" name="ReleaseDate" placeholder="Ngày Phát Hành" required>
-                            <input type="url" name="FileUrl" placeholder="URL File Nhạc" required>
-                            <input type="url" name="ImageUrl" placeholder="URL Hình Ảnh" required> <!-- New ImageUrl input -->
-                            <select name="AlbumID" required>
+                        <form action="/Song/AddSong" method="post">
+                            <input type="text" name="title" placeholder="Tên Bài Hát" required>
+                            <input type="time" name="duration" placeholder="Thời Lượng" required>
+                            <input type="date" name="releaseDate" placeholder="Ngày Phát Hành" required>
+                            <input type="url" name="fileUrl" placeholder="URL File Nhạc" required>
+                            <input type="url" name="imageUrl" placeholder="URL Hình Ảnh" required>
+
+                            <select name="albumId" required>
                                 <option value="">Chọn Album</option>
                                 <!-- Dynamic Album options from database -->
                                 <option value="1">Album 1</option>
                                 <option value="2">Album 2</option>
-                                <!-- Add options dynamically from your database -->
+                                <!-- Add other options dynamically from your database -->
                             </select>
-                            <select name="GenreID" required>
+
+                            <select name="genreId" required>
                                 <option value="">Chọn Thể Loại</option>
                                 <!-- Dynamic Genre options from database -->
                                 <option value="1">Pop</option>
                                 <option value="2">Rock</option>
-                                <!-- Add options dynamically from your database -->
+                                <!-- Add other options dynamically from your database -->
                             </select>
+
                             <button type="submit">Thêm</button>
                         </form>
                     </div>
+
                 </div>
 
                 <h3>Danh Sách Bài Hát</h3>
@@ -105,13 +109,13 @@
                                 <!-- Ensure the image URL is correct -->
                                 <img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" />
                             </td>
-                            <td>@song[2]</td> <!-- Assuming Title is at index 2 -->
-                            <td>@song[3]</td> <!-- Assuming Duration is at index 3 -->
-                            <td>@song[4]</td> <!-- Assuming ReleaseDate is at index 4 -->
-                            <td>@song[5]</td> <!-- Assuming GenreID (you might want to replace this with Genre Name) -->
+                            <td>@song[3]</td> <!-- Assuming Title is at index 2 -->
+                            <td>@song[4]</td> <!-- Assuming Duration is at index 3 -->
+                            <td>@song[5]</td> <!-- Assuming ReleaseDate is at index 4 -->
+                            <td>@song[2]</td> <!-- Assuming GenreID (you might want to replace this with Genre Name) -->
                             <td>@song[1]</td> <!-- Assuming AlbumID (you might want to replace this with Album Name) -->
                             <td>
-                                <a href="~/Admin/DeleteSong?id=@song[0]">Xóa</a>
+                                <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a>
                             </td>
                         </tr>
                      }

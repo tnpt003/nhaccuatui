@@ -129,6 +129,6 @@ INSERT INTO Comments (UserID, SongID, CommentText) VALUES
 ALTER TABLE Songs
 ADD ImageUrl VARCHAR(255);
 INSERT INTO Songs (AlbumID, GenreID, Title, Duration, ReleaseDate, FileUrl, ImageUrl) VALUES 
-(1, 1, 'Song One', '00:03:30', '2024-01-15', 'http://example.com/song1.mp3', 'http://example.com/image1.jpg'),
-(1, 2, 'Song Two', '00:04:00', '2024-01-15', 'http://example.com/song2.mp3', 'http://example.com/image2.jpg');
-(1, 2, 'Song Two', '00:04:00', '2024-01-15', 'http://example.com/song2.mp3', '1.jpg');
+(1, 1, 'Song One', '00:03:30', '2024-01-15', 'http://example.com/song1.mp3', 'Song One.jpg');
+select * from Songs
+

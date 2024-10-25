@@ -14,15 +14,15 @@ namespace nhaccuatui.Controllers
         public ActionResult Index()
         {
             NhaccuatuiModel db = new NhaccuatuiModel();
-            ViewBag.list = db.get("SELECT * FROM Songs");
+            ViewBag.list = db.get("SELECT * FROM Songs ORDER BY SONGID DESC");
             return View();
         }
-        public ActionResult DeleteSong(string id)
-        {
-            NhaccuatuiModel db = new NhaccuatuiModel();
-            ViewBag.list = db.get("EXEC DeleteSong " + id);
-            return RedirectToAction("Index","Admin");
-        }
+        //public ActionResult DeleteSong(string id)
+        //{
+        //    NhaccuatuiModel db = new NhaccuatuiModel();
+        //    ViewBag.list = db.get("EXEC DeleteSong " + id);
+        //    return RedirectToAction("Index","Admin");
+        //}
 
     }
 }
