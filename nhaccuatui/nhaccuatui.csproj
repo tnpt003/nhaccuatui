@@ -229,6 +229,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginRegisterController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
@@ -335,12 +336,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Playlists\Core.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\LoginRegister\Index.cshtml" />
     <Content Include="Views\Home\SearchResults.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Hinh\" />
+    <Folder Include="Views\Genre\" />
     <Folder Include="Views\Song\" />
   </ItemGroup>
   <ItemGroup>

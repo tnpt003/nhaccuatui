@@ -24,3 +24,32 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+// Function to load content via AJAX
+function loadContent(url) {
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(html => {
+            // Inject the HTML into the content-container
+            document.getElementById('content-container').innerHTML = html;
+        })
+        .catch(error => console.error('Error loading content:', error));
+}
+
+// Attach event listeners to all links with the class "ajax-link"
+document.querySelectorAll('.ajax-link').forEach(link => {
+    link.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default navigation
+
+        // Get the target URL from the href attribute
+        const url = this.getAttribute('href');
+
+        // Load content dynamically
+        loadContent(url);
+    });
+});

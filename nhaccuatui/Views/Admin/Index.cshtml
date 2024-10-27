@@ -21,16 +21,18 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-light">Chào mừng đến với Trang Quản Lý Admin</div>
+            <div class="sidebar-heading border-bottom bg-light">Admin Page</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                <div class="list-group list-group-flush">
+                    <!-- Songs link -->
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#manage-songs">Songs</a>
+
+                    <!-- Genre link -->
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#manage-genres">Genres</a>
+                </div>
             </div>
         </div>
+
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
             <!-- Top navigation-->
@@ -62,29 +64,29 @@
                     <button onclick="document.getElementById('addSongForm').style.display='block'">Thêm Bài Hát</button>
                     <div id="addSongForm" style="display:none;">
                         <h3>Thêm Bài Hát Mới</h3>
-                        <form action="/Song/AddSong" method="post">
+                        <form action="/Song/AddSong" method="post"enctype = "multipart/form-data">> 
                             <input type="text" name="title" placeholder="Tên Bài Hát" required>
                             <input type="time" name="duration" placeholder="Thời Lượng" required>
                             <input type="date" name="releaseDate" placeholder="Ngày Phát Hành" required>
                             <input type="url" name="fileUrl" placeholder="URL File Nhạc" required>
-                            <input type="url" name="imageUrl" placeholder="URL Hình Ảnh" required>
+                            <input type="file" name="imageUrl" placeholder="URL Hình Ảnh" required>
 
                             <select name="albumId" required>
                                 <option value="">Chọn Album</option>
-                                <!-- Dynamic Album options from database -->
-                                <option value="1">Album 1</option>
-                                <option value="2">Album 2</option>
-                                <!-- Add other options dynamically from your database -->
+                                @foreach (var album in ViewBag.ListAl)
+                                {
+                                    <option value="@album[0]">@album[1]</option>
+                                    <!-- Assuming AlbumID is at index 0, Title at index 1 -->
+                                }
                             </select>
-
                             <select name="genreId" required>
                                 <option value="">Chọn Thể Loại</option>
-                                <!-- Dynamic Genre options from database -->
-                                <option value="1">Pop</option>
-                                <option value="2">Rock</option>
-                                <!-- Add other options dynamically from your database -->
+                                @foreach (var genre in ViewBag.ListGe)
+                                {
+                                    <option value="@genre[0]">@genre[1]</option>
+                                    <!-- Assuming GenreID is at index 0, Name at index 1 -->
+                                }
                             </select>
-
                             <button type="submit">Thêm</button>
                         </form>
                     </div>
@@ -103,7 +105,7 @@
                         <th>Hành Động</th>
                     </tr>
                     @foreach (var song in ViewBag.list)
-                     {
+                    {
                         <tr>
                             <td>
                                 <!-- Ensure the image URL is correct -->
@@ -118,7 +120,38 @@
                                 <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a>
                             </td>
                         </tr>
-                     }
+                    }
+                </table>
+            </div>
+
+            <div class="container-fluid">
+                <div id="manage-genres" class="section">
+                    <h2>Quản Lý Thể Loại</h2>
+                    <button onclick="document.getElementById('addGenreForm').style.display='block'">Thêm Thể Loại</button>
+                    <div id="addGenreForm" style="display:none;">
+                        <h3>Thêm Thể Loại Mới</h3>
+                        <form action="/Genre/AddGenre" method="post">
+                            <input type="text" name="name" placeholder="Tên Thể Loại" required>
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Danh Sách Thể Loại</h3>
+                <table border="1">
+                    <tr>
+                        <th>Tên Thể Loại</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var genre in ViewBag.ListGe)
+                    {
+                        <tr>
+                            <td>@genre[1]</td> <!-- Genre Name -->
+                            <td>
+                                <a href="~/Genre/DeleteGenre?id=@genre[0]">Xóa</a>
+                            </td>
+                        </tr>
+                    }
                 </table>
             </div>
         </div>
