@@ -1,0 +1,45 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var songData = ViewBag.SongData != null && ViewBag.SongData.Count > 0 ? ViewBag.SongData[0] : null; // Safely access song data
+}
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Bài Hát</h2>
+
+@if (songData != null)
+{
+    <form action="/Song/UpdateSong" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="songId" value="@songData[0]"> <!-- SongID -->
+        <input type="text" name="title" value="@songData[1]" placeholder="Tên Bài Hát" required> <!-- Title -->
+        <input type="time" name="duration" value="@songData[2]" placeholder="Thời Lượng" required> <!-- Duration -->
+        <input type="date" name="releaseDate" value="@songData[3]" placeholder="Ngày Phát Hành" required> <!-- Release Date -->
+
+        <label>Nhạc:</label>
+        <input type="file" name="fileUrl" placeholder="URL File Nhạc">
+
+        <label>Hình:</label>
+        <input type="file" name="imageUrl" placeholder="URL Hình Ảnh">
+
+        <label>Chọn Album:</label>
+        <select name="albumId" required>
+            @foreach (var album in ViewBag.ListAl)
+            {
+                <option value="@album[0]">@album[1]</option>
+                <!-- Assuming AlbumID is at index 0, Title at index 1 -->}
+        </select>
+
+        <label>Chọn Thể Loại:</label>
+        <select name="genreId" required>
+            @foreach (var genre in ViewBag.ListGe)
+            {
+                <option value="@genre[0]">@genre[1]</option>
+                <!-- Assuming GenreID is at index 0, Name at index 1 -->}
+        </select>
+
+        <button type="submit">Cập Nhật</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy bài hát cần cập nhật.</p>
+}

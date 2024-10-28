@@ -339,13 +339,12 @@
     <Content Include="Views\LoginRegister\Index.cshtml" />
     <Content Include="Views\Home\SearchResults.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\UpdateSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Audio\" />
     <Folder Include="Hinh\" />
-    <Folder Include="Views\Genre\" />
-    <Folder Include="Views\Song\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

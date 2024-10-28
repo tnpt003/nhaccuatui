@@ -25,6 +25,19 @@ namespace nhaccuatui.Controllers
             ViewBag.listCo = db.get("SELECT * FROM Comments ORDER BY COMMENTID DESC");
             return View();
         }
+        public ActionResult GetSongUpdate(int id)
+        {
+            NhaccuatuiModel db = new NhaccuatuiModel();
 
+            // Execute stored procedure to get song data by ID
+            ViewBag.ListSo = db.get($"EXEC GetSongById {id}");
+
+            // Retrieve additional data for dropdowns (if needed)
+            ViewBag.ListAl = db.get("SELECT * FROM Albums"); // Retrieve album list
+            ViewBag.ListGe = db.get("SELECT * FROM Genres"); // Retrieve genre list
+
+            // Redirect to the Index action in the Admin controller after adding the song
+            return RedirectToAction("UpdateSong");
+        }
     }
 }
