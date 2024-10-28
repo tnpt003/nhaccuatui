@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Collections
 @{
     Layout = null;
 }
@@ -16,6 +16,18 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/Content/Admin/Admin.css" rel="stylesheet" />
     <link href="~/Content/Admin/Data.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Ensure only one audio element plays at a time
+            $("audio").on("play", function () {
+                $("audio").not(this).each(function (index, audio) {
+                    audio.pause();
+                });
+            });
+        });
+    </script>
+
 </head>
 <body>
     <div class="d-flex" id="wrapper">
@@ -64,11 +76,14 @@
                     <button onclick="document.getElementById('addSongForm').style.display='block'">Thêm Bài Hát</button>
                     <div id="addSongForm" style="display:none;">
                         <h3>Thêm Bài Hát Mới</h3>
-                        <form action="/Song/AddSong" method="post"enctype = "multipart/form-data">> 
+                        <form action="/Song/AddSong" method="post" enctype="multipart/form-data">
+                            >
                             <input type="text" name="title" placeholder="Tên Bài Hát" required>
                             <input type="time" name="duration" placeholder="Thời Lượng" required>
                             <input type="date" name="releaseDate" placeholder="Ngày Phát Hành" required>
-                            <input type="url" name="fileUrl" placeholder="URL File Nhạc" required>
+                            <a>Nhạc</a>
+                            <input type="file" name="fileUrl" placeholder="URL File Nhạc" required>
+                            <a>Hinh</a>
                             <input type="file" name="imageUrl" placeholder="URL Hình Ảnh" required>
 
                             <select name="albumId" required>
@@ -97,6 +112,7 @@
                 <table border="1">
                     <tr>
                         <th>Hình</th>
+                        <th>Play</th>
                         <th>Tên Bài Hát</th>
                         <th>Thời Lượng</th>
                         <th>Ngày Phát Hành</th>
@@ -108,20 +124,28 @@
                     {
                         <tr>
                             <td>
-                                <!-- Ensure the image URL is correct -->
+                                <!-- Display the song's image -->
                                 <img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" />
                             </td>
-                            <td>@song[3]</td> <!-- Assuming Title is at index 2 -->
-                            <td>@song[4]</td> <!-- Assuming Duration is at index 3 -->
-                            <td>@song[5]</td> <!-- Assuming ReleaseDate is at index 4 -->
-                            <td>@song[2]</td> <!-- Assuming GenreID (you might want to replace this with Genre Name) -->
-                            <td>@song[1]</td> <!-- Assuming AlbumID (you might want to replace this with Album Name) -->
+                            <td>
+                                <!-- Adjusted audio player for MP3 file in Audio folder -->
+                                <audio controls>
+                                    <source src="~/Audio/@song[6]" type="audio/mp3">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </td>
+                            <td>@song[3]</td> <!-- Title -->
+                            <td>@song[4]</td> <!-- Duration -->
+                            <td>@song[5]</td> <!-- Release Date -->
+                            <td>@song[2]</td> <!-- Genre -->
+                            <td>@song[1]</td> <!-- Album -->
                             <td>
                                 <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a>
                             </td>
                         </tr>
                     }
                 </table>
+
             </div>
 
             <div class="container-fluid">
