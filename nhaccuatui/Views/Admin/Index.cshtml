@@ -35,54 +35,33 @@
             <div class="sidebar-heading border-bottom bg-light">Admin Page</div>
             <div class="list-group list-group-flush">
                 <div class="list-group list-group-flush">
-                    <!-- Songs link -->
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#manage-songs">Songs</a>
+                    <div class="list-group list-group-flush">
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#songs-section">Songs</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#genres-section">Genres</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#artists-section">Artists</a>
+                        <!-- Future links for new sections can follow the same format -->
+                    </div>
 
-                    <!-- Genre link -->
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#manage-genres">Genres</a>
                 </div>
             </div>
         </div>
 
         <!-- Page content wrapper-->
-        <div id="page-content-wrapper">
-            <!-- Top navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#!">Action</a>
-                                    <a class="dropdown-item" href="#!">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#!">Something else here</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Page content-->
-            <div class="container-fluid">
-                <div id="manage-songs" class="section">
+        <div class="container-fluid">
+            <!-- Songs Management and List Section -->
+            <div id="songs-section" class="section" style="display: none;">
+                <div id="manage-songs">
                     <h2>Quản Lý Bài Hát</h2>
                     <button onclick="document.getElementById('addSongForm').style.display='block'">Thêm Bài Hát</button>
                     <div id="addSongForm" style="display:none;">
                         <h3>Thêm Bài Hát Mới</h3>
                         <form action="/Song/AddSong" method="post" enctype="multipart/form-data">
-                            >
                             <input type="text" name="title" placeholder="Tên Bài Hát" required>
                             <input type="time" name="duration" placeholder="Thời Lượng" required>
                             <input type="date" name="releaseDate" placeholder="Ngày Phát Hành" required>
                             <a>Nhạc</a>
                             <input type="file" name="fileUrl" placeholder="URL File Nhạc" required>
-                            <a>Hinh</a>
+                            <a>Hình</a>
                             <input type="file" name="imageUrl" placeholder="URL Hình Ảnh" required>
 
                             <select name="albumId" required>
@@ -90,7 +69,6 @@
                                 @foreach (var album in ViewBag.ListAl)
                                 {
                                     <option value="@album[0]">@album[1]</option>
-                                    <!-- Assuming AlbumID is at index 0, Title at index 1 -->
                                 }
                             </select>
                             <select name="genreId" required>
@@ -98,13 +76,11 @@
                                 @foreach (var genre in ViewBag.ListGe)
                                 {
                                     <option value="@genre[0]">@genre[1]</option>
-                                    <!-- Assuming GenreID is at index 0, Name at index 1 -->
                                 }
                             </select>
                             <button type="submit">Thêm</button>
                         </form>
                     </div>
-
                 </div>
 
                 <h3>Danh Sách Bài Hát</h3>
@@ -122,22 +98,18 @@
                     @foreach (var song in ViewBag.list)
                     {
                         <tr>
+                            <td><img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" /></td>
                             <td>
-                                <!-- Display the song's image -->
-                                <img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" />
-                            </td>
-                            <td>
-                                <!-- Adjusted audio player for MP3 file in Audio folder -->
                                 <audio controls>
                                     <source src="~/Audio/@song[6]" type="audio/mp3">
                                     Your browser does not support the audio element.
                                 </audio>
                             </td>
-                            <td>@song[3]</td> <!-- Title -->
-                            <td>@song[4]</td> <!-- Duration -->
-                            <td>@song[5]</td> <!-- Release Date -->
-                            <td>@song[2]</td> <!-- Genre -->
-                            <td>@song[1]</td> <!-- Album -->
+                            <td>@song[3]</td>
+                            <td>@song[4]</td>
+                            <td>@song[5]</td>
+                            <td>@song[2]</td>
+                            <td>@song[1]</td>
                             <td>
                                 <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a>
                                 <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
@@ -145,11 +117,11 @@
                         </tr>
                     }
                 </table>
-
             </div>
 
-            <div class="container-fluid">
-                <div id="manage-genres" class="section">
+            <!-- Genres Management and List Section -->
+            <div id="genres-section" class="section" style="display: none;">
+                <div id="manage-genres">
                     <h2>Quản Lý Thể Loại</h2>
                     <button onclick="document.getElementById('addGenreForm').style.display='block'">Thêm Thể Loại</button>
                     <div id="addGenreForm" style="display:none;">
@@ -170,19 +142,75 @@
                     @foreach (var genre in ViewBag.ListGe)
                     {
                         <tr>
-                            <td>@genre[1]</td> <!-- Genre Name -->
-                            <td>
-                                <a href="~/Genre/DeleteGenre?id=@genre[0]">Xóa</a>
-                            </td>
+                            <td>@genre[1]</td>
+                            <td><a href="~/Genre/DeleteGenre?id=@genre[0]">Xóa</a></td>
                         </tr>
                     }
                 </table>
             </div>
+
+            <!-- Artists Management and List Section -->
+            <div id="artists-section" class="section" style="display: none;">
+                <div id="manage-artists">
+                    <h2>Quản Lý Nghệ Sĩ</h2>
+                    <button onclick="document.getElementById('addArtistForm').style.display='block'">Thêm Nghệ Sĩ</button>
+                    <div id="addArtistForm" style="display:none;">
+                        <h3>Thêm Nghệ Sĩ Mới</h3>
+                        <form action="/Artist/AddArtist" method="post">
+                            <input type="text" name="name" placeholder="Tên Nghệ Sĩ" required>
+                            <input type="text" name="country" placeholder="Quốc Gia" required>
+                            <textarea name="bio" placeholder="Tiểu Sử"></textarea>
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Danh Sách Nghệ Sĩ</h3>
+                <table border="1">
+                    <tr>
+                        <th>Tên Nghệ Sĩ</th>
+                        <th>Quốc Gia</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var artist in ViewBag.ListAr)
+                    {
+                        <tr>
+                            <td>@artist[1]</td> <!-- Artist Name -->
+                            <td>@artist[3]</td> <!-- Country -->
+                            <td><a href="~/Artist/DeleteArtist?id=@artist[0]">Xóa</a></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+
         </div>
     </div>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="~/Scripts/Admin/Admin.js"></script>
+    <script>
+        document.querySelectorAll('.ajax-link').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+
+                // Show the clicked section
+                const sectionId = this.getAttribute('href');
+                const section = document.querySelector(sectionId);
+                if (section) {
+                    section.style.display = 'block';
+                }
+            });
+        });
+
+        // Show "Songs" section by default
+        document.querySelector('#songs-section').style.display = 'block';
+
+    </script>
+
 </body>
 </html>

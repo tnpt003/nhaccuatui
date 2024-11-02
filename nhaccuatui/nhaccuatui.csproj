@@ -229,6 +229,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginRegisterController.cs" />
@@ -345,6 +346,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Audio\" />
     <Folder Include="Hinh\" />
+    <Folder Include="Views\Artist\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
