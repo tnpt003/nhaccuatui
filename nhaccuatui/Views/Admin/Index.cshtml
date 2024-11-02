@@ -111,8 +111,7 @@
                             <td>@song[2]</td>
                             <td>@song[1]</td>
                             <td>
-                                <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a>
-                                <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
+                                <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a> | <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
                             </td>
                         </tr>
                     }
@@ -143,7 +142,10 @@
                     {
                         <tr>
                             <td>@genre[1]</td>
-                            <td><a href="~/Genre/DeleteGenre?id=@genre[0]">Xóa</a></td>
+                            <td>
+                                <a href="~/Genre/DeleteGenre?id=@genre[0]">Xóa</a> | <a href="~/Genre/GetGenreUpdate?id=@genre[0]">Cập Nhật</a>
+                            </td>
+
                         </tr>
                     }
                 </table>
@@ -177,7 +179,10 @@
                         <tr>
                             <td>@artist[1]</td> <!-- Artist Name -->
                             <td>@artist[3]</td> <!-- Country -->
-                            <td><a href="~/Artist/DeleteArtist?id=@artist[0]">Xóa</a></td>
+                            <td>
+                                <a href="~/Artist/DeleteArtist?id=@artist[0]">Xóa</a> | <a href="~/Artist/GetArtistUpdate?id=@artist[0]">Cập Nhật</a>
+                            </td>
+
                         </tr>
                     }
                 </table>

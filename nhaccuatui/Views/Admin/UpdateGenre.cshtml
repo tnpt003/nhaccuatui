@@ -1,0 +1,22 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var genreData = ViewBag.GenreData; // Retrieve genre data from ViewBag
+}
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Thể Loại</h2>
+
+@if (genreData != null)
+{
+    <form action="/Genre/UpdateGenre" method="post">
+        <input type="hidden" name="genreId" value="@genreData[0]"> <!-- GenreID -->
+        <input type="text" name="name" value="@genreData[1]" placeholder="Tên Thể Loại" required> <!-- Genre Name -->
+
+        <button type="submit">Cập Nhật</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy thể loại cần cập nhật.</p>
+}
+

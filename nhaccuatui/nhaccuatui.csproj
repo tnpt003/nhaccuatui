@@ -341,12 +341,13 @@
     <Content Include="Views\Home\SearchResults.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\UpdateSong.cshtml" />
+    <Content Include="Views\Admin\UpdateGenre.cshtml" />
+    <Content Include="Views\Admin\UpdateArtist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Audio\" />
     <Folder Include="Hinh\" />
-    <Folder Include="Views\Artist\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
