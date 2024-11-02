@@ -1,0 +1,37 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var playlistData = ViewBag.PlaylistData != null && ViewBag.PlaylistData.Count > 0 ? ViewBag.PlaylistData[0] : null; // Safely access playlist data
+}
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Danh Sách Phát</h2>
+
+@if (playlistData != null)
+{
+    <form action="/Playlist/UpdatePlaylist" method="post">
+        <input type="hidden" name="playlistId" value="@playlistData[0]"> <!-- PlaylistID -->
+
+        <label for="userId">Chọn Người Dùng:</label>
+        <select name="userId" required>
+            @if (ViewBag.ListUs != null)
+            {
+                foreach (var user in ViewBag.ListUs)
+                {
+                    <option value="@user[0]" @(user[0] == playlistData[1] ? "selected" : "")>@user[1]</option>
+                }
+            }
+            else
+            {
+                <option disabled>Không có người dùng nào.</option>
+            }
+        </select>
+
+        <input type="text" name="name" value="@playlistData[2]" placeholder="Tên Playlist" required /> <!-- Current name of the playlist -->
+
+        <button type="submit">Cập Nhật Playlist</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy danh sách phát cần cập nhật.</p>
+}

@@ -39,6 +39,9 @@
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#songs-section">Songs</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#genres-section">Genres</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#artists-section">Artists</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#albums-section">Albums</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#users-section">Users</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlists-section">Playlists</a>
                         <!-- Future links for new sections can follow the same format -->
                     </div>
 
@@ -183,6 +186,145 @@
                                 <a href="~/Artist/DeleteArtist?id=@artist[0]">Xóa</a> | <a href="~/Artist/GetArtistUpdate?id=@artist[0]">Cập Nhật</a>
                             </td>
 
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <!-- Albums Management and List Section -->
+            <div id="albums-section" class="section" style="display: none;">
+                <div id="manage-albums">
+                    <h2>Quản Lý Album</h2>
+                    <button onclick="document.getElementById('addAlbumForm').style.display='block'">Thêm Album</button>
+                    <div id="addAlbumForm" style="display:none;">
+                        <h3>Thêm Album Mới</h3>
+                        <form action="/Album/AddAlbum" method="post" enctype="multipart/form-data">
+                            <label>Chọn Nghệ Sĩ:</label>
+                            <select name="artistId" required>
+                                @foreach (var artist in ViewBag.ListAr)
+                                {
+                                    <option value="@artist[0]">@artist[1]</option>
+                                    <!-- Assuming ArtistID at index 0, Name at index 1 -->
+                                }
+                            </select>
+
+                            <input type="text" name="title" placeholder="Tên Album" required>
+                            <input type="date" name="releaseDate" placeholder="Ngày Phát Hành" required>
+
+                            <label>Ảnh Bìa:</label>
+                            <input type="file" name="coverImage" placeholder="URL Hình Ảnh Bìa">
+
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Danh Sách Album</h3>
+                <table border="1">
+                    <tr>
+                        <th>Tên Album</th>
+                        <th>Ngày Phát Hành</th>
+                        <th>Ảnh Bìa</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var album in ViewBag.ListAl)
+                    {
+                        <tr>
+                            <td>@album[2]</td> <!-- Album Title -->
+                            <td>@album[3]</td> <!-- Release Date -->
+                            <td>
+                                @if (!string.IsNullOrEmpty(album[4]?.ToString()))
+                                {
+                                    <img src="~/Image/Data/@album[4]" width="50" height="50" />
+                                }
+                            </td>
+                            <td>
+                                <a href="~/Album/DeleteAlbum?id=@album[0]">Xóa</a> |
+                                <a href="~/Album/GetAlbumUpdate?id=@album[0]">Cập Nhật</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <!-- Users Management and List Section -->
+            <div id="users-section" class="section" style="display: none;">
+                <div id="manage-users">
+                    <h2>Quản Lý Người Dùng</h2>
+                    <button onclick="document.getElementById('addUserForm').style.display='block'">Thêm Người Dùng</button>
+                    <div id="addUserForm" style="display:none;">
+                        <h3>Thêm Người Dùng Mới</h3>
+                        <form action="/User/AddUser" method="post">
+                            <input type="text" name="username" placeholder="Tên Người Dùng" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="password" name="password" placeholder="Mật Khẩu" required>
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Danh Sách Người Dùng</h3>
+                <table border="1">
+                    <tr>
+                        <th>Tên Người Dùng</th>
+                        <th>Email</th>
+                        <th>Ngày Tham Gia</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var user in ViewBag.ListUs)
+                    {
+                        <tr>
+                            <td>@user[1]</td> <!-- Username -->
+                            <td>@user[2]</td> <!-- Email -->
+                            <td>@user[4]</td> <!-- DateJoined -->
+                            <td>
+                                <a href="~/User/DeleteUser?id=@user[0]">Xóa</a> |
+                                <a href="~/User/GetUserUpdate?id=@user[0]">Cập Nhật</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <!-- Playlists Management and List Section -->
+            <div id="playlists-section" class="section" style="display: none;">
+                <div id="manage-playlists">
+                    <h2>Quản Lý Danh Sách Phát</h2>
+                    <button onclick="document.getElementById('addPlaylistForm').style.display='block'">Thêm Danh Sách Phát</button>
+                    <div id="addPlaylistForm" style="display:none;">
+                        <h3>Thêm Danh Sách Phát Mới</h3>
+                        <form action="/Playlist/AddPlaylist" method="post">
+                            <label for="userId">Chọn Người Dùng:</label>
+                            <select name="userId" required>
+                                @foreach (var user in ViewBag.ListUs)
+                                {
+                                    <option value="@user[0]">@user[1]</option>
+                                    <!-- Assuming UserID is at index 0, Username at index 1 -->
+                                }
+
+                            </select>
+                            <input type="text" name="name" placeholder="Tên Danh Sách Phát" required />
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>Danh Sách Phát</h3>
+                <table border="1">
+                    <tr>
+                        <th>Tên Danh Sách Phát</th>
+                        <th>Ngày Tạo</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var playlist in ViewBag.ListPl)
+                    {
+                        <tr>
+                            <td>@playlist[2]</td> <!-- Playlist Name -->
+                            <td>@playlist[3]</td> <!-- Created Date -->
+                            <td>
+                                <a href="~/Playlist/DeletePlaylist?id=@playlist[0]">Xóa</a> |
+                                <a href="~/Playlist/GetPlaylistUpdate?id=@playlist[0]">Cập Nhật</a>
+                            </td>
                         </tr>
                     }
                 </table>

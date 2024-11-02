@@ -1,0 +1,34 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var albumData = ViewBag.AlbumData;
+}
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Album</h2>
+
+@if (albumData != null)
+{
+    <form action="/Album/UpdateAlbum" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="albumId" value="@albumData[0]">
+
+        <label>Nghệ Sĩ:</label>
+        <select name="artistId" required>
+            @foreach (var artist in ViewBag.ListArtists)
+            {
+                <option value="@artist[0]" @(artist[0] == albumData[1] ? "selected" : "")>@artist[1]</option>
+            }
+        </select>
+
+        <input type="text" name="title" value="@albumData[2]" required>
+        <input type="date" name="releaseDate" value="@albumData[3]" required>
+
+        <label>Ảnh Bìa:</label>
+        <input type="file" name="coverImage">
+
+        <button type="submit">Cập Nhật</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy album cần cập nhật.</p>
+}

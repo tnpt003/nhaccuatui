@@ -1,0 +1,21 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var user = ViewBag.UserData;
+}
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Người Dùng</h2>
+@if (user != null)
+{
+    <form action="/User/UpdateUser" method="post">
+        <input type="hidden" name="userId" value="@user[0]" /> <!-- UserID -->
+        <input type="text" name="username" value="@user[1]" placeholder="Tên Người Dùng" required />
+        <input type="email" name="email" value="@user[2]" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Mật Khẩu" required /> <!-- For simplicity -->
+        <button type="submit">Cập Nhật</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy người dùng cần cập nhật.</p>
+}
