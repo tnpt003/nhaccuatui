@@ -42,6 +42,7 @@
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#albums-section">Albums</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#users-section">Users</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlists-section">Playlists</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlistsongs-section">Playlist Songs</a>
                         <!-- Future links for new sections can follow the same format -->
                     </div>
 
@@ -324,6 +325,67 @@
                             <td>
                                 <a href="~/Playlist/DeletePlaylist?id=@playlist[0]">Xóa</a> |
                                 <a href="~/Playlist/GetPlaylistUpdate?id=@playlist[0]">Cập Nhật</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <!-- Playlist Songs Management and List Section -->
+            <div id="playlistsongs-section" class="section" style="display: none;">
+                <div id="manage-playlistsongs">
+                    <h2>Quản Lý Bài Hát Trong Playlist</h2>
+
+                    <!-- Form to Add Song to Playlist -->
+                    <button onclick="document.getElementById('addPlaylistSongForm').style.display='block'">Thêm Bài Hát Vào Playlist</button>
+                    <div id="addPlaylistSongForm" style="display:none;">
+                        <h3>Thêm Bài Hát Vào Playlist</h3>
+                        <form action="/PlaylistSong/AddSongToPlaylist" method="post">
+
+                            <!-- Select Playlist -->
+                            <label>Chọn Playlist:</label>
+                            <select name="playlistId" required>
+                                @foreach (var playlist in ViewBag.ListPl)
+                                {
+                                    <option value="@playlist[0]">@playlist[2]</option>
+                                    <!-- Assuming PlaylistID at index 0, Name at index 1 -->
+                                }
+                            </select>
+
+                            <!-- Select Song -->
+                            <label>Chọn Bài Hát:</label>
+                            <select name="songId" required>
+                                @foreach (var song in ViewBag.List)
+                                {
+                                    <option value="@song[0]">@song[3]</option>
+                                    <!-- Assuming SongID at index 0, Title at index 1 -->
+                                }
+                            </select>
+
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- List Songs in Playlists -->
+                <h3>Danh Sách Bài Hát Trong Playlist</h3>
+                <table border="1">
+                    <tr>
+                        <th>Playlist</th>
+                        <th>Bài Hát</th>
+                        <th>Ngày Thêm</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var item in ViewBag.listPlS)
+                    {
+                        <tr>
+                            <td>@item[1]</td> <!-- Playlist Name -->
+                            <td>@item[3]</td> <!-- Song Title -->
+                            <td>@item[4]</td> <!-- Added Date -->
+                            <td>
+                                <a href="~/PlaylistSong/DeleteSongFromPlaylist?playlistId=@item[0]&songId=@item[2]">Xóa</a>
+                                <a href="~/PlaylistSong/GetPlaylistSongUpdate?playlistId=@item[0]&songId=@item[2]">Cập Nhật</a>
+                                <!-- Assuming PlaylistID at index 0, Playlist Name at index 1, SongID at index 2, Song Title at index 3 -->
                             </td>
                         </tr>
                     }

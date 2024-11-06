@@ -1,0 +1,42 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var playlistSongs = ViewBag.PlaylistSongs;
+    var allSongs = ViewBag.AllSongs;
+    int playlistId = ViewBag.PlaylistID;
+}
+
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Bài Hát Trong Playlist</h2>
+
+<form action="/PlaylistSong/UpdatePlaylistSong" method="post">
+    <input type="hidden" name="playlistId" value="@playlistId" /> <!-- PlaylistID -->
+    <!-- Display the current songs in the playlist -->
+    <label>Bài Hát Hiện Tại Trong Playlist:</label>
+    @if (playlistSongs != null && playlistSongs.Count > 0)
+    {
+        <select name="oldSongId" required>
+            @foreach (var song in playlistSongs)
+            {
+                <option value="@song[0]">@song[1]</option>
+                <!-- Assuming SongID at index 0, Title at index 1 -->
+            }
+        </select>
+    }
+    else
+    {
+        <p>Không có bài hát nào trong playlist.</p>
+    }
+
+    <!-- Select the new song to replace the old one -->
+    <label>Chọn Bài Hát Mới Để Đổi:</label>
+    <select name="newSongId" required>
+        @foreach (var song in allSongs)
+        {
+            <option value="@song[0]">@song[1]</option>
+            <!-- Assuming SongID at index 0, Title at index 3 -->
+        }
+    </select>
+
+    <button type="submit">Cập Nhật Playlist</button>
+</form>

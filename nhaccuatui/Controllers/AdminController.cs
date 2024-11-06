@@ -20,7 +20,14 @@ namespace nhaccuatui.Controllers
             ViewBag.listAl = db.get("SELECT * FROM Albums ORDER BY ALBUMID DESC");
             ViewBag.listGe = db.get("SELECT * FROM Genres ORDER BY GENREID DESC");
             ViewBag.listPl = db.get("SELECT * FROM Playlists ORDER BY PLAYLISTID DESC");
-            ViewBag.listPlS = db.get("SELECT * FROM PlaylistSongs ORDER BY PLAYLISTID DESC");
+            ViewBag.listPlS = db.get(@"
+    SELECT ps.PlaylistID, pl.Name AS PlaylistName, ps.SongID, s.Title AS SongTitle, ps.AddedDate
+    FROM PlaylistSongs ps
+    JOIN Playlists pl ON ps.PlaylistID = pl.PlaylistID
+    JOIN Songs s ON ps.SongID = s.SongID
+    ORDER BY ps.PlaylistID DESC
+");
+
             ViewBag.listLi = db.get("SELECT * FROM Likes ORDER BY LIKEID DESC");
             ViewBag.listCo = db.get("SELECT * FROM Comments ORDER BY COMMENTID DESC");
             return View();

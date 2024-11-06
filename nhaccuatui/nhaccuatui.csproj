@@ -233,9 +233,11 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikeController.cs" />
     <Compile Include="Controllers\LoginRegisterController.cs" />
     <Compile Include="Controllers\PlaylistController.cs" />
     <Compile Include="Controllers\PlaylistsController.cs" />
+    <Compile Include="Controllers\PlaylistSongController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -281,6 +283,8 @@
     <Content Include="Image\NhacCuaTui_2022logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="KQtimkiem\index.html" />
+    <Content Include="KQtimkiem\style.css" />
     <Content Include="Scripts\3 dots.js" />
     <Content Include="Scripts\Admin\Admin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -349,12 +353,15 @@
     <Content Include="Views\Admin\UpdateAlbum.cshtml" />
     <Content Include="Views\Admin\UpdateUser.cshtml" />
     <Content Include="Views\Admin\UpdatePlaylist.cshtml" />
+    <Content Include="Views\Admin\UpdatePlaylistSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Audio\" />
     <Folder Include="Hinh\" />
     <Folder Include="Views\Album\" />
+    <Folder Include="Views\Like\" />
+    <Folder Include="Views\PlaylistSong\" />
     <Folder Include="Views\Playlist\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
