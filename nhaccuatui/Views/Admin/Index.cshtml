@@ -43,6 +43,7 @@
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#users-section">Users</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlists-section">Playlists</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlistsongs-section">Playlist Songs</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#likes-section">Likes</a>
                         <!-- Future links for new sections can follow the same format -->
                     </div>
 
@@ -386,6 +387,66 @@
                                 <a href="~/PlaylistSong/DeleteSongFromPlaylist?playlistId=@item[0]&songId=@item[2]">Xóa</a>
                                 <a href="~/PlaylistSong/GetPlaylistSongUpdate?playlistId=@item[0]&songId=@item[2]">Cập Nhật</a>
                                 <!-- Assuming PlaylistID at index 0, Playlist Name at index 1, SongID at index 2, Song Title at index 3 -->
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <!-- Like Management Section -->
+            <div id="likes-section" class="section" style="display: none;">
+                <div id="manage-likes">
+                    <h2>Quản Lý Likes</h2>
+
+                    <!-- Form to Add Like -->
+                    <button onclick="document.getElementById('addLikeForm').style.display='block'">Thêm Like Mới</button>
+                    <div id="addLikeForm" style="display:none;">
+                        <h3>Thêm Like Mới</h3>
+                        <form action="/Like/AddLike" method="post">
+                            <!-- Select User -->
+                            <label>Chọn Người Dùng:</label>
+                            <select name="userId" required>
+                                @foreach (var user in ViewBag.listUs)
+                                {
+                                    <option value="@user[0]">@user[1]</option>
+                                    <!-- Assuming UserID at index 0, Name at index 1 -->
+                                }
+                            </select>
+
+                            <!-- Select Song -->
+                            <label>Chọn Bài Hát:</label>
+                            <select name="songId" required>
+                                @foreach (var song in ViewBag.list)
+                                {
+                                    <option value="@song[0]">@song[3]</option>
+                                    <!-- Assuming SongID at index 0, Title at index 1 -->
+                                }
+                            </select>
+
+                            <button type="submit">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- List Likes -->
+                <h3>Danh Sách Likes</h3>
+                <table border="1">
+                    <tr>
+                        <th>Người Dùng</th>
+                        <th>Bài Hát</th>
+                        <th>Ngày Like</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var item in ViewBag.listLi)
+                    {
+                        <tr>
+                            <td>@item[1]</td> <!-- User Name -->
+                            <td>@item[2]</td> <!-- Song Title -->
+                            <td>@item[3]</td> <!-- Liked Date -->
+                            <td>
+                                <a href="~/Like/DeleteLike?likeId=@item[0]">Xóa</a>
+                                <a href="~/Like/GetLikeDetails?likeId=@item[0]">Cập Nhật</a>
+                                <!-- Assuming LikeID at index 0, UserID at index 1, SongID at index 2, Song Title at index 3 -->
                             </td>
                         </tr>
                     }

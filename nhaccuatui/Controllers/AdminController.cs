@@ -26,9 +26,18 @@ namespace nhaccuatui.Controllers
     JOIN Playlists pl ON ps.PlaylistID = pl.PlaylistID
     JOIN Songs s ON ps.SongID = s.SongID
     ORDER BY ps.PlaylistID DESC
-");
+    ");
 
-            ViewBag.listLi = db.get("SELECT * FROM Likes ORDER BY LIKEID DESC");
+            ViewBag.listLi = db.get(@"SELECT 
+    L.LikeID,
+    U.UserName,
+    S.Title AS SongTitle,
+    L.LikedDate
+    FROM Likes L
+    JOIN Users U ON L.UserID = U.UserID
+    JOIN Songs S ON L.SongID = S.SongID
+    ORDER BY L.LikeID DESC;
+    ");
             ViewBag.listCo = db.get("SELECT * FROM Comments ORDER BY COMMENTID DESC");
             return View();
         }

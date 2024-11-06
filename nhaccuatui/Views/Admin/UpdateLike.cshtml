@@ -1,0 +1,39 @@
+﻿@using System.Collections
+@{
+    Layout = null;
+    var likeData = ViewBag.LikeData; // Assuming ViewBag.LikeData contains the Like data
+}
+
+<h2>Cập Nhật Like</h2>
+
+@if (likeData != null)
+{
+    <form action="/Like/UpdateLike" method="post">
+        <input type="hidden" name="likeId" value="@likeData[0]" /> <!-- LikeID -->
+        <input type="hidden" name="oldSongId" value="@likeData[2]" /> <!-- Old SongID -->
+
+        <label>Chọn Người Dùng:</label>
+        <select name="userId" required>
+            @foreach (var user in ViewBag.listUs)
+            {
+                <option value="@user[0]" @(user[0] == likeData[1] ? "selected" : "")>@user[1]</option>
+                <!-- Assuming UserID at index 0, Name at index 1 -->
+            }
+        </select>
+
+        <label>Chọn Bài Hát:</label>
+        <select name="songId" required>
+            @foreach (var song in ViewBag.list)
+            {
+                <option value="@song[0]" @(song[0] == likeData[2] ? "selected" : "")>@song[3]</option>
+                <!-- Assuming SongID at index 0, Title at index 3 -->
+            }
+        </select>
+
+        <button type="submit">Cập Nhật</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy Like.</p>
+}
