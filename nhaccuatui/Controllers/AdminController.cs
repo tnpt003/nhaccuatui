@@ -38,7 +38,13 @@ namespace nhaccuatui.Controllers
     JOIN Songs S ON L.SongID = S.SongID
     ORDER BY L.LikeID DESC;
     ");
-            ViewBag.listCo = db.get("SELECT * FROM Comments ORDER BY COMMENTID DESC");
+            ViewBag.listCo = db.get(@"
+        SELECT c.CommentID, u.UserName, s.Title AS SongTitle, c.CommentText, c.CommentDate
+        FROM Comments c
+        JOIN Users u ON c.UserID = u.UserID
+        JOIN Songs s ON c.SongID = s.SongID
+        ORDER BY c.CommentID DESC
+    ");
             return View();
         }
     }

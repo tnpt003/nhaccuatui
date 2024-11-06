@@ -44,6 +44,7 @@
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlists-section">Playlists</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#playlistsongs-section">Playlist Songs</a>
                         <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#likes-section">Likes</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3 ajax-link" href="#comments-section">Comments</a>
                         <!-- Future links for new sections can follow the same format -->
                     </div>
 
@@ -447,6 +448,72 @@
                                 <a href="~/Like/DeleteLike?likeId=@item[0]">Xóa</a>
                                 <a href="~/Like/GetLikeDetails?likeId=@item[0]">Cập Nhật</a>
                                 <!-- Assuming LikeID at index 0, UserID at index 1, SongID at index 2, Song Title at index 3 -->
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <!-- Comment Management Section -->
+            <div id="comments-section" class="section" style="display: none;">
+                <div id="manage-comments">
+                    <h2>Quản Lý Bình Luận</h2>
+
+                    <!-- Form to Add Comment -->
+                    <button onclick="document.getElementById('addCommentForm').style.display='block'">Thêm Bình Luận Mới</button>
+                    <div id="addCommentForm" style="display:none;">
+                        <h3>Thêm Bình Luận Mới</h3>
+                        <form action="/Comment/AddComment" method="post">
+                            <!-- Select User -->
+                            <label>Chọn Người Dùng:</label>
+                            <select name="userId" required>
+                                @foreach (var user in ViewBag.listUs)
+                                {
+                                    <option value="@user[0]">@user[1]</option>
+                                    <!-- Assuming UserID at index 0, Name at index 1 -->
+                                }
+                            </select>
+
+                            <!-- Select Song -->
+                            <label>Chọn Bài Hát:</label>
+                            <select name="songId" required>
+                                @foreach (var song in ViewBag.list)
+                                {
+                                    <option value="@song[0]">@song[3]</option>
+                                    <!-- Assuming SongID at index 0, Song Title at index 3 -->
+                                }
+                            </select>
+
+                            <!-- Comment Text -->
+                            <label for="commentText">Bình Luận:</label>
+                            <textarea name="commentText" required></textarea>
+
+                            <button type="submit">Thêm Bình Luận</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- List Comments -->
+                <h3>Danh Sách Bình Luận</h3>
+                <table border="1">
+                    <tr>
+                        <th>Người Dùng</th>
+                        <th>Bài Hát</th>
+                        <th>Bình Luận</th>
+                        <th>Ngày Bình Luận</th>
+                        <th>Hành Động</th>
+                    </tr>
+                    @foreach (var item in ViewBag.listCo)
+                    {
+                        <tr>
+                            <td>@item[1]</td> <!-- User Name -->
+                            <td>@item[2]</td> <!-- Song Title -->
+                            <td>@item[3]</td> <!-- Comment Text -->
+                            <td>@item[4]</td> <!-- Comment Date -->
+                            <td>
+                                <a href="~/Comment/DeleteComment?commentId=@item[0]">Xóa</a>
+                                <a href="~/Comment/GetCommentDetails?commentId=@item[0]">Cập Nhật</a>
+                                <!-- Assuming CommentID at index 0, UserID at index 1, SongID at index 2, Comment Text at index 3, Comment Date at index 4 -->
                             </td>
                         </tr>
                     }

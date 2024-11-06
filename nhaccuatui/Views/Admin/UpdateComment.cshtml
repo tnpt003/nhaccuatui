@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+    var commentData = ViewBag.CommentData; // Assuming commentData is passed from controller
+}
+<link href="~/Content/Admin/Data.css" rel="stylesheet" />
+<h2>Cập Nhật Bình Luận</h2>
+
+@if (commentData != null)
+{
+    <form action="/Comment/UpdateComment" method="post">
+        <input type="hidden" name="commentId" value="@commentData[0]" />
+
+        <label for="userId">Chọn Người Dùng:</label>
+        <select name="userId" required>
+            @foreach (var user in ViewBag.listUs)
+            {
+                <option value="@user[0]" @(user[0] == commentData[1] ? "selected" : "")>@user[1]</option>
+            }
+        </select>
+
+        <label for="songId">Chọn Bài Hát:</label>
+        <select name="songId" required>
+            @foreach (var song in ViewBag.list)
+            {
+                <option value="@song[0]" @(song[0] == commentData[2] ? "selected" : "")>@song[3]</option>
+            }
+        </select>
+
+        <label for="commentText">Bình Luận:</label>
+        <textarea name="commentText" required>@commentData[3]</textarea>
+
+        <button type="submit">Cập Nhật Bình Luận</button>
+    </form>
+}
+else
+{
+    <p>Không tìm thấy bình luận cần cập nhật.</p>
+}
+
