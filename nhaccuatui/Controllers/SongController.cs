@@ -11,12 +11,21 @@ namespace nhaccuatui.Controllers
     public class SongController : Controller
     {
         // GET: Song
-        public ActionResult DeleteSong(string id)
+        public ActionResult DeleteSong(int songId)
         {
             NhaccuatuiModel db = new NhaccuatuiModel();
-            ViewBag.list = db.get("EXEC DeleteSong " + id);
+
+            // Delete related playlist songs, likes, and comments
+            db.get($"DELETE FROM PlaylistSongs WHERE SongID = {songId}");
+            db.get($"DELETE FROM Likes WHERE SongID = {songId}");
+            db.get($"DELETE FROM Comments WHERE SongID = {songId}");
+
+            // Finally, delete the song
+            db.get($"DELETE FROM Songs WHERE SongID = {songId}");
+
             return RedirectToAction("Index", "Admin");
         }
+
         [HttpPost]
         public ActionResult AddSong(
     string title,

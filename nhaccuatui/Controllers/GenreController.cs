@@ -21,13 +21,19 @@ namespace nhaccuatui.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
-        public ActionResult DeleteGenre(int id)
+        public ActionResult DeleteGenre(int genreId)
         {
             NhaccuatuiModel db = new NhaccuatuiModel();
-            // Execute delete stored procedure
-            ViewBag.list = db.get("EXEC DeleteGenre " + id);
+
+            // Delete all songs in this genre
+            db.get($"DELETE FROM Songs WHERE GenreID = {genreId}");
+
+            // Finally, delete the genre
+            db.get($"DELETE FROM Genres WHERE GenreID = {genreId}");
+
             return RedirectToAction("Index", "Admin");
         }
+
         public ActionResult GetGenreUpdate(int id)
         {
             NhaccuatuiModel db = new NhaccuatuiModel();

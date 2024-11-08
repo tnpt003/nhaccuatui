@@ -26,12 +26,12 @@ namespace nhaccuatui.Controllers
         {
             NhaccuatuiModel db = new NhaccuatuiModel();
 
-            // Delete the comment based on CommentID
-            string sql = $"DELETE FROM Comments WHERE CommentID = {commentId}";
-            db.get(sql);
+            // Delete the comment
+            db.get($"DELETE FROM Comments WHERE CommentID = {commentId}");
 
             return RedirectToAction("Index", "Admin");
         }
+
 
         [HttpPost]
         public ActionResult UpdateComment(int commentId, int userId, int songId, string commentText)

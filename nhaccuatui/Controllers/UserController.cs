@@ -47,12 +47,26 @@ namespace nhaccuatui.Controllers
         }
 
         // Delete User
-        public ActionResult DeleteUser(int id)
+        public ActionResult DeleteUser(int userId)
         {
-            string sql = $"DELETE FROM Users WHERE UserID = {id}";
-            db.get(sql);
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            // Delete related comments, likes, and playlists first
+            db.get($"DELETE FROM Comments WHERE UserID = {userId}");
+            db.get($"DELETE FROM Likes WHERE UserID = {userId}");
+
+            // Delete all songs in the user's playlists
+            db.get($"DELETE FROM PlaylistSongs WHERE PlaylistID IN (SELECT PlaylistID FROM Playlists WHERE UserID = {userId})");
+
+            // Delete playlists owned by the user
+            db.get($"DELETE FROM Playlists WHERE UserID = {userId}");
+
+            // Finally, delete the user
+            db.get($"DELETE FROM Users WHERE UserID = {userId}");
+
             return RedirectToAction("Index", "Admin");
         }
+
 
         // Implement password hashing function
         private string HashPassword(string password)

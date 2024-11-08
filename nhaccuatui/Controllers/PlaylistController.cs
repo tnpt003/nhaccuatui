@@ -65,11 +65,18 @@ namespace nhaccuatui.Controllers
         }
 
         // Delete Playlist
-        public ActionResult DeletePlaylist(int id)
+        public ActionResult DeletePlaylist(int playlistId)
         {
-            string sql = $"DELETE FROM Playlists WHERE PlaylistID = {id}";
-            db.get(sql);
-            return RedirectToAction("Index", "Admin"); // Redirect as needed
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            // Delete related playlist songs
+            db.get($"DELETE FROM PlaylistSongs WHERE PlaylistID = {playlistId}");
+
+            // Finally, delete the playlist
+            db.get($"DELETE FROM Playlists WHERE PlaylistID = {playlistId}");
+
+            return RedirectToAction("Index", "Admin");
         }
+
     }
 }

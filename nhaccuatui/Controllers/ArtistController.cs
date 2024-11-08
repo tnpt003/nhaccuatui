@@ -23,11 +23,25 @@ namespace nhaccuatui.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
-        public ActionResult DeleteArtist(int id)
+        public ActionResult DeleteArtist(int artistId)
         {
-            db.get($"DELETE FROM Artists WHERE ArtistID = {id}");
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            // Delete related songs in albums by this artist
+            db.get($"DELETE FROM PlaylistSongs WHERE SongID IN (SELECT SongID FROM Songs WHERE AlbumID IN (SELECT AlbumID FROM Albums WHERE ArtistID = {artistId}))");
+            db.get($"DELETE FROM Likes WHERE SongID IN (SELECT SongID FROM Songs WHERE AlbumID IN (SELECT AlbumID FROM Albums WHERE ArtistID = {artistId}))");
+            db.get($"DELETE FROM Comments WHERE SongID IN (SELECT SongID FROM Songs WHERE AlbumID IN (SELECT AlbumID FROM Albums WHERE ArtistID = {artistId}))");
+            db.get($"DELETE FROM Songs WHERE AlbumID IN (SELECT AlbumID FROM Albums WHERE ArtistID = {artistId})");
+
+            // Delete the albums by this artist
+            db.get($"DELETE FROM Albums WHERE ArtistID = {artistId}");
+
+            // Finally, delete the artist
+            db.get($"DELETE FROM Artists WHERE ArtistID = {artistId}");
+
             return RedirectToAction("Index", "Admin");
         }
+
         [HttpPost]
         public ActionResult UpdateArtist(int artistId, string name, string country, string bio)
         {

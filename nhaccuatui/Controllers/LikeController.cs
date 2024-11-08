@@ -26,12 +26,12 @@ namespace nhaccuatui.Controllers
         {
             NhaccuatuiModel db = new NhaccuatuiModel();
 
-            // Delete the like based on LikeID
-            string sql = $"DELETE FROM Likes WHERE LikeID = {likeId}";
-            db.get(sql);
+            // Delete the like
+            db.get($"DELETE FROM Likes WHERE LikeID = {likeId}");
 
             return RedirectToAction("Index", "Admin");
         }
+
         [HttpPost]
         public ActionResult UpdateLike(int likeId, int userId, int songId, int? oldSongId)
         {

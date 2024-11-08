@@ -117,7 +117,8 @@
                             <td>@song[2]</td>
                             <td>@song[1]</td>
                             <td>
-                                <a href="~/Song/DeleteSong?id=@song[0]">Xóa</a> | <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
+                                <a href="~/Song/DeleteSong?songId=@song[0]">Xóa</a> | 
+                                <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
                             </td>
                         </tr>
                     }
@@ -149,7 +150,8 @@
                         <tr>
                             <td>@genre[1]</td>
                             <td>
-                                <a href="~/Genre/DeleteGenre?id=@genre[0]">Xóa</a> | <a href="~/Genre/GetGenreUpdate?id=@genre[0]">Cập Nhật</a>
+                                <a href="~/Genre/DeleteGenre?genreId=@genre[0]">Xóa</a> | 
+                                <a href="~/Genre/GetGenreUpdate?id=@genre[0]">Cập Nhật</a>
                             </td>
 
                         </tr>
@@ -186,7 +188,8 @@
                             <td>@artist[1]</td> <!-- Artist Name -->
                             <td>@artist[3]</td> <!-- Country -->
                             <td>
-                                <a href="~/Artist/DeleteArtist?id=@artist[0]">Xóa</a> | <a href="~/Artist/GetArtistUpdate?id=@artist[0]">Cập Nhật</a>
+                                <a href="~/Artist/DeleteArtist?artistId=@artist[0]">Xóa</a> | 
+                                <a href="~/Artist/GetArtistUpdate?id=@artist[0]">Cập Nhật</a>
                             </td>
 
                         </tr>
@@ -242,7 +245,7 @@
                                 }
                             </td>
                             <td>
-                                <a href="~/Album/DeleteAlbum?id=@album[0]">Xóa</a> |
+                                <a href="~/Album/DeleteAlbum?albumId=@album[0]">Xóa</a> |
                                 <a href="~/Album/GetAlbumUpdate?id=@album[0]">Cập Nhật</a>
                             </td>
                         </tr>
@@ -281,7 +284,7 @@
                             <td>@user[2]</td> <!-- Email -->
                             <td>@user[4]</td> <!-- DateJoined -->
                             <td>
-                                <a href="~/User/DeleteUser?id=@user[0]">Xóa</a> |
+                                <a href="~/User/DeleteUser?userId=@user[0]">Xóa</a> |
                                 <a href="~/User/GetUserUpdate?id=@user[0]">Cập Nhật</a>
                             </td>
                         </tr>
@@ -325,7 +328,7 @@
                             <td>@playlist[2]</td> <!-- Playlist Name -->
                             <td>@playlist[3]</td> <!-- Created Date -->
                             <td>
-                                <a href="~/Playlist/DeletePlaylist?id=@playlist[0]">Xóa</a> |
+                                <a href="~/Playlist/DeletePlaylist?playlistId=@playlist[0]">Xóa</a> |
                                 <a href="~/Playlist/GetPlaylistUpdate?id=@playlist[0]">Cập Nhật</a>
                             </td>
                         </tr>

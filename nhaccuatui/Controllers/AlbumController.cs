@@ -11,20 +11,22 @@ namespace nhaccuatui.Controllers
     public class AlbumController : Controller
     {
         // GET: Album
-        public ActionResult DeleteAlbum(int id)
+        public ActionResult DeleteAlbum(int albumId)
         {
-            try
-            {
-                NhaccuatuiModel db = new NhaccuatuiModel();
-                db.get($"DELETE FROM Albums WHERE AlbumID = {id}");
-            }
-            catch (Exception ex)
-            {
-                // Handle any errors if needed
-            }
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            // Delete related songs in the album
+            db.get($"DELETE FROM PlaylistSongs WHERE SongID IN (SELECT SongID FROM Songs WHERE AlbumID = {albumId})");
+            db.get($"DELETE FROM Likes WHERE SongID IN (SELECT SongID FROM Songs WHERE AlbumID = {albumId})");
+            db.get($"DELETE FROM Comments WHERE SongID IN (SELECT SongID FROM Songs WHERE AlbumID = {albumId})");
+            db.get($"DELETE FROM Songs WHERE AlbumID = {albumId}");
+
+            // Finally, delete the album
+            db.get($"DELETE FROM Albums WHERE AlbumID = {albumId}");
 
             return RedirectToAction("Index", "Admin");
         }
+
         public ActionResult GetAlbumUpdate(int id)
         {
             NhaccuatuiModel db = new NhaccuatuiModel();
