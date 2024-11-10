@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "View";
     Layout = "~/Views/Shared/Shared.cshtml";
 }
 <!DOCTYPE html>
@@ -8,8 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dropdown Menu</title>
-    @Styles.Render("~/main")
-    <link href="~/css/Content/Content.css" rel="stylesheet" />
+
 </head>
 <body>
     <section>
@@ -19,23 +19,15 @@
                 <div class="section-title">VŨ TRỤ NHẠC VIỆT</div>
                 <div class="playlist">
                     <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
+                        <img src="Hip-Hop việt.jpg" alt="Hip-Hop Việt">
                         <div class="playlist-item-title">Hip-Hop Việt</div>
                     </div>
                     <div class="playlist-item">
-                        <img src="~/Image/Data/Screenshot (9).png" alt="Gen Z">
+                        <img src="genz.jpg" alt="Gen Z">
                         <div class="playlist-item-title">Gen Gi Gen Z</div>
                     </div>
                     <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
-                        <div class="playlist-item-title">Nhạc Miền Tây</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
-                        <div class="playlist-item-title">Nhạc Miền Tây</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
+                        <img src="nhacmientay.jpg" alt="Nhạc Miền Tây">
                         <div class="playlist-item-title">Nhạc Miền Tây</div>
                     </div>
                     <!-- Add more playlist items as needed -->
@@ -56,7 +48,7 @@
                     </div>
                     <!-- Add more playlist items as needed -->
                 </div>
-            </div>    
+            </div>
             <!-- Right Section (Song Ranking) -->
             <div class="right-section">
                 <div class="section-title">BXH BÀI HÁT</div>
@@ -67,10 +59,8 @@
                 </div>
                 <div class="song-list">
                     <div class="song-item">
-                        <div class="song-rank-overlay">
-                            <div class="song-rank rank-1">1</div>
-                        </div>
-                        <img src="~/Image/Data/Song One.jpg" alt="cover" width="100" height="100">
+                        <div class="song-rank">1</div>
+                        <img src="song1.jpg" alt="cover" width="50" height="50">
                         <div class="song-info">
                             <div class="song-title">TÌNH ĐẦU QUÁ CHÉN</div>
                             <div class="song-artist">ANH TRAI "SAY HI", Quang Hùng MasterD, Negav, Pháp Kiều, ERIK</div>

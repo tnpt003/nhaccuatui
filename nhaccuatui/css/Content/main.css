@@ -1,0 +1,29 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* Basic body and HTML styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+/* Header, Content, Footer Wrapper */
+.header-wrap, .content-wrap, .footer-wrap {
+    max-width: 1080px;
+    mix-width: 1080px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Additional styling for headers and content if needed */
+header, .content, footer {
+    padding: 20px 0;
+}

@@ -1,0 +1,123 @@
+﻿/* Base styles for the menu */
+.menu {
+    max-width: 1080px; /* Ensure the menu container doesn't exceed 1080px */
+    margin: 0 auto; /* Center the menu */
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    position: relative;
+}
+
+    /* Reset list styling */
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex; /* Align items horizontally */
+    }
+
+    /* Main menu item styles */
+    .menu > ul > li {
+        position: relative;
+        display: inline; /* Remove block display to avoid box around it */
+        font-size: 14px; /* Adjust font size if needed */
+    }
+
+    /* Main link styling */
+    .menu ul li a {
+        text-decoration: none;
+        padding: 4px 6px; /* Reduced padding for smaller gap */
+        display: inline-block; /* Changed to inline-block to allow padding but no box */
+        background-color: transparent; /* Remove background color to avoid box effect */
+        color: #000;
+        font-size: 14px; /* Adjust font size if needed */
+    }
+
+        .menu ul li a:hover {
+            background-color: #ddd;
+            color: #000;
+        }
+
+    /* Dropdown container styling */
+    .menu ul .dropdown {
+        display: none;
+        position: absolute;
+        top: 100%; /* Position directly below the parent item */
+        left: 0;
+        white-space: nowrap;
+        background-color: #f9f9f9;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+        padding: 0px; /* Reduced padding inside the dropdown */
+        max-width: 100%; /* Make sure dropdown doesn't exceed parent width */
+        z-index: 999; /* Keeps dropdown above other content */
+    }
+
+    /* Show dropdown when hovering over the parent */
+    .menu ul li:hover .dropdown {
+        display: block;
+        width: auto;
+    }
+
+/* Category styling */
+.category {
+    display: block; /* Stack items vertically */
+    padding: 5px; /* Reduced padding */
+    background-color: #fff;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    /* Styling for category list */
+    .category ul {
+        margin-top: 5px; /* Reduced margin */
+        list-style: none;
+        padding-left: 0; /* Remove padding */
+        display: block; /* Ensure items are stacked vertically */
+    }
+
+        /* Category item styling */
+        .category ul li {
+            margin-top: 2px; /* Reduced margin between items (adjusted) */
+        }
+
+            /* Category link styling */
+            .category ul li a {
+                padding: 3px 0; /* Reduced padding */
+                font-size: 12px; /* Reduced font size */
+                color: #000;
+                display: block;
+                transition: background-color 0.3s ease;
+            }
+
+/* Reducing the gap between dropdown items */
+.menu ul .dropdown li {
+    margin-top: 2px; /* Adjust the gap between dropdown items */
+}
+
+/* Hover effect for category links */
+.category ul li a:hover {
+    background-color: #ddd;
+}
+
+/* Ensuring the dropdown stays open when hovering over the dropdown items */
+.menu ul li .dropdown li a:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+/* Add a slight delay before hiding the dropdown (for smooth transition) */
+.menu ul li .dropdown {
+    transition: visibility 0s 0.3s, opacity 0.3s linear;
+}
+
+/* Prevent dropdown from disappearing too quickly */
+.menu ul li:hover .dropdown {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Prevents the dropdown from hiding when hovering on the item inside */
+.menu ul li:hover > .dropdown:hover {
+    visibility: visible;
+    opacity: 1;
+}
