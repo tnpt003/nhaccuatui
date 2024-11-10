@@ -1,0 +1,153 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Menu styling */
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+/* Align the image inline with menu items */
+.menu li img {
+    vertical-align: middle;
+    margin-right: 10px; /* Adjust spacing between the image and text */
+}
+
+.menu > ul > li {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* Reduced margin between menu items */
+}
+
+.menu ul li a {
+    text-decoration: none;
+    padding: 6px 10px; /* More compact padding */
+    display: block;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 12px; /* Reduced font size for compactness */
+    font-weight: 500;
+    border-radius: 4px; /* Slightly smaller border radius */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .menu ul li a:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px); /* Reduced lift effect */
+    }
+
+.menu ul .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    padding: 8px;
+    width: auto;
+    min-width: 300px; /* Further reduced width */
+    border-radius: 6px; /* Smaller border radius */
+    white-space: nowrap;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Show dropdown on hover */
+.menu ul li:hover .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Category styling */
+.category {
+    display: inline-block;
+    width: 100px; /* Reduced width for better compactness */
+    vertical-align: top;
+    padding: 8px; /* Further reduced padding */
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 6px; /* Smaller border radius */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 8px; /* Reduced bottom margin */
+}
+
+    .category:hover {
+        transform: translateY(-4px); /* Reduced hover effect */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+    }
+
+    .category span {
+        font-weight: bold;
+        font-size: 12px; /* Further reduced font size for titles */
+        color: #3498db;
+        display: block;
+        margin-bottom: 6px; /* Reduced margin below title */
+    }
+
+    .category ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .category ul li {
+            margin-top: 4px; /* Reduced margin between list items */
+        }
+
+            .category ul li a {
+                padding: 4px 0; /* More compact padding */
+                font-size: 10px; /* Reduced font size for links */
+                color: #333;
+                text-decoration: none;
+                display: block;
+                transition: background-color 0.2s ease, padding-left 0.2s ease;
+            }
+
+                .category ul li a:hover {
+                    background-color: #ecf0f1;
+                    padding-left: 6px; /* More subtle hover effect */
+                }
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .menu > ul > li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .menu ul .dropdown {
+        position: static;
+        box-shadow: none;
+        width: 100%;
+        padding: 6px; /* Further reduced padding */
+        display: block;
+        min-width: 100%;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .category {
+        width: 100%; /* Full width for small screens */
+    }
+
+        .category span {
+            font-size: 14px; /* Increased font size slightly for better readability */
+        }
+
+    .menu ul li a {
+        font-size: 14px; /* Slightly larger font size for accessibility */
+        padding: 10px 14px; /* Slightly increased padding for better touch targets */
+    }
+}

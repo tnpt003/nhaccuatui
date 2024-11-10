@@ -1,0 +1,116 @@
+﻿/* Container Layout */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    gap: 20px;
+    margin: 20px auto;
+}
+
+.left-section, .right-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.left-section {
+    flex: 3;
+}
+
+.right-section {
+    flex: 1;
+}
+
+.section-title {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+/* Playlist and Chart Layout */
+.playlist, .chart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.playlist-item, .chart-item {
+    width: calc(33.333% - 10px);
+    text-align: center;
+}
+
+    .playlist-item img, .chart-item img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+.playlist-item-title, .chart-item-title {
+    font-size: 15px;
+    color: #333;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.playlist-item-genre, .chart-item-genre {
+    font-size: 13px;
+    color: #777;
+}
+
+/* Tab Styles */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.tab {
+    padding: 8px 20px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .tab:hover {
+        background-color: #ddd;
+    }
+
+    .tab.active {
+        background-color: #e00;
+        color: #fff;
+        border-radius: 15px;
+    }
+
+/* Song List Styles */
+.song-list .song-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.song-rank {
+    width: 30px;
+    font-size: 18px;
+    color: #007bff;
+    text-align: center;
+}
+
+.song-info {
+    margin-left: 15px;
+}
+
+.song-title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+}
+
+.song-artist {
+    font-size: 13px;
+    color: #777;
+}

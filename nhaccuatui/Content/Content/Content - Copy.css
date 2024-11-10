@@ -1,0 +1,362 @@
+﻿﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    color: rgb(51, 51, 51);
+    font-family: NhacCuaTui, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    min-width: 1009px;
+    overflow-y: scroll;
+}
+
+.box-content {
+    min-width: 1080px;
+    margin-top: 70px !important;
+    width: 100%; /* Ensures it takes the full width of the content-wrap */
+    box-sizing: border-box; /* Includes padding and borders in the width */
+}
+
+.wrap {
+    position: relative;
+}
+
+.content-wrap {
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+    .content-wrap::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+/* Global Styles */
+.box-left {
+    width: 70%; /* Takes up 60% of the container */
+    float: left;
+    margin: 0;
+    padding-right: 50px;
+}
+
+.box-left-album img {
+    width: 100%; /* Ensure the image takes the full width of the container */
+    height: 100%; /* Ensure the image takes the full height of the container */
+    object-fit: cover; /* Scale the image to cover the entire container without distortion */
+    object-position: center; /* Center the image within the container */
+}
+.fram_select {
+    overflow: hidden;
+    width: 100%;
+}
+
+.tile_box_key h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgb(35, 38, 45);
+    line-height: 36px;
+    text-transform: uppercase;
+}
+
+    .tile_box_key h2 a {
+        outline: none;
+        color: rgb(45, 170, 237);
+        text-decoration: none;
+        transition: 0.2s linear;
+        padding-right: 20px;
+    }
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    margin: 0; /* Remove default margin */
+}
+
+    ul li {
+        margin: 0 10px 10px 0;
+        width: calc(20% - 10px);
+        height: auto; /* Allow height to adjust */
+        display: flex;
+        flex-direction: column; /* Stack children vertically */
+    }
+
+.box-left-album {
+    margin: 0 0 8px;
+    height: 127.986px;
+    overflow: hidden;
+    width: 127.986px;
+}
+
+.box_absolute {
+    color: rgba(0, 0, 0, 0.88);
+    transition: 0.2s linear;
+    height: 152px;
+    position: relative;
+    width: 152px;
+}
+
+.bg_action_info {
+    height: 127.986px;
+    position: absolute;
+    width: 127.986px;
+    z-index: 2;
+}
+
+.icon_play {
+    display: block;
+    height: 47.9861px;
+    width: 47.9861px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    z-index: 1001;
+}
+
+.name_song, .name_singer, .h3seo {
+    outline: none;
+    color: rgb(45, 170, 237);
+    text-decoration: none;
+    transition: 0.2s linear;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    line-height: 19px;
+    white-space: normal; /* Allow text to wrap */
+    word-break: break-word; /* Break long words */
+    overflow-wrap: break-word; /* Allow overflow wrapping */
+}
+
+.name_song {
+    font-size: 14px;
+    margin: 0 0 5px;
+    width: 100%;
+}
+
+.h3seo {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(35, 38, 45);
+    width: 100%;
+}
+
+.info_album {
+    bottom: 0;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    line-height: 19px;
+    width: 100%;
+    z-index: 10;
+    font-family: NhacCuaTui, sans-serif;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.albumHot {
+    margin: 0 0 10px;
+    float: left;
+    width: 667.988px;
+}
+
+.name_singer {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    list-style: none;
+    font-family: NhacCuaTui, sans-serif;
+    background-color: rgb(255, 255, 255);
+    max-width: 100%; /* Ensure it doesn't exceed container */
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Show ellipsis when text overflows */
+}
+
+
+h4 {
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: 400;
+    width: 151.997px;
+    color: rgb(172, 172, 172);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent wrapping */
+    line-height: 19px;
+    list-style: none;
+    font-family: NhacCuaTui, sans-serif;
+    background-color: rgb(255, 255, 255);
+}
+
+/* Additional Flexbox Adjustments */
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+/*RIGHT*/
+.box-right {
+    width: 30%; /* or max-width: 300px for better responsiveness */
+    float: right;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container for the tab buttons */
+.box_chart_music .btn_tab_select {
+    padding: 0;
+    width: 300px;
+    height: 32px;
+    background: #e5e5e5;
+    line-height: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* Space the three tabs evenly */
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Style for each tab link */
+.btn_tab_select a {
+    flex: 1; /* Make each link occupy equal space */
+    text-align: center; /* Center the text within the link */
+    color: #333;
+    text-decoration: none;
+    padding: 0 10px; /* Add some padding to the left and right */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+    /* Active tab style */
+    .btn_tab_select a.active {
+        background-color: #333;
+        color: #fff;
+        border-radius: 16px; /* Give rounded corners for the active tab */
+    }
+
+    /* Hover effect for tab links */
+    .btn_tab_select a:hover {
+        background-color: #ccc;
+        color: #000;
+    }
+
+.list_chart_music ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+    .list_chart_music ul li {
+        display: grid; /* Use CSS Grid for layout */
+        grid-template-columns: auto 1fr; /* Auto for number, remaining space for info */
+        align-items: start; /* Align items to the start (top) */
+        padding: 10px 0; /* Space between list items */
+        border-bottom: 1px solid #ddd; /* Optional: Border for separation */
+        transition: background-color 0.3s ease; /* Smooth background color transition */
+        width: 100%; /* Each li takes full width */
+    }
+
+.img-container {
+    position: relative; /* Enable absolute positioning for children */
+    width: 100px; /* Set fixed width for the image container */
+    max-width: 100px; /* Prevent it from exceeding this width */
+    margin-right: 10px; /* Space between the image container and song info */
+}
+
+    .img-container img {
+        display: block; /* Make image a block element */
+        width: 100%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+        z-index: 1; /* Image should be behind the number */
+    }
+
+.one .number {
+    position: absolute; /* Position the number absolutely within the container */
+    top: 5px; /* Adjust the top position */
+    left: 5px; /* Adjust the left position */
+    font-size: 24px; /* Adjust font size for the number */
+    font-weight: bold; /* Bold for the number */
+    color: #ff3333; /* Color for the number */
+    background-color: rgba(255, 255, 255, 0.7); /* Optional: background for contrast */
+    padding: 5px; /* Optional: padding around the number */
+    border-radius: 5px; /* Optional: rounded corners */
+    z-index: 2; /* Ensure number is above the image */
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column; /* Stack title and artist info vertically */
+}
+
+    .song-info h3 {
+        margin: 0; /* Remove default margin */
+        font-size: 16px; /* Size for the song title */
+    }
+
+    .song-info h4 {
+        margin-top: 5px; /* Space between title and artist info */
+        font-size: 14px; /* Size for artist info */
+        color: #666; /* Color for artist info */
+    }
+
+
+.number {
+    font-size: 24px; /* Adjust font size for the number */
+    font-weight: bold; /* Bold for the number */
+    color: #ff3333; /* Color for the number */
+    margin-right: 15px; /* Space between number and info data */
+    flex-shrink: 0; /* Prevent number from shrinking */
+}
+
+.info_data {
+    display: flex; /* Keep flex for stacking info vertically */
+    flex-direction: column; /* Stack title and artist info vertically */
+    justify-content: flex-start; /* Align content to the top */
+    flex-grow: 1; /* Allow info data to grow */
+}
+    .info_data.img {
+    position: relative; /* Position relative for child elements */
+}
+
+    .info_data h3 {
+        margin: 0; /* Remove default margin */
+        font-size: 16px; /* Size for the song title */
+    }
+
+    .info_data h4 {
+        margin-top: 5px; /* Space between title and artist info */
+        font-size: 14px; /* Size for artist info */
+        color: #666; /* Color for artist info */
+    }
+
+.name_song {
+    text-decoration: none; /* Remove underline from link */
+    color: #333; /* Default text color */
+    font-weight: bold; /* Bold for song title */
+}
+
+    .name_song:hover {
+        color: #ff3333; /* Change color on hover */
+    }
+
+

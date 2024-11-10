@@ -14,8 +14,8 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="~/Image/Assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    @Styles.Render("~/Admin")
-    @Styles.Render("~/Data")
+    <link href="~/css/Admin/Admin.css" rel="stylesheet" />
+    <link href="~/css/Admin/Data.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -74,7 +74,7 @@
                                 <option value="">Chọn Album</option>
                                 @foreach (var album in ViewBag.ListAl)
                                 {
-                                    <option value="@album[0]">@album[1]</option>
+                                    <option value="@album[0]">@album[2]</option>
                                 }
                             </select>
                             <select name="genreId" required>

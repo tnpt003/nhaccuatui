@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập & Đăng Ký</title>
-    <link href="~/Content/LoginRegister/login-register.css" rel="stylesheet" />
+    <link href="~/css/LoginRegister/login-register.css" rel="stylesheet" />
 </head>
 <body>
     <div class="form-container">
@@ -16,11 +16,17 @@
                 <button id="loginBtn">Đăng Nhập</button>
                 <button id="registerBtn">Đăng Ký</button>
             </div>
-
-            <form id="loginForm" class="form active">
+            <!-- Display login error if present -->
+            @if (TempData["LoginError"] != null)
+            {
+                <div class="error-message">
+                    @TempData["LoginError"]
+                </div>
+            }
+            <form id="loginForm" class="form active" action="/LoginRegister/XulyDangNhap" method="post">
                 <h2>Đăng Nhập</h2>
-                <input type="email" id="loginEmail" placeholder="Email" required>
-                <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                <input type="text" id="loginUsername" name="username" placeholder="Tên đăng nhập" required>
+                <input type="password" id="loginPassword" name="password" placeholder="Mật khẩu" required>
                 <button type="submit">Đăng Nhập</button>
                 <div class="social-login">
                     <button class="social-btn google-btn">
@@ -50,7 +56,6 @@
     </div>
 
     <script>
-
         const loginForm = document.getElementById("loginForm");
         const registerForm = document.getElementById("registerForm");
         const showRegister = document.getElementById("showRegister");
@@ -77,23 +82,20 @@
         });
 
         loginForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const adminEmail = "admin@gmail.com";
-            const adminPassword = "admin123";
-
-            const email = document.getElementById("loginEmail").value;
+            // Get the input values
+            const username = document.getElementById("loginUsername").value;
             const password = document.getElementById("loginPassword").value;
 
-            if (email === adminEmail && password === adminPassword) {
+            // Check if the admin credentials are entered (adjust as needed)
+            if (username === "admin" && password === "admin123") {
+                event.preventDefault();  // Prevent form submission only for admin
                 alert("Đăng nhập thành công");
-                window.location.href = "../admindangnhap/AdminDashboard.html";
-            } else {
-                alert("Sai tên đăng nhập hoặc mật khẩu");
+                window.location.href = "/Admin/Index"; // Redirect admin
             }
+            // For regular users, allow the form to submit and let the server handle it
         });
-
     </script>
+
 </body>
 </html>
 

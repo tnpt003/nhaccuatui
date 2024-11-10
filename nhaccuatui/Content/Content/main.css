@@ -1,0 +1,36 @@
+﻿
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Wrapper */
+.header-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for distinction */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+/* Content Wrapper */
+.content-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Footer Wrapper */
+.footer-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f3f3f3;
+    text-align: center;
+}
+
+/* Additional styling for headers and content if needed */
+header, .content, footer {
+    padding: 20px 0;
+}

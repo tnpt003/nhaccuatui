@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link href="~/Content/Content/Menu.css" rel="stylesheet" />
-    @Styles.Render("~/Menu")
-    @Styles.Render("~/main")
-    @Styles.Render("~/Footer")
+    <link href="~/css/Content/Menu.css" rel="stylesheet" />
+    <link href="~/css/Content/main.css" rel="stylesheet" />
+    <link href="~/css/Content/Footer.css" rel="stylesheet" />
 </head>
 <body>
     <div class="header-wrap">
@@ -284,10 +284,10 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="login">Đăng nhập</a>
+                        <a href="@Url.Action("Index", "LoginRegister")" class="login">Đăng nhập</a>
                     </li>
                     <li>
-                        <a href="#" class="signup">Đăng ký</a>
+                        <a href="@Url.Action("Index", "LoginRegister")" class="signup">Đăng ký</a>
                     </li>
 
                 </ul>
