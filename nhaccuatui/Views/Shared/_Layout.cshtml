@@ -1,42 +1,13 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NhacCuaTui Example</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <title>Menu</title>
     <link href="~/Content/Content/Menu.css" rel="stylesheet" />
-    <link href="~/Content/Content/Footer.css" rel="stylesheet" />
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        /* Additional styling for headers and content if needed */
-        header, .content, footer {
-            padding: 20px 0;
-        }
-        /* Header Wrapper */
-        .header-wrap {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa; /* Light background for distinction */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
-        }
-        /* Footer Wrapper */
-        .footer-wrap {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f3f3f3;
-            text-align: center;
-        }
-    </style>
+    <link href="~/css/Content/Menu.css" rel="stylesheet" />
+    <link href="~/css/Content/main.css" rel="stylesheet" />
+    <link href="~/css/Content/Footer.css" rel="stylesheet" />
 </head>
 <body>
     <div class="header-wrap">
@@ -312,19 +283,35 @@
                             <input type="text" placeholder="Tìm kiếm">
                         </div>
                     </li>
-                    <li>
-                        <a href="#" class="login">Đăng nhập</a>
-                    </li>
-                    <li>
-                        <a href="#" class="signup">Đăng ký</a>
-                    </li>
-
+                    @if (Session["Username"] != null)
+                    {
+                        var username = Session["Username"].ToString(); // Get the username from session
+                        <li>
+                            <a href="@Url.Action("Profile", "User")" class="profile">@username</a> <!-- Display the username -->
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Logout", "LoginRegister")" class="logout">Đăng xuất</a> <!-- Logout link -->
+                        </li>
+                    }
+                    else
+                    {
+                        <!-- User is not logged in, show login and register links -->
+                        <li>
+                            <a href="@Url.Action("Index", "LoginRegister")" class="login">Đăng nhập</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "LoginRegister")" class="signup">Đăng ký</a>
+                        </li>
+                    }
                 </ul>
             </nav>
         </header>
     </div>
-    <div class="container body-content clearfix">
-        @RenderBody()
+    <!-- Content Wrapper -->
+    <div class="content-wrap">
+        <section class="content">
+            @RenderBody()
+        </section>
     </div>
     <div class="footer-wrap">
         <footer>
@@ -365,11 +352,6 @@
             </div>
         </footer>
     </div>
-
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
     <script>
         document.querySelectorAll('.menu > ul > li').forEach(item => {
             item.addEventListener('click', () => {

@@ -16,13 +16,19 @@
                 <button id="loginBtn">Đăng Nhập</button>
                 <button id="registerBtn">Đăng Ký</button>
             </div>
-            <!-- Display login error if present -->
             @if (TempData["LoginError"] != null)
             {
-                <div class="error-message">
-                    @TempData["LoginError"]
-                </div>
+                <p class="error-message">@TempData["LoginError"]</p>
             }
+            @if (TempData["RegisterError"] != null)
+            {
+                <p class="error-message">@TempData["RegisterError"]</p>
+            }
+            @if (TempData["RegisterSuccess"] != null)
+            {
+                <p class="success-message">@TempData["RegisterSuccess"]</p>
+            }
+
             <form id="loginForm" class="form active" action="/LoginRegister/XulyDangNhap" method="post">
                 <h2>Đăng Nhập</h2>
                 <input type="text" id="loginUsername" name="username" placeholder="Tên đăng nhập" required>
@@ -41,17 +47,16 @@
                 <p>Chưa có tài khoản? <span id="showRegister">Đăng ký tại đây</span></p>
             </form>
 
-            <form id="registerForm" class="form">
+            <form id="registerForm" class="form" action="/LoginRegister/XulyDangKy" method="post">
                 <h2>Đăng Ký</h2>
-                <input type="text" placeholder="Tên đăng nhập" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Mật khẩu" required>
-                <input type="password" placeholder="Xác nhận mật khẩu" required>
-                <input type="text" placeholder="Họ và tên" required>
-                <input type="text" placeholder="Số điện thoại" required>
+                <input type="text" name="username" placeholder="Tên đăng nhập" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Mật khẩu" required>
+                <input type="password" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
                 <button type="submit">Đăng Ký</button>
                 <p>Đã có tài khoản? <span id="showLogin">Đăng nhập tại đây</span></p>
             </form>
+
         </div>
     </div>
 

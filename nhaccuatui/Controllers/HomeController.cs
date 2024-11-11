@@ -48,6 +48,7 @@ namespace nhaccuatui.Controllers
             // Return the SearchResults view
             return View("SearchResults");
         }
+       
 
 
 
