@@ -14,8 +14,8 @@
         <header>
             <nav class="menu" style="text-align: center;">
                 <ul>
-                    <li><img src="../Image/NhacCuaTui_2022logo.png" alt="" style="height: 40px;"></li>
-                    <li><a href="#">Khám phá</a></li>
+                    <li><img src="~/Image/NhacCuaTui_2022logo.png" alt="" style="height: 40px;"></li>
+                    <li><a href="@Url.Action("Index", "Home")">Khám phá</a></li>
                     <li>
                         <a href="#">Bài hát</a>
                         <ul class="dropdown">
@@ -279,9 +279,10 @@
                         </ul>
                     </li>
                     <li>
-                        <div class="navbar-right">
-                            <input type="text" placeholder="Tìm kiếm">
-                        </div>
+                        <form action="@Url.Action("SearchSongsByTitle", "Home")" method="get">
+                            <input type="text" name="title" placeholder="Tìm kiếm">
+                            <button type="submit">Search</button>
+                        </form>
                     </li>
                     @if (Session["Username"] != null)
                     {

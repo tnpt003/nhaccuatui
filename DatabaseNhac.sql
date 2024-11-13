@@ -132,3 +132,50 @@ INSERT INTO Songs (AlbumID, GenreID, Title, Duration, ReleaseDate, FileUrl, Imag
 (1, 1, 'Song One', '00:03:30', '2024-01-15', 'http://example.com/song1.mp3', 'Song One.jpg');
 select * from Songs
 
+SELECT TOP 5 * FROM Albums ORDER BY NEWID()
+
+SELECT TOP 1 
+    s.SongID, 
+    s.Title, 
+    s.FileUrl, 
+    s.AlbumID, 
+    s.ReleaseDate,
+    a.Name AS ArtistName, 
+    COUNT(l.LikeID) AS LikeCount 
+FROM Songs s
+LEFT JOIN Likes l ON s.SongID = l.SongID
+LEFT JOIN Artists a ON a.ArtistID = (SELECT ArtistID FROM Albums WHERE AlbumID = s.AlbumID)
+GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
+ORDER BY LikeCount DESC
+
+SELECT 
+    s.SongID, 
+    s.Title, 
+    s.FileUrl, 
+    s.AlbumID, 
+    s.ReleaseDate,
+    a.Name AS ArtistName, 
+    COUNT(l.LikeID) AS LikeCount 
+FROM Songs s
+LEFT JOIN Likes l ON s.SongID = l.SongID
+LEFT JOIN Artists a ON a.ArtistID = (SELECT ArtistID FROM Albums WHERE AlbumID = s.AlbumID)
+GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
+ORDER BY LikeCount DESC
+OFFSET 1 ROWS FETCH NEXT 9 ROWS ONLY;
+
+select * from Albums
+SELECT 
+    s.SongID, 
+    s.Title, 
+    s.FileUrl, 
+    s.AlbumID, 
+    s.ReleaseDate,
+    a.Name AS ArtistName, 
+    COUNT(l.LikeID) AS LikeCount 
+FROM Songs s
+LEFT JOIN Likes l ON s.SongID = l.SongID
+LEFT JOIN Artists a ON a.ArtistID = (SELECT ArtistID FROM Albums WHERE AlbumID = s.AlbumID)
+GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
+ORDER BY LikeCount DESC
+OFFSET 1 ROWS FETCH NEXT 9 ROWS ONLY
+

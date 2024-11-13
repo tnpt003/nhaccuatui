@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Collections
+@{
     ViewBag.Title = "Home Page";
 }
 <!DOCTYPE html>
@@ -17,27 +18,19 @@
             <div class="left-section">
                 <div class="section-title">VŨ TRỤ NHẠC VIỆT</div>
                 <div class="playlist">
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
-                        <div class="playlist-item-title">Hip-Hop Việt</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Screenshot (9).png" alt="Gen Z">
-                        <div class="playlist-item-title">Gen Gi Gen Z</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
-                        <div class="playlist-item-title">Nhạc Miền Tây</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
-                        <div class="playlist-item-title">Nhạc Miền Tây</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="~/Image/Data/Song One.jpg" alt="Hip-Hop Việt">
-                        <div class="playlist-item-title">Nhạc Miền Tây</div>
-                    </div>
-                    <!-- Add more playlist items as needed -->
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    {
+                        // Ensure there is data at the expected indices
+                        string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
+                        string coverImageUrl = album.Count > 4 ? album[4]?.ToString() : "default.jpg"; // Cover image, with a default
+                        string albumTitle = album.Count > 2 ? album[2]?.ToString() : "Unknown Album"; // Album title, with a default
+
+                        <div class="playlist-item" onclick="location.href='@Url.Action("Core", "PlaySong", new { id = albumId })';" style="cursor:pointer;">
+                            <img src="~/Image/Data/@coverImageUrl" alt="@albumTitle">
+                            <div class="playlist-item-title">@albumTitle</div>
+                        </div>
+
+                    }
                 </div>
                 <div class="section-title">QUỐC TẾ NỔI BẬT</div>
                 <div class="playlist">
@@ -55,7 +48,7 @@
                     </div>
                     <!-- Add more playlist items as needed -->
                 </div>
-            </div>    
+            </div>
             <!-- Right Section (Song Ranking) -->
             <div class="right-section">
                 <div class="section-title">BXH BÀI HÁT</div>
@@ -65,53 +58,41 @@
                     <div class="tab">Hàn Quốc</div>
                 </div>
                 <div class="song-list">
-                    <div class="song-item">
-                        <div class="song-rank-overlay">
-                            <div class="song-rank rank-1">1</div>
-                        </div>
-                        <img src="~/Image/Data/Song One.jpg" alt="cover" width="100" height="100">
-                        <div class="song-info">
-                            <div class="song-title">TÌNH ĐẦU QUÁ CHÉN</div>
-                            <div class="song-artist">ANH TRAI "SAY HI", Quang Hùng MasterD, Negav, Pháp Kiều, ERIK</div>
-                        </div>
-                    </div>
-                    <div class="song-item">
-                        <div class="song-rank">2</div>
-                        <div class="song-info">
-                            <div class="song-title">Chăm Hoa</div>
-                            <div class="song-artist">MONO</div>
-                        </div>
-                    </div>
-                    <div class="song-item">
-                        <div class="song-rank">3</div>
-                        <div class="song-info">
-                            <div class="song-title">bình yên</div>
-                            <div class="song-artist">Vũ., Binz</div>
-                        </div>
-                    </div>
-                    <div class="song-item">
-                        <div class="song-rank">4</div>
-                        <div class="song-info">
-                            <div class="song-title">Tràn Bộ Nhớ </div>
-                            <div class="song-artist">ANH TRAI "SAY HI", Dương Domic </div>
-                        </div>
-                    </div>
+                    <!-- Display the top song (Rank 1) -->
+                    @foreach (ArrayList song in ViewBag.rank1Song ?? new ArrayList())
+                    {
+                        string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
+                        string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
+                        string coverImageUrl = song.Count > 2 ? song[2]?.ToString() : "default.jpg";
 
-                    <div class="song-item">
-                        <div class="song-rank">5</div>
-                        <div class="song-info">
-                            <div class="song-title">Đi Giữa Trời Rực Rỡ </div>
-                            <div class="song-artist">Ngô Lan Hương, SK Pictures </div>
+                        <div class="song-item">
+                            <div class="song-rank-overlay">
+                                <div class="song-rank rank-1">1</div>
+                            </div>
+                            <img src="~/Image/Data/@coverImageUrl" alt="cover" width="100" height="100">
+                            <div class="song-info">
+                                <div class="song-title">@songTitle</div>
+                                <div class="song-artist">@artistName</div>
+                            </div>
                         </div>
-                    </div>
+                    }
 
-                    <div class="song-item">
-                        <div class="song-rank">6</div>
-                        <div class="song-info">
-                            <div class="song-title">Sao Hạng A </div>
-                            <div class="song-artist">ANH TRAI "SAY HI", HIEUTHUHAI, Dương Domic, Song Luân, JSOL </div>
+                    <!-- Display the remaining songs (Rank 2 and above) -->
+                    @foreach (ArrayList song in ViewBag.rank2AndAboveSongs ?? new ArrayList())
+                    {
+                        string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
+                        string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
+                        string coverImageUrl = song.Count > 2 ? song[2]?.ToString() : "default.jpg";
+                        int rank = ViewBag.rank2AndAboveSongs.IndexOf(song) + 2; // Rank starts from 2 for this query
+
+                        <div class="song-item">
+                            <div class="song-rank"> @rank </div>
+                            <div class="song-info">
+                                <div class="song-title">@songTitle</div>
+                                <div class="song-artist">@artistName</div>
+                            </div>
                         </div>
-                    </div>
+                    }
                     <!-- Add more song items as needed -->
                 </div>
             </div>

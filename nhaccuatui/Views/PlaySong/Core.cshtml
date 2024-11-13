@@ -1,0 +1,122 @@
+﻿@using System.Collections
+@{
+    ViewBag.Title = "Core";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Safely access the album data passed in ViewBag
+    var albumData = ViewBag.AlbumData as ArrayList;
+    var albumTitle = albumData != null && albumData.Count > 2 ? albumData[2]?.ToString() : "Unknown Title";  // Assuming Title is at index 2
+    var albumImageUrl = albumData != null && albumData.Count > 4 ? albumData[4]?.ToString() : "default.jpg";  // Assuming CoverImageUrl is at index 4
+
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản Sắc Việt - album</title>
+    <link href="~/css/Core/Core.css" rel="stylesheet" />
+    <link href="~/css/Content/Content.css" rel="stylesheet" />
+</head>
+
+<body>
+    <section>
+        <div class="container">
+            <div class="left-section">
+                <div class="album-content">
+                    <div class="album-header">
+                        <div class="album-art">
+                            <img src="~/Image/Data/@albumImageUrl" alt="Album Art">
+                        </div>
+                        <div class="album-info">
+                            <h2>@albumTitle</h2>
+                            <div class="audio-controls">
+                                <span class="time">01:23 / 04:14</span>
+                                <span class="bitrate">128kbps</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="song-list">
+                        <ul>
+                            @if (ViewBag.SongsData != null && ViewBag.SongsData.Count > 0)
+                            {
+                                int songIndex = 0;
+                                foreach (ArrayList song in ViewBag.SongsData as ArrayList)
+                                {
+                                    string Title = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
+                                    string artist = song.Count > 4 ? song[4]?.ToString() : "Unknown Artist";
+                                    string duration = song.Count > 2 ? song[2]?.ToString() : "00:00";
+                                    string fileUrl = song.Count > 3 ? song[3]?.ToString() : "#";
+                                    string fullFileUrl = Url.Content($"~/Audio/{fileUrl}");
+
+                                    <li class="song">
+                                        <span class="song-number">@songIndex</span>
+                                        <span class="song-title">@Title</span> - @artist
+                                        <div class="song-actions">
+                                            <audio controls>
+                                                <source src="@fullFileUrl" type="audio/mp3">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+                                    </li>
+
+                                    songIndex++;
+                                }
+                            }
+                            else
+                            {
+                                <p>No songs available.</p>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="section-title">BXH BÀI HÁT</div>
+                <div class="tab-container">
+                    <div class="tab active">Việt Nam</div>
+                    <div class="tab">Âu Mỹ</div>
+                    <div class="tab">Hàn Quốc</div>
+                </div>
+                <div class="song-list">
+                    @foreach (ArrayList ranksong in ViewBag.rank1Song ?? new ArrayList())
+                    {
+                        string songTitle = ranksong.Count > 1 ? ranksong[1]?.ToString() : "Unknown Title";
+                        string artistName = ranksong.Count > 5 ? ranksong[5]?.ToString() : "Unknown Artist";
+                        string coverImageUrl = ranksong.Count > 2 ? ranksong[2]?.ToString() : "default.jpg";
+
+                        <div class="song-item">
+                            <div class="song-rank-overlay">
+                                <div class="song-rank rank-1">1</div>
+                            </div>
+                            <img src="~/Image/Data/@coverImageUrl" alt="cover" width="100" height="100">
+                            <div class="song-info">
+                                <div class="song-title">@songTitle</div>
+                                <div class="song-artist">@artistName</div>
+                            </div>
+                        </div>
+                    }
+
+                    @foreach (ArrayList ranksong in ViewBag.rank2AndAboveSongs ?? new ArrayList())
+                    {
+                        string songTitle = ranksong.Count > 1 ? ranksong[1]?.ToString() : "Unknown Title";
+                        string artistName = ranksong.Count > 5 ? ranksong[5]?.ToString() : "Unknown Artist";
+                        string coverImageUrl = ranksong.Count > 2 ? ranksong[2]?.ToString() : "default.jpg";
+                        int rank = ViewBag.rank2AndAboveSongs.IndexOf(ranksong) + 2;
+
+                        <div class="song-item">
+                            <div class="song-rank"> @rank </div>
+                            <div class="song-info">
+                                <div class="song-title">@songTitle</div>
+                                <div class="song-artist">@artistName</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
