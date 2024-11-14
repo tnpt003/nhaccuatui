@@ -306,6 +306,7 @@
     <Content Include="css\Content\Footer.css" />
     <Content Include="css\Content\main.css" />
     <Content Include="css\Content\Menu.css" />
+    <Content Include="css\Content\SearchResult.css" />
     <Content Include="css\Core\Core.css" />
     <Content Include="css\LoginRegister\login-register.css" />
     <Content Include="css\main.css" />

@@ -3,37 +3,228 @@
     ViewBag.Title = "Kết quả tìm kiếm bài hát";
 }
 
-<h2>Kết quả tìm kiếm</h2>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm bài hát</title>
+    <link href="~/css/Content/SearchResult.css" rel="stylesheet" />
+    <link href="~/css/Content/Content.css" rel="stylesheet" />
+    <script>
+        function showTabContent(tabName) {
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Tên Bài Hát</th>
-            <th>Thời Lượng</th>
-            <th>Ngày Phát Hành</th>
-            <th>Album</th>
-            <th>Thể Loại</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (ViewBag.list != null && ViewBag.list.Count > 0)
-        {
-            foreach (var row in ViewBag.list)
-            {
-                <tr>
-                    <td>@row[2]</td> <!-- Assuming Title is at index 2 -->
-                    <td>@row[3]</td> <!-- Duration -->
-                    <td>@row[4]</td> <!-- ReleaseDate -->
-                    <td>@row[0]</td> <!-- AlbumID (replace with Album name if available) -->
-                    <td>@row[1]</td> <!-- GenreID (replace with Genre name if available) -->
-                </tr>
-            }
+            const allContent = document.querySelectorAll('.tab-content');
+            allContent.forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const allTabs = document.querySelectorAll('.search-options a');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.querySelector(`#${tabName}`).style.display = 'block';
+            document.querySelector(`.search-options a[data-tab="${tabName}"]`).classList.add('active');
         }
-        else
-        {
-            <tr>
-                <td colspan="5">Không có kết quả tìm kiếm nào cho "@Request.QueryString["title"]".</td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showTabContent('all');
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="search-bar">
+                <h2>Tìm Kiếm</h2>
+                <div class="search-options">
+                    <a href="#" data-tab="all" onclick="showTabContent('all'); return false;" class="active">Tất cả</a>
+                    <a href="#" data-tab="songs" onclick="showTabContent('songs'); return false;">Bài hát</a>
+                    <a href="#" data-tab="playlists" onclick="showTabContent('playlists'); return false;">Albums</a>
+                    <a href="#" data-tab="artists" onclick="showTabContent('artists'); return false;">Nghệ sĩ</a>
+                </div>
+            </div>
+            <span class="search-result-count">
+                Có @(ViewBag.listSo != null ? ((System.Collections.ArrayList)ViewBag.listSo).Count : 0) Bài hát,
+                @(ViewBag.listAl != null ? ((System.Collections.ArrayList)ViewBag.listAl).Count : 0) Album,
+                @(ViewBag.listAr != null ? ((System.Collections.ArrayList)ViewBag.listAr).Count : 0) Nghệ sĩ
+            </span>
+            <div class="suggest">
+                <p>Bạn muốn tìm <a href="#">Bài Hát</a>, <a href="#">Album</a> hay <a href="#">Video</a> cho "@ViewBag.searchTitle"?</p>
+            </div>
+
+            <!-- All Tab Content -->
+            <div id="all" class="tab-content">
+                <h3>Tất cả</h3>
+                @if ((ViewBag.listSo == null || ViewBag.listSo.Count == 0) &&
+(ViewBag.listAl == null || ViewBag.listAl.Count == 0) &&
+(ViewBag.listAr == null || ViewBag.listAr.Count == 0))
+                {
+                    <p>Không có kết quả phù hợp.</p>
+                }
+                else
+                {
+                    if (ViewBag.listSo != null && ViewBag.listSo.Count > 0)
+                    {
+                        foreach (var row in ViewBag.listSo)
+                        {
+                            <div class="song-item-L">
+                                <img src="~/Image/Data/@row[5]" alt="Song Image" class="album-cover"> <!-- Song Image -->
+                                <div class="song-info-L">
+                                    <h4>@row[2]</h4> <!-- Song Title -->
+                                    <p>Trong Album @row[4]</p> <!-- Album Title -->
+                                </div>
+                            </div>
+                        }
+                    }
+                    if (ViewBag.listAl != null && ViewBag.listAl.Count > 0)
+                    {
+                        foreach (var row in ViewBag.listAl)
+                        {
+                            <div class="song-item-L">
+                                <img src="~/Image/Data/@row[4]" alt="Album Cover" class="album-cover"> <!-- Album Cover Image -->
+                                <div class="song-info-L">
+                                    <h4>@row[2]</h4> <!-- Album Title -->
+                                    <p>Bởi @row[3]</p> <!-- Artist Name -->
+                                </div>
+                            </div>
+                        }
+                    }
+                    if (ViewBag.listAr != null && ViewBag.listAr.Count > 0)
+                    {
+                        foreach (var row in ViewBag.listAr)
+                        {
+                            <div class="song-item-L">
+                                <div class="song-info-L">
+                                    <h4>@row[1]</h4> <!-- Artist Name -->
+                                    <p>@row[2]</p> <!-- Artist Bio -->
+                                    <p>Ở @row[3]</p> <!-- Artist Country -->
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+
+            </div>
+
+            <!-- Songs Tab Content -->
+            <div id="songs" class="tab-content" style="display: none;">
+                <h3>BÀI HÁT</h3>
+                @if (ViewBag.listSo != null && ViewBag.listSo.Count > 0)
+                {
+                    foreach (var row in ViewBag.listSo)
+                    {
+                        <div class="song-item-L">
+                            <img src="~/Image/Data/@row[5]" alt="Song Image" class="album-cover"> <!-- Song Image -->
+                            <div class="song-info-L">
+                                <h4>@row[2]</h4> <!-- Song Title -->
+                                <p>Trong Album @row[4]</p> <!-- Album Title -->
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có bài hát nào phù hợp.</p>
+                }
+            </div>
+
+            <!-- Albums Tab Content -->
+            <div id="playlists" class="tab-content" style="display: none;">
+                <h3>ALBUMS</h3>
+                @if (ViewBag.listAl != null && ViewBag.listAl.Count > 0)
+                {
+                    foreach (var row in ViewBag.listAl)
+                    {
+                        <div class="song-item-L">
+                            <img src="~/Image/Data/@row[4]" alt="Album Cover" class="album-cover"> <!-- Album Cover Image -->
+                            <div class="song-info-L">
+                                <h4>@row[2]</h4> <!-- Album Title -->
+                                <p>Bởi @row[3]</p> <!-- Artist Name -->
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có album nào phù hợp.</p>
+                }
+            </div>
+
+            <!-- Artists Tab Content -->
+            <div id="artists" class="tab-content" style="display: none;">
+                <h3>NGHỆ SĨ</h3>
+                @if (ViewBag.listAr != null && ViewBag.listAr.Count > 0)
+                {
+                    foreach (var row in ViewBag.listAr)
+                    {
+                        <div class="song-item-L">
+                            <div class="song-info-L">
+                                <h4>@row[1]</h4> <!-- Artist Name -->
+                                <p>@row[2]</p> <!-- Artist Bio -->
+                                <p>Ở @row[3]</p> <!-- Artist Country -->
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>Không có nghệ sĩ nào phù hợp.</p>
+                }
+            </div>
+        </div>
+        <!-- Right Section (Song Ranking) -->
+        <div class="right-section">
+            <div class="section-title">BXH BÀI HÁT</div>
+            <div class="tab-container">
+                <div class="tab active">Việt Nam</div>
+                <div class="tab">Âu Mỹ</div>
+                <div class="tab">Hàn Quốc</div>
+            </div>
+            <div class="song-list">
+                <!-- Display the top song (Rank 1) -->
+                @foreach (ArrayList song in ViewBag.rank1Song ?? new ArrayList())
+                {
+                    string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
+                    string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
+                    string coverImageUrl = song.Count > 2 ? song[2]?.ToString() : "default.jpg";
+
+                    <div class="song-item">
+                        <div class="song-rank-overlay">
+                            <div class="song-rank rank-1">1</div>
+                        </div>
+                        <img src="~/Image/Data/@coverImageUrl" alt="cover" width="100" height="100">
+                        <div class="song-info">
+                            <div class="song-title">@songTitle</div>
+                            <div class="song-artist">@artistName</div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Display the remaining songs (Rank 2 and above) -->
+                @foreach (ArrayList song in ViewBag.rank2AndAboveSongs ?? new ArrayList())
+                {
+                    string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
+                    string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
+                    string coverImageUrl = song.Count > 2 ? song[2]?.ToString() : "default.jpg";
+                    int rank = ViewBag.rank2AndAboveSongs.IndexOf(song) + 2; // Rank starts from 2 for this query
+
+                    <div class="song-item">
+                        <div class="song-rank"> @rank </div>
+                        <div class="song-info">
+                            <div class="song-title">@songTitle</div>
+                            <div class="song-artist">@artistName</div>
+                        </div>
+                    </div>
+                }
+                <!-- Add more song items as needed -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

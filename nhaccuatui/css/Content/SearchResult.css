@@ -1,0 +1,137 @@
+﻿/* Search Bar Styling */
+.search-bar {
+    background-color: #003366;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .search-bar h2 {
+        font-size: 26px;
+        font-weight: bold;
+        color: #00c6ff;
+    }
+
+.search-options {
+    margin-top: 10px;
+}
+
+    .search-options a {
+        color: #00c6ff;
+        padding: 8px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        margin: 0 5px;
+        font-weight: bold;
+        transition: all 0.3s;
+    }
+
+        .search-options a.active,
+        .search-options a:hover {
+            background-color: #00c6ff;
+            color: #003366;
+        }
+
+.search-result-count {
+    display: block;
+    margin-top: 10px;
+    color: black;
+}
+
+.suggest p {
+    margin-top: 10px;
+    color: black;
+}
+
+.suggest a {
+    color: #00c6ff;
+    text-decoration: none;
+}
+
+/* Tab Content Styling */
+.tab-content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+    .tab-content h3 {
+        color: #003366;
+        font-size: 22px;
+        border-bottom: 2px solid #00c6ff;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+    }
+
+/* Song Item Styling */
+.song-item-L {
+    display: flex;
+    align-items: center;
+    background: #e6f7ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+    .song-item-L:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+.album-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.song-info-L h4 {
+    font-size: 18px;
+    color: #003366;
+    margin: 0;
+}
+
+.song-info-L p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+    .label.official {
+        background-color: #ff6347;
+    }
+
+    .label.quality {
+        background-color: #00c6ff;
+    }
+
+.song-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    align-items: center;
+    color: #666;
+}
+
+    .song-actions span {
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+        .song-actions span:hover {
+            color: #003366;
+        }

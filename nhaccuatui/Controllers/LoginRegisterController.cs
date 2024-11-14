@@ -79,7 +79,7 @@ namespace nhaccuatui.Controllers
         }
         public ActionResult Logout()
         {
-            Session["taikhoan"] = null; // Clear the session on logout
+            Session["Username"] = null; // Clear the session on logout
             return RedirectToAction("Index", "Home"); // Redirect to home or login page
         }
 

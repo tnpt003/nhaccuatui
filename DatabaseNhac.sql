@@ -31,6 +31,7 @@ CREATE TABLE Songs (
     Duration TIME,
     ReleaseDate DATE,
     FileUrl VARCHAR(255),
+	ImageUrl VARCHAR(255),
     FOREIGN KEY (AlbumID) REFERENCES Albums(AlbumID),
     FOREIGN KEY (GenreID) REFERENCES Genres(GenreID)
 );
@@ -163,7 +164,7 @@ GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
 ORDER BY LikeCount DESC
 OFFSET 1 ROWS FETCH NEXT 9 ROWS ONLY;
 
-select * from Albums
+select * from Songs
 SELECT 
     s.SongID, 
     s.Title, 
@@ -179,3 +180,33 @@ GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
 ORDER BY LikeCount DESC
 OFFSET 1 ROWS FETCH NEXT 9 ROWS ONLY
 
+DECLARE @searchTerm NVARCHAR(150) = 's';
+
+SELECT 
+    s.SongID, 
+    s.AlbumID, 
+    s.Title AS SongTitle, 
+    s.Duration, 
+    s.ReleaseDate, 
+    a.Title AS AlbumTitle
+FROM 
+    Songs s
+LEFT JOIN 
+    Albums a ON s.AlbumID = a.AlbumID
+WHERE 
+    s.Title LIKE '%' + @searchTerm + '%' OR a.Title LIKE '%' + @searchTerm + '%';
+
+
+SELECT 
+    s.SongID, 
+    s.AlbumID, 
+    s.Title AS SongTitle, 
+    s.Duration, 
+    s.ReleaseDate, 
+    a.Title AS AlbumTitle
+FROM 
+    Songs s
+LEFT JOIN 
+    Albums a ON s.AlbumID = a.AlbumID
+WHERE 
+    s.Title LIKE '%' + @searchTerm + '%' OR a.Title LIKE '%' + @searchTerm + '%';
