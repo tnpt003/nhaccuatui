@@ -34,19 +34,53 @@
                 </div>
                 <div class="section-title">QUỐC TẾ NỔI BẬT</div>
                 <div class="playlist">
-                    <div class="playlist-item">
-                        <img src="jjamm.jpg" alt="J-Jam">
-                        <div class="playlist-item-title">J-Jam</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="kpop.jpg" alt="K-POP Today's Hits">
-                        <div class="playlist-item-title">K-POP Today's Hits</div>
-                    </div>
-                    <div class="playlist-item">
-                        <img src="hoangu.jpg" alt="Hoa Ngữ">
-                        <div class="playlist-item-title">Nhạc Phim Hoa Ngữ</div>
-                    </div>
-                    <!-- Add more playlist items as needed -->
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    {
+                        // Ensure there is data at the expected indices
+                        string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
+                        string coverImageUrl = album.Count > 4 ? album[4]?.ToString() : "default.jpg"; // Cover image, with a default
+                        string albumTitle = album.Count > 2 ? album[2]?.ToString() : "Unknown Album"; // Album title, with a default
+
+                        <div class="playlist-item" onclick="location.href='@Url.Action("Core", "PlaySong", new { id = albumId })';" style="cursor:pointer;">
+                            <img src="~/Image/Data/@coverImageUrl" alt="@albumTitle">
+                            <div class="playlist-item-title">@albumTitle</div>
+                        </div>
+
+                    }
+                </div>
+
+                <div class="section-title">TÂM TRẠNG HÔM NAY</div>
+                <div class="playlist">
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    {
+                        // Ensure there is data at the expected indices
+                        string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
+                        string coverImageUrl = album.Count > 4 ? album[4]?.ToString() : "default.jpg"; // Cover image, with a default
+                        string albumTitle = album.Count > 2 ? album[2]?.ToString() : "Unknown Album"; // Album title, with a default
+
+                        <div class="playlist-item" onclick="location.href='@Url.Action("Core", "PlaySong", new { id = albumId })';" style="cursor:pointer;">
+                            <img src="~/Image/Data/@coverImageUrl" alt="@albumTitle">
+                            <div class="playlist-item-title">@albumTitle</div>
+                        </div>
+
+                    }
+                </div>
+
+                <div class="section-title">MỚI PHÁT HÀNH</div>
+                <div class="playlist">
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    {
+                        // Ensure there is data at the expected indices
+                        string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
+                        string coverImageUrl = album.Count > 4 ? album[4]?.ToString() : "default.jpg"; // Cover image, with a default
+                        string albumTitle = album.Count > 2 ? album[2]?.ToString() : "Unknown Album"; // Album title, with a default
+
+                        <div class="playlist-item" onclick="location.href='@Url.Action("Core", "PlaySong", new { id = albumId })';" style="cursor:pointer;">
+                            <img src="~/Image/Data/@coverImageUrl" alt="@albumTitle">
+                            <div class="playlist-item-title">@albumTitle</div>
+                        </div>
+
+                    }
                 </div>
             </div>
             <!-- Right Section (Song Ranking) -->

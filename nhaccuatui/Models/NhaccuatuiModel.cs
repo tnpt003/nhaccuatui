@@ -29,7 +29,7 @@ namespace nhaccuatui.Models
                         ArrayList row = new ArrayList();
                         for (int i = 0; i < r.FieldCount; i++)
                         {
-                            row.Add(r.GetValue(i).ToString());
+                            row.Add(xulydulieu(r.GetValue(i).ToString()));
                         }
                         datalist.Add(row); // Add the row to the datalist
                     }
@@ -37,6 +37,16 @@ namespace nhaccuatui.Models
             }
             return datalist; // Return the filled datalist
         }
+        public string xulydulieu(string text)
+        {
+            String s = text.Replace(",", "&44;");
+            s = s.Replace("\"", "&34;");
+            s = s.Replace("'", "&39;");
+            s = s.Replace("\r", "");
+            s = s.Replace("\n", "");
+            return s;
+        }
+
 
     }
 

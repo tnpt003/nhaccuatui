@@ -230,6 +230,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
@@ -387,7 +388,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Audio\" />
-    <Folder Include="Hinh\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css.map" />
