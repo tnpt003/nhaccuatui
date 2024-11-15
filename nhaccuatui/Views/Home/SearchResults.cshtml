@@ -188,7 +188,7 @@
                 {
                     string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
                     string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
-                    string coverImageUrl = song.Count > 2 ? song[2]?.ToString() : "default.jpg";
+                    string coverImageUrl = song.Count > 2 ? song[3]?.ToString() : "default.jpg";
 
                     <div class="song-item">
                         <div class="song-rank-overlay">
@@ -207,7 +207,6 @@
                 {
                     string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
                     string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
-                    string coverImageUrl = song.Count > 2 ? song[2]?.ToString() : "default.jpg";
                     int rank = ViewBag.rank2AndAboveSongs.IndexOf(song) + 2; // Rank starts from 2 for this query
 
                     <div class="song-item">

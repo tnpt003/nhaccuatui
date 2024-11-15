@@ -21,6 +21,7 @@ namespace nhaccuatui.Controllers
             s.SongID, 
             s.Title, 
             s.FileUrl, 
+            s.ImageUrl, -- Added ImageUrl
             s.AlbumID, 
             s.ReleaseDate,
             a.Name AS ArtistName, 
@@ -28,8 +29,17 @@ namespace nhaccuatui.Controllers
         FROM Songs s
         LEFT JOIN Likes l ON s.SongID = l.SongID
         LEFT JOIN Artists a ON a.ArtistID = (SELECT ArtistID FROM Albums WHERE AlbumID = s.AlbumID)
-        GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
-        ORDER BY LikeCount DESC");
+        GROUP BY 
+            s.SongID, 
+            s.Title, 
+            s.FileUrl, 
+            s.ImageUrl, -- Added ImageUrl to GROUP BY
+            s.AlbumID, 
+            s.ReleaseDate, 
+            a.Name
+        ORDER BY LikeCount DESC
+        ");
+
 
             ViewBag.rank2AndAboveSongs = db.get(@"
         SELECT 
@@ -67,6 +77,7 @@ namespace nhaccuatui.Controllers
             s.SongID, 
             s.Title, 
             s.FileUrl, 
+            s.ImageUrl, -- Added ImageUrl
             s.AlbumID, 
             s.ReleaseDate,
             a.Name AS ArtistName, 
@@ -74,7 +85,14 @@ namespace nhaccuatui.Controllers
         FROM Songs s
         LEFT JOIN Likes l ON s.SongID = l.SongID
         LEFT JOIN Artists a ON a.ArtistID = (SELECT ArtistID FROM Albums WHERE AlbumID = s.AlbumID)
-        GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
+        GROUP BY 
+            s.SongID, 
+            s.Title, 
+            s.FileUrl, 
+            s.ImageUrl, -- Added ImageUrl to GROUP BY
+            s.AlbumID, 
+            s.ReleaseDate, 
+            a.Name
         ORDER BY LikeCount DESC");
 
             ViewBag.rank2AndAboveSongs = db.get(@"
