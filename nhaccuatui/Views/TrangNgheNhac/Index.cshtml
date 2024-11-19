@@ -1,0 +1,210 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đóa Hồng Chơi Vơi - NhacCuaTui</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .header a {
+                font-size: 0.9rem;
+                color: #007bff;
+                text-decoration: none;
+            }
+
+        .content {
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        .song-info {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .song-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .artist {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            margin-top: 10px;
+        }
+
+            .actions a {
+                color: #007bff;
+                margin-right: 15px;
+                font-size: 0.9rem;
+                text-decoration: none;
+            }
+
+        .audio-player {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .playlist-section, .related-songs-section {
+            margin-top: 30px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .playlist-grid, .related-songs-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .playlist-item {
+            width: 150px;
+            text-align: center;
+        }
+
+            .playlist-item img {
+                width: 100%;
+                border-radius: 5px;
+            }
+
+        .playlist-item-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .playlist-item-artist {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .related-song {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .related-song img {
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+
+        .related-song-info {
+            flex: 1;
+        }
+
+        .related-song-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .related-song-artist {
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>Nghe nhạc > Bài hát NhacCuaTui > Đóa Hồng Chơi Vơi</div>
+        <a href="#">NGHE TIẾP</a>
+    </div>
+
+
+    <div class="content">
+
+        <div class="song-info">
+            <div class="song-title">Đóa Hồng Chơi Vơi</div>
+            <div class="artist">Anh Trai "Say Hi!", Anh Tú</div>
+            <div class="actions">
+                <a href="#">Thêm vào</a>
+                <a href="#">Chia sẻ</a>
+                <a href="#">Nhạc chờ</a>
+            </div>
+            <audio controls class="audio-player">
+                <audio controls="controls">
+                    <source src="~/Audio/BuongDoiTayNhauRa-SonTungMTP-4184408.mp3" type="audio/mpeg" />
+                </audio>
+                Trình duyệt của bạn không hỗ trợ phát nhạc.
+            </audio>
+        </div>
+
+    
+        <div class="playlist-section">
+            <div class="section-title">PLAYLIST | ALBUM</div>
+            <div class="playlist-grid">
+                <div class="playlist-item">
+                   <img src="~/Image/Data/Song One.jpg"  alt="Playlist 1">
+                    <div class="playlist-item-title">ANH TRAI 'SAY HI!', Tập 13</div>
+                    <div class="playlist-item-artist">ANH TRAI SAY HI!</div>
+                </div>
+                <div class="playlist-item">
+                     <img src="~/Image/Data/Song One.jpg" alt="Playlist 2">
+                    <div class="playlist-item-title">Đóa Hồng (Remix)</div>
+                    <div class="playlist-item-artist">Đặng Cấp Nhất</div>
+                </div>
+                <div class="playlist-item">
+                     <img src="~/Image/Data/Song One.jpg" alt="Playlist 3">
+                    <div class="playlist-item-title">Triệu Đóa Hoa Hồng</div>
+                    <div class="playlist-item-artist">Mai Tiến Dũng</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="related-songs-section">
+            <div class="section-title">BÀI HÁT</div>
+            <div class="related-songs-list">
+                <div class="related-song">
+                    <img src="~/Image/Data/Song One.jpg" alt="Related 1">
+                    <div class="related-song-info">
+                        <div class="related-song-title">Chơi Vơi</div>
+                        <div class="related-song-artist">Hồ Ngọc Hà</div>
+                    </div>
+                </div>
+                <div class="related-song">
+                     <img src="~/Image/Data/Song One.jpg" alt="Related 2">
+                    <div class="related-song-info">
+                        <div class="related-song-title">999 Đóa Hoa Hồng</div>
+                        <div class="related-song-artist">Saimi Remix</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
