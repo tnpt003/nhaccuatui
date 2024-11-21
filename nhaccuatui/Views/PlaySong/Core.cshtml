@@ -44,13 +44,14 @@
                                 int songIndex = 0;
                                 foreach (ArrayList song in ViewBag.SongsData as ArrayList)
                                 {
+                                    int songID = song.Count > 0 ? Convert.ToInt32(song[0]) : 0; // Assuming SongID is at index 0
                                     string Title = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
                                     string artist = song.Count > 4 ? song[4]?.ToString() : "Unknown Artist";
                                     string duration = song.Count > 2 ? song[2]?.ToString() : "00:00";
                                     string fileUrl = song.Count > 3 ? song[3]?.ToString() : "#";
                                     string fullFileUrl = Url.Content($"~/Audio/{fileUrl}");
 
-                                    <li class="song">
+                                    <li class="song" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">
                                         <span class="song-number">@songIndex</span>
                                         <span class="song-title">@Title</span> - @artist
                                         <div class="song-actions">
@@ -83,11 +84,12 @@
                 <div class="song-list">
                     @foreach (ArrayList ranksong in ViewBag.rank1Song ?? new ArrayList())
                     {
+                        int songID = ranksong.Count > 0 ? Convert.ToInt32(ranksong[0]) : 0; // Assuming SongID is at index 0
                         string songTitle = ranksong.Count > 1 ? ranksong[1]?.ToString() : "Unknown Title";
                         string artistName = ranksong.Count > 5 ? ranksong[5]?.ToString() : "Unknown Artist";
                         string coverImageUrl = ranksong.Count > 2 ? ranksong[3]?.ToString() : "default.jpg";
 
-                        <div class="song-item">
+                        <div class="song-item" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">
                             <div class="song-rank-overlay">
                                 <div class="song-rank rank-1">1</div>
                             </div>
@@ -101,12 +103,13 @@
 
                     @foreach (ArrayList ranksong in ViewBag.rank2AndAboveSongs ?? new ArrayList())
                     {
+                        int songID = ranksong.Count > 0 ? Convert.ToInt32(ranksong[0]) : 0; // Assuming SongID is at index 0
                         string songTitle = ranksong.Count > 1 ? ranksong[1]?.ToString() : "Unknown Title";
                         string artistName = ranksong.Count > 5 ? ranksong[5]?.ToString() : "Unknown Artist";
                         string coverImageUrl = ranksong.Count > 2 ? ranksong[2]?.ToString() : "default.jpg";
                         int rank = ViewBag.rank2AndAboveSongs.IndexOf(ranksong) + 2;
 
-                        <div class="song-item">
+                        <div class="song-item" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">
                             <div class="song-rank"> @rank </div>
                             <div class="song-info">
                                 <div class="song-title">@songTitle</div>

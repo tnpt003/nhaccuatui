@@ -95,11 +95,12 @@
                     <!-- Display the top song (Rank 1) -->
                     @foreach (ArrayList song in ViewBag.rank1Song ?? new ArrayList())
                     {
+                        int songID = song.Count > 0 ? Convert.ToInt32(song[0]) : 0; // Assuming SongID is at index 0
                         string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
                         string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
                         string coverImageUrl = song.Count > 2 ? song[3]?.ToString() : "default.jpg";
 
-                        <div class="song-item">
+                        <div class="song-item" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">
                             <div class="song-rank-overlay">
                                 <div class="song-rank rank-1">1</div>
                             </div>
@@ -114,11 +115,12 @@
                     <!-- Display the remaining songs (Rank 2 and above) -->
                     @foreach (ArrayList song in ViewBag.rank2AndAboveSongs ?? new ArrayList())
                     {
+                        int songID = song.Count > 0 ? Convert.ToInt32(song[0]) : 0; // Assuming SongID is at index 0
                         string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
                         string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
                         int rank = ViewBag.rank2AndAboveSongs.IndexOf(song) + 2; // Rank starts from 2 for this query
 
-                        <div class="song-item">
+                        <div class="song-item" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">
                             <div class="song-rank"> @rank </div>
                             <div class="song-info">
                                 <div class="song-title">@songTitle</div>

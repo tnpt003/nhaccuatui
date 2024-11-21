@@ -77,6 +77,47 @@ namespace nhaccuatui.Controllers
             ViewBag.SongsData = songsData;
             return View("~/Views/PlaySong/Core.cshtml");
         }
+        public ActionResult PlaySong(int id)
+        {
+            // Initialize the database model
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            // Query to get the song details including the album, artist, and genre
+            string songQuery = @"
+        SELECT s.SongID, s.Title AS SongTitle, s.FileUrl, s.ImageUrl, a.Title AS AlbumTitle, 
+               g.Name AS GenreName, ar.Name AS ArtistName
+        FROM Songs s
+        JOIN Albums a ON s.AlbumID = a.AlbumID
+        JOIN Genres g ON s.GenreID = g.GenreID
+        JOIN Artists ar ON a.ArtistID = ar.ArtistID
+        WHERE s.SongID = " + id;
+
+            var songDetails = db.get(songQuery);
+            ViewBag.SongDetails = songDetails.Count > 0 ? songDetails[0] : null;
+
+            // Query to fetch the top 5 random albums (no dependency on SongID or ArtistID)
+            string playlistQuery = @"
+        SELECT TOP 5 a.AlbumID, a.Title AS AlbumTitle, a.CoverImageUrl, ar.Name AS ArtistName
+        FROM Albums a
+        JOIN Artists ar ON a.ArtistID = ar.ArtistID
+        ORDER BY NEWID()";
+
+            var playlist = db.get(playlistQuery);
+            ViewBag.Playlist = playlist;
+
+            // Query to fetch related songs from the same genre
+            string relatedSongsQuery = @"
+        SELECT s.SongID, s.Title AS SongTitle, ar.Name AS ArtistName
+        FROM Songs s
+        JOIN Albums a ON s.AlbumID = a.AlbumID
+        JOIN Artists ar ON a.ArtistID = ar.ArtistID
+        WHERE s.GenreID = (SELECT GenreID FROM Songs WHERE SongID = " + id + ") AND s.SongID != " + id;
+
+            var relatedSongs = db.get(relatedSongsQuery);
+            ViewBag.RelatedSongs = relatedSongs;
+
+            return View("PlaySong");
+        }
 
     }
 }

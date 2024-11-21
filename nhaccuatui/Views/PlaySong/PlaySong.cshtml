@@ -1,0 +1,89 @@
+﻿@using System.Collections
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var song = ViewBag.SongDetails as ArrayList;
+
+    // Extract song details from the ArrayList
+    string songTitle = song != null && song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
+    string artistName = song != null && song.Count > 6 ? song[6]?.ToString() : "Unknown Artist";
+    string fileUrl = song != null && song.Count > 2 ? song[2]?.ToString() : "#";
+    string imageUrl = song != null && song.Count > 3 ? song[3]?.ToString() : "default.jpg";
+    string albumTitle = song != null && song.Count > 4 ? song[4]?.ToString() : "Unknown Album";
+    string genreName = song != null && song.Count > 5 ? song[5]?.ToString() : "Unknown Genre";
+
+    // Get the playlist and related songs
+    var playlist = ViewBag.Playlist ?? new ArrayList();
+    var relatedSongs = ViewBag.RelatedSongs ?? new ArrayList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@songTitle - NhacCuaTui</title>
+    <link href="~/css/Core/PlaySong.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="song-info">
+        <div class="song-image">
+            <img src="~/Image/Data/@imageUrl" alt="@songTitle">
+        </div>
+        <div class="song-details">
+            <div class="song-title">@songTitle</div>
+            <div class="artist">@artistName</div>
+            <div class="actions">
+                <a href="#">Thêm vào</a>
+                <a href="#">Chia sẻ</a>
+                <a href="#">Nhạc chờ</a>
+            </div>
+            <audio controls class="audio-player">
+                <source src="~/Audio/@fileUrl" type="audio/mpeg" />
+                Trình duyệt của bạn không hỗ trợ phát nhạc.
+            </audio>
+        </div>
+    </div>
+
+    <div class="playlist-section">
+        <div class="section-title">PLAYLIST | ALBUM</div>
+        <div class="playlist-grid">
+            @foreach (ArrayList item in playlist)
+            {
+                string playlistImage = item.Count > 2 ? item[2]?.ToString() : "default.jpg";
+                string playlistTitle = item.Count > 1 ? item[1]?.ToString() : "Unknown Title";
+                string playlistArtist = item.Count > 3 ? item[3]?.ToString() : "Unknown Artist";
+
+                <div class="playlist-item">
+                    <img src="~/Image/Data/@playlistImage" alt="@playlistTitle">
+                    <div class="playlist-item-title">@playlistTitle</div>
+                    <div class="playlist-item-artist">@playlistArtist</div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="related-songs-section">
+        <div class="section-title">BÀI HÁT CÙNG THỂ LOẠI</div>
+        <div class="related-songs-list">
+            @foreach (ArrayList relatedSong in relatedSongs)
+            {
+                string relatedSongTitle = relatedSong.Count > 1 ? relatedSong[1]?.ToString() : "Unknown Title";
+                string relatedSongArtist = relatedSong.Count > 2 ? relatedSong[2]?.ToString() : "Unknown Artist";
+
+                <div class="related-song">
+                    <div class="related-song-line">
+                        <div class="related-song-details">
+                            <span class="related-song-title">@relatedSongTitle</span>
+                            <a href="#" class="related-song-artist">@relatedSongArtist</a>
+                        </div>
+                        <div class="related-song-actions">
+                            <a href="@Url.Action("PlaySong", "PlaySong", new { id = relatedSong[0] })" class="play-action">Play ▶</a>
+                            <a href="#" class="add-action">Add to Playlist +</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+﻿.song-info {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.song-image {
+    flex: 1 1 10px;
+    text-align: center;
+}
+
+    .song-image img {
+        max-width: 100%;
+        height: 200px;
+        width:200px;
+    }
+
+.song-details {
+    flex: 2 1 300px;
+    padding: 10px 20px;
+}
+
+.song-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.artist {
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.actions a {
+    margin-right: 20px;
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .actions a:hover {
+        text-decoration: underline;
+    }
+
+.audio-player {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 30px 0 15px;
+    color: #333;
+}
+
+/* Playlist Grid */
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.playlist-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+}
+
+    .playlist-item img {
+        width: 100%;
+        height: 170px;
+        width: 200px;
+        border-bottom: 1px solid #ddd;
+    }
+
+.playlist-item-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.playlist-item-artist {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Related Songs List */
+.related-songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.related-song {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.related-song-line {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.related-song-details {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.related-song-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.related-song-artist {
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .related-song-artist:hover {
+        text-decoration: underline;
+    }
+
+.related-song-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.play-action, .add-action {
+    font-size: 0.9rem;
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .play-action:hover, .add-action:hover {
+        text-decoration: underline;
+    }
+
+
+
