@@ -106,10 +106,6 @@
                 <p>@playlist[1] bài hát</p> <!-- Song Count -->
             </div>
         }
-        else
-        {
-            <p>Không tìm thấy thông tin playlist.</p>
-        }
     </header>
 
     <section class="songs-section">
@@ -120,7 +116,7 @@
                 {
                     var s = song as ArrayList;
                     <li class="song-item">
-                        <img src="@s[3]" alt="Song Thumbnail" class="song-thumbnail" /> <!-- ImageUrl -->
+                        <img src="~/Image/Data/@s[3]" alt="Song Thumbnail" class="song-thumbnail" /> <!-- ImageUrl -->
                         <div class="song-info">
                             <h3>@s[1]</h3> <!-- Song Title -->
                             <p>@s[2]</p> <!-- Song Duration -->

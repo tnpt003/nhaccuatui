@@ -33,10 +33,35 @@
             <div class="song-title">@songTitle</div>
             <div class="artist">@artistName</div>
             <div class="actions">
-                <a href="#">Thêm vào</a>
                 <a href="#">Chia sẻ</a>
                 <a href="#">Nhạc chờ</a>
+
+                @if (Session["Username"] != null)
+                {
+                    <a href="javascript:void(0);"
+                       onclick="showPlaylistDropdownDirect(@song[0])">Thêm vào Playlist</a>
+
+                    <div class="playlist-dropdown" id="playlist-dropdown-direct-@song[0]" style="display: none;">
+                        <select id="playlist-select-direct-@song[0]">
+                            <option value="">Select Playlist</option>
+                        </select>
+                        <button onclick="addToPlaylistDirect(@song[0])">Add</button>
+                    </div>
+
+                    <!-- Like Button -->
+                    <a href="javascript:void(0);"
+                       id="like-button-@song[0]"
+                       data-liked="@ViewBag.IsLiked"
+                       onclick="toggleLike(@song[0])">
+                        <span id="like-text-@song[0]">
+                            @(ViewBag.IsLiked ? "Đã Thích" : "Thích") <!-- Display initial text based on ViewBag.IsLiked -->
+                        </span>
+                    </a>
+
+
+                }
             </div>
+
             <audio controls class="audio-player">
                 <source src="~/Audio/@fileUrl" type="audio/mpeg" />
                 Trình duyệt của bạn không hỗ trợ phát nhạc.
@@ -69,6 +94,7 @@
             {
                 string relatedSongTitle = relatedSong.Count > 1 ? relatedSong[1]?.ToString() : "Unknown Title";
                 string relatedSongArtist = relatedSong.Count > 2 ? relatedSong[2]?.ToString() : "Unknown Artist";
+                int relatedSongId = Convert.ToInt32(relatedSong[0]);
 
                 <div class="related-song">
                     <div class="related-song-line">
@@ -77,20 +103,181 @@
                             <a href="#" class="related-song-artist">@relatedSongArtist</a>
                         </div>
                         <div class="related-song-actions">
-                            <a href="@Url.Action("PlaySong", "PlaySong", new { id = relatedSong[0] })" class="play-action">Play ▶</a>
+                            <a href="@Url.Action("PlaySong", "PlaySong", new { id = relatedSongId })" class="play-action">Play ▶</a>
                             @if (Session["Username"] != null)
                             {
-                               <a href="#" class="add-action">Add to Playlist +</a>
-                            }
-                            else
-                            {
-
+                                <div class="playlist-dropdown" id="playlist-dropdown-@relatedSongId" style="display: none;">
+                                    <select id="playlist-select-@relatedSongId">
+                                        <option value="">Select Playlist</option>
+                                    </select>
+                                    <button onclick="addToPlaylist(@relatedSongId)">Add</button>
+                                </div>
+                                <a href="javascript:void(0);"
+                                   class="add-action"
+                                   onclick="showPlaylistDropdown(@relatedSongId)">Add to Playlist +</a>
                             }
                         </div>
                     </div>
                 </div>
             }
+
         </div>
     </div>
+    <script>
+    function showPlaylistDropdown(songId) {
+        const dropdown = document.getElementById(`playlist-dropdown-${songId}`);
+        const select = document.getElementById(`playlist-select-${songId}`);
+
+        if (select.options.length === 1) { // Only fetch playlists if not already loaded
+            fetch('@Url.Action("GetUserPlaylists", "PlaySong")')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched playlists:", data); // Debugging
+                    if (data.success) {
+                        data.playlists.forEach(playlist => {
+                            const option = document.createElement("option");
+                            option.value = playlist.PlaylistID;
+                            option.textContent = playlist.Name;
+                            select.appendChild(option);
+                        });
+                    } else {
+                        alert("Failed to fetch playlists.");
+                    }
+                })
+                .catch(error => console.error("Error fetching playlists:", error));
+        }
+
+        dropdown.style.display = "block";
+    }
+
+    function addToPlaylist(songId) {
+        const playlistSelect = document.getElementById(`playlist-select-${songId}`);
+        const playlistId = playlistSelect.value;
+
+        if (!playlistId) {
+            alert("Please select a playlist first.");
+            return;
+        }
+
+        fetch('@Url.Action("AddToPlaylist", "PlaySong")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ songId: songId, playlistId: playlistId })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Add response:", data); // Debugging
+                if (data.success) {
+                    alert(data.message); // Song added successfully
+                } else {
+                    alert(data.message); // Handle errors
+                }
+            })
+            .catch(error => {
+                console.error("Error adding song to playlist:", error);
+            });
+    }
+
+    function showPlaylistDropdownDirect(songId) {
+        const dropdown = document.getElementById(`playlist-dropdown-direct-${songId}`);
+        const select = document.getElementById(`playlist-select-direct-${songId}`);
+
+        if (select.options.length === 1) { // Only fetch playlists if not already loaded
+            fetch('@Url.Action("GetUserPlaylists", "PlaySong")')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched playlists for direct:", data); // Debugging
+                    if (data.success) {
+                        data.playlists.forEach(playlist => {
+                            const option = document.createElement("option");
+                            option.value = playlist.PlaylistID;
+                            option.textContent = playlist.Name;
+                            select.appendChild(option);
+                        });
+                    } else {
+                        alert("Failed to fetch playlists.");
+                    }
+                })
+                .catch(error => console.error("Error fetching playlists:", error));
+        }
+
+        dropdown.style.display = "block";
+    }
+
+    function addToPlaylistDirect(songId) {
+        const playlistSelect = document.getElementById(`playlist-select-direct-${songId}`);
+        const playlistId = playlistSelect.value;
+
+        if (!playlistId) {
+            alert("Please select a playlist first.");
+            return;
+        }
+
+        fetch('@Url.Action("AddToPlaylist", "PlaySong")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ songId: songId, playlistId: playlistId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Add response for direct:", data); // Debugging
+            if (data.success) {
+                alert(data.message); // Song added successfully
+            } else {
+                alert(data.message); // Handle errors
+            }
+        })
+        .catch(error => {
+            console.error("Error adding song to playlist:", error);
+        });
+    }
+
+    function toggleLike(songId) {
+        const likeButton = document.getElementById(`like-button-${songId}`);
+        const likeText = document.getElementById(`like-text-${songId}`);
+
+        // Get the current like state from the data attribute
+        const isLiked = likeButton.getAttribute("data-liked") === "true";
+
+        // Make the AJAX call to toggle the like status
+        fetch('@Url.Action("ToggleLike", "PlaySong")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ songId: songId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the like state and the button text
+                if (data.isLiked) {
+                    likeButton.setAttribute("data-liked", "true");
+                    likeText.textContent = "Đã Thích"; // Song is liked
+                } else {
+                    likeButton.setAttribute("data-liked", "false");
+                    likeText.textContent = "Thích"; // Song is unliked
+                }
+            } else {
+                alert(data.message); // Show error message if any
+            }
+        })
+        .catch(error => {
+            console.error("Error toggling like:", error);
+        });
+    }
+
+
+
+
+
+
+    </script>
+
+
 </body>
 </html>

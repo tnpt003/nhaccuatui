@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -116,8 +117,143 @@ namespace nhaccuatui.Controllers
             var relatedSongs = db.get(relatedSongsQuery);
             ViewBag.RelatedSongs = relatedSongs;
 
+            var userId = Convert.ToInt32(Session["UserID"]); // Assuming you store the logged-in user's ID in session
+
+            // Query to check if the current user has liked the song
+            var likeQuery = $@"
+    SELECT COUNT(*) 
+    FROM Likes 
+    WHERE UserID = {userId} AND SongID = {id}";
+
+            var likeCount = db.get(likeQuery); // Execute the query to check if the user has liked the song
+
+            bool isLiked = false;
+            if (likeCount != null && likeCount.Count > 0)
+            {
+                // Ensure the first item is correctly cast to an integer
+                var countStr = likeCount[0].ToString();  // Convert the first item to string
+
+                // Attempt to parse the count string into an integer
+                if (int.TryParse(countStr, out int count))
+                {
+                    // If the parse is successful, set 'isLiked' based on the count
+                    isLiked = count > 0;
+                }
+                else
+                {
+                    // If the parse fails, set 'isLiked' to false
+                    isLiked = false;
+                }
+            }
+
+            // Pass the 'isLiked' value to the view so it can be used in the HTML
+            ViewBag.IsLiked = isLiked;
+
+
             return View("PlaySong");
         }
+        [HttpPost]
+        public JsonResult AddToPlaylist(int songId, int playlistId)
+        {
+            try
+            {
+                NhaccuatuiModel db = new NhaccuatuiModel();
+
+                // Check if the song is already in the playlist
+                var checkQuery = $@"
+            SELECT * 
+            FROM PlaylistSongs 
+            WHERE PlaylistID = {playlistId} AND SongID = {songId}";
+                var checkResult = db.get(checkQuery);
+
+                if (checkResult != null && checkResult.Count > 0)
+                {
+                    return Json(new { success = false, message = "Song already in playlist" });
+                }
+
+                // Insert the song into the playlist
+                var insertQuery = $@"
+            INSERT INTO PlaylistSongs (PlaylistID, SongID) 
+            VALUES ({playlistId}, {songId})";
+                db.get(insertQuery);
+
+                return Json(new { success = true, message = "Song added to playlist" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Error: {ex.Message}" });
+            }
+        }
+
+
+        public JsonResult GetUserPlaylists()
+        {
+            var userId = Session["UserID"].ToString();
+            NhaccuatuiModel db = new NhaccuatuiModel();
+
+            var query = $@"
+            SELECT PlaylistID, Name 
+            FROM Playlists 
+            WHERE UserID = {userId}";
+            var result = db.get(query);
+
+            var playlists = result.Cast<ArrayList>().Select(row => new
+            {
+                PlaylistID = row[0].ToString(),
+                Name = row[1].ToString()
+            }).ToList();
+
+            return Json(new { success = true, playlists }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ToggleLike(int songId)
+        {
+            try
+            {
+                // Get the current user ID from the session
+                int userId = Convert.ToInt32(Session["UserID"]);
+                NhaccuatuiModel db = new NhaccuatuiModel();
+
+                // Check if the user has already liked the song
+                var checkQuery = $@"
+        SELECT * 
+        FROM Likes 
+        WHERE UserID = {userId} AND SongID = {songId}";
+
+                var checkResult = db.get(checkQuery); // Execute the query
+
+                bool isLiked = false;
+                if (checkResult != null && checkResult.Count > 0)
+                {
+                    // If the song is already liked, remove the like (unlike)
+                    var deleteQuery = $@"
+            DELETE FROM Likes
+            WHERE UserID = {userId} AND SongID = {songId}";
+                    db.get(deleteQuery); // Execute the delete query
+
+                    isLiked = false; // After deleting, it's unliked
+                }
+                else
+                {
+                    // If the song is not liked, add a like
+                    var insertQuery = $@"
+            INSERT INTO Likes (UserID, SongID, LikedDate) 
+            VALUES ({userId}, {songId}, GETDATE())";
+                    db.get(insertQuery); // Execute the insert query
+
+                    isLiked = true; // After inserting, it's liked
+                }
+
+                return Json(new { success = true, isLiked = isLiked }); // Return the updated like state
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"Error: {ex.Message}" });
+            }
+        }
+
+
 
     }
 }
