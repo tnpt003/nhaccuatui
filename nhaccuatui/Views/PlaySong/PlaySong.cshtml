@@ -78,7 +78,14 @@
                         </div>
                         <div class="related-song-actions">
                             <a href="@Url.Action("PlaySong", "PlaySong", new { id = relatedSong[0] })" class="play-action">Play ▶</a>
-                            <a href="#" class="add-action">Add to Playlist +</a>
+                            @if (Session["Username"] != null)
+                            {
+                               <a href="#" class="add-action">Add to Playlist +</a>
+                            }
+                            else
+                            {
+
+                            }
                         </div>
                     </div>
                 </div>

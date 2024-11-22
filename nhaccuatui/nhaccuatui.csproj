@@ -313,6 +313,7 @@
     <Content Include="css\LoginRegister\login-register.css" />
     <Content Include="css\main.css" />
     <Content Include="css\Site.css" />
+    <Content Include="css\User\User.css" />
     <Content Include="favicon.ico" />
     <Content Include="Image\Assets\favicon.ico" />
     <Content Include="Image\Data\Song One.jpg" />
@@ -322,6 +323,7 @@
     <Content Include="Image\NhacCuaTui_2022logo.png" />
     <Content Include="Global.asax" />
     <Content Include="js\Admin.js" />
+    <Content Include="js\User.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -381,6 +383,8 @@
     <Content Include="Views\Home\backupIndex - Copy.cshtml" />
     <Content Include="Views\PlaySong\Core.cshtml" />
     <Content Include="Views\PlaySong\PlaySong.cshtml" />
+    <Content Include="Views\User\index.cshtml" />
+    <Content Include="Views\User\ViewPlaylist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

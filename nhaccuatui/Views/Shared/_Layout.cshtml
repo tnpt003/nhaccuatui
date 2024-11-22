@@ -287,7 +287,9 @@
                     {
                         var username = Session["Username"].ToString(); // Get the username from session
                         <li>
-                            <a href="@Url.Action("Profile", "User")" class="profile">@username</a> <!-- Display the username -->
+                            <a href="@Url.Action("Index", "User", new { userId = Session["UserID"] })" class="profile">
+                                @Session["Username"]
+                            </a> <!-- Display the username and link to the User page -->
                         </li>
                         <li>
                             <a href="@Url.Action("Logout", "LoginRegister")" class="logout">Đăng xuất</a> <!-- Logout link -->

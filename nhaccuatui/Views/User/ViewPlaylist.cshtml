@@ -1,0 +1,163 @@
+﻿@using System.Collections
+@{
+    ViewBag.Title = "ViewPlaylist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Playlist Details Page Styles */
+
+    .playlist-details-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .playlist-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .playlist-info h1 {
+        font-size: 2em;
+        margin: 10px 0;
+    }
+
+    .playlist-info p {
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .songs-section {
+        margin-top: 20px;
+    }
+
+    .songs-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .song-item {
+        display: flex;
+        align-items: center;
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .song-thumbnail {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .song-info h3 {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    .song-info p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .play-btn {
+        margin-left: auto;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .play-btn:hover {
+            background: #0056b3;
+        }
+
+    /* Audio Player */
+    .audio-player {
+        display: none;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    audio {
+        width: 100%;
+        max-width: 600px;
+    }
+</style>
+
+<div class="playlist-details-container">
+    <header class="playlist-header">
+        @if (ViewBag.PlaylistDetails != null)
+        {
+            var playlist = ViewBag.PlaylistDetails as ArrayList;
+            <div class="playlist-info">
+                <h1>@playlist[0]</h1> <!-- Playlist Name -->
+                <p>@playlist[1] bài hát</p> <!-- Song Count -->
+            </div>
+        }
+        else
+        {
+            <p>Không tìm thấy thông tin playlist.</p>
+        }
+    </header>
+
+    <section class="songs-section">
+        @if (ViewBag.Songs != null && ViewBag.Songs.Count > 0)
+        {
+            <ul class="songs-list">
+                @foreach (var song in ViewBag.Songs)
+                {
+                    var s = song as ArrayList;
+                    <li class="song-item">
+                        <img src="@s[3]" alt="Song Thumbnail" class="song-thumbnail" /> <!-- ImageUrl -->
+                        <div class="song-info">
+                            <h3>@s[1]</h3> <!-- Song Title -->
+                            <p>@s[2]</p> <!-- Song Duration -->
+                        </div>
+                        <button class="play-btn" onclick="playSong('@Url.Content("~/Audio/" + s[4])')">Phát</button> <!-- FileUrl (play song) -->
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Không có bài hát trong playlist này.</p>
+        }
+    </section>
+
+    <div class="audio-player">
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</div>
+
+<script>
+    function playSong(fileUrl) {
+        // Set the audio source to the file URL and display the audio player
+        var audioPlayer = document.getElementById('audioPlayer');
+        var audioSource = document.getElementById('audioSource');
+
+        // Update the source with the selected song's FileUrl
+        audioSource.src = fileUrl;
+
+        // Load the new song and play it
+        audioPlayer.load();
+        audioPlayer.play();
+
+        // Show the audio player
+        document.querySelector('.audio-player').style.display = 'block';
+    }
+</script>

@@ -1,0 +1,108 @@
+﻿@using System.Collections
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Cá Nhân - NhacCuaTui Clone</title>
+    <link href="~/css/User/User.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="profile-header">
+        <div class="avatar">
+            <img src="../Image/LoginRegister/facebook.png" alt="Avatar">
+        </div>
+        <div class="user-info">
+            @if (ViewBag.User != null)
+            {
+                var user = ViewBag.User as ArrayList;
+                <h1>@user[1]</h1> <!-- Assuming Username is at index 1 -->
+                <div class="user-details">
+                    <p><strong>UserID:</strong> @user[0]</p> <!-- Assuming UserID is at index 0 -->
+                    <p><strong>Email:</strong> @user[2]</p> <!-- Assuming Email is at index 2 -->
+                    <p><strong>Ngày tham gia:</strong> @Convert.ToDateTime(user[4]).ToString("dd/MM/yyyy")</p> <!-- Assuming DateJoined is at index 4 -->
+                </div>
+            }
+            else
+            {
+                <p>Không thể tải thông tin người dùng.</p>
+            }
+            <button class="follow-btn" onclick="toggleFollow()"><i class="fas fa-user-plus"></i> Theo dõi</button>
+            <button class="share-btn"><i class="fas fa-share-alt"></i> Chia sẻ</button>
+        </div>
+    </header>
+
+    <nav class="profile-nav">
+        <ul>
+            <li><a href="#">Playlist</a></li>
+            <li><a href="#">Bài hát yêu thích</a></li>
+            <li><a href="#">Album</a></li>
+        </ul>
+    </nav>
+
+
+    <div class="playlist-section">
+        <div class="section-header">
+            <h2>Playlist</h2>
+            <button class="create-playlist-btn" onclick="openModal()">Tạo Playlist</button>
+        </div>
+        @if (ViewBag.Playlists != null)
+        {
+            foreach (var playlist in ViewBag.Playlists)
+            {
+                var pl = playlist as ArrayList;
+                var userId = ViewBag.UserID; // Assuming UserID is available in ViewBag
+                <div class="playlist-item">
+                    <img src="~/Image/LoginRegister/facebook.png" alt="Playlist Thumbnail">
+                    <div class="playlist-info">
+                        <h3>@pl[1]</h3> <!-- Playlist Name -->
+                        <p>Có @pl[2] bài hát</p> <!-- Song Count -->
+                    </div>
+                    <div class="playlist-actions">
+                        <!-- Link to view the playlist -->
+                        <button class="view-btn"
+                                onclick="location.href='@Url.Action("ViewPlaylist", "User", new { playlistId = pl[0], userId = userId })'">
+                            Xem
+                        </button>
+
+                        <!-- Form for deleting the playlist -->
+                        <form method="post" action="@Url.Action("DeletePlaylist", "User")" style="display: inline;">
+                            <input type="hidden" name="playlistId" value="@pl[0]" />
+                            <input type="hidden" name="userId" value="@userId" />
+                            <button type="submit" class="delete-btn"
+                                    onclick="return confirm('Bạn có chắc chắn muốn xóa playlist này?');">
+                                Xóa
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Không có playlist nào.</p>
+        }
+
+
+    </div>
+
+    <div id="playlistModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3>Tạo Playlist Mới</h3>
+            <form method="post" action="@Url.Action("CreatePlaylist", "User", new { userId = ViewBag.UserID })">
+                <input type="text" name="playlistName" placeholder="Nhập tên playlist" required>
+                <button type="submit" class="save-btn">Lưu Playlist</button>
+            </form>
+        </div>
+    </div>
+    <script src="~/js/User.js"></script>
+</body>
+</html>
+
+
