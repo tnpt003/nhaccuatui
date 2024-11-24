@@ -83,75 +83,66 @@ namespace nhaccuatui.Controllers
             // Initialize the database model
             NhaccuatuiModel db = new NhaccuatuiModel();
 
-            // Query to get the song details including the album, artist, and genre
+            // Query to get the song details
             string songQuery = @"
-        SELECT s.SongID, s.Title AS SongTitle, s.FileUrl, s.ImageUrl, a.Title AS AlbumTitle, 
-               g.Name AS GenreName, ar.Name AS ArtistName
-        FROM Songs s
-        JOIN Albums a ON s.AlbumID = a.AlbumID
-        JOIN Genres g ON s.GenreID = g.GenreID
-        JOIN Artists ar ON a.ArtistID = ar.ArtistID
-        WHERE s.SongID = " + id;
+    SELECT s.SongID, s.Title AS SongTitle, s.FileUrl, s.ImageUrl, a.Title AS AlbumTitle, 
+           g.Name AS GenreName, ar.Name AS ArtistName
+    FROM Songs s
+    JOIN Albums a ON s.AlbumID = a.AlbumID
+    JOIN Genres g ON s.GenreID = g.GenreID
+    JOIN Artists ar ON a.ArtistID = ar.ArtistID
+    WHERE s.SongID = " + id;
 
             var songDetails = db.get(songQuery);
             ViewBag.SongDetails = songDetails.Count > 0 ? songDetails[0] : null;
 
-            // Query to fetch the top 5 random albums (no dependency on SongID or ArtistID)
+            // Query to fetch the top 5 random albums
             string playlistQuery = @"
-        SELECT TOP 5 a.AlbumID, a.Title AS AlbumTitle, a.CoverImageUrl, ar.Name AS ArtistName
-        FROM Albums a
-        JOIN Artists ar ON a.ArtistID = ar.ArtistID
-        ORDER BY NEWID()";
+    SELECT TOP 5 a.AlbumID, a.Title AS AlbumTitle, a.CoverImageUrl, ar.Name AS ArtistName
+    FROM Albums a
+    JOIN Artists ar ON a.ArtistID = ar.ArtistID
+    ORDER BY NEWID()";
 
             var playlist = db.get(playlistQuery);
             ViewBag.Playlist = playlist;
 
-            // Query to fetch related songs from the same genre
+            // Query to fetch related songs
             string relatedSongsQuery = @"
-        SELECT s.SongID, s.Title AS SongTitle, ar.Name AS ArtistName
-        FROM Songs s
-        JOIN Albums a ON s.AlbumID = a.AlbumID
-        JOIN Artists ar ON a.ArtistID = ar.ArtistID
-        WHERE s.GenreID = (SELECT GenreID FROM Songs WHERE SongID = " + id + ") AND s.SongID != " + id;
+    SELECT s.SongID, s.Title AS SongTitle, ar.Name AS ArtistName
+    FROM Songs s
+    JOIN Albums a ON s.AlbumID = a.AlbumID
+    JOIN Artists ar ON a.ArtistID = ar.ArtistID
+    WHERE s.GenreID = (SELECT GenreID FROM Songs WHERE SongID = " + id + ") AND s.SongID != " + id;
 
             var relatedSongs = db.get(relatedSongsQuery);
             ViewBag.RelatedSongs = relatedSongs;
 
-            var userId = Convert.ToInt32(Session["UserID"]); // Assuming you store the logged-in user's ID in session
+            // Query to check if the user has liked the song
+            var userId = Convert.ToInt32(Session["UserID"]); // Ensure correct user ID from session
 
-            // Query to check if the current user has liked the song
             var likeQuery = $@"
     SELECT COUNT(*) 
     FROM Likes 
     WHERE UserID = {userId} AND SongID = {id}";
 
-            var likeCount = db.get(likeQuery); // Execute the query to check if the user has liked the song
+            var likeCount = db.get(likeQuery); // Execute the query
 
             bool isLiked = false;
             if (likeCount != null && likeCount.Count > 0)
             {
-                // Ensure the first item is correctly cast to an integer
-                var countStr = likeCount[0].ToString();  // Convert the first item to string
-
-                // Attempt to parse the count string into an integer
+                var countStr = likeCount[0].ToString();
                 if (int.TryParse(countStr, out int count))
                 {
-                    // If the parse is successful, set 'isLiked' based on the count
                     isLiked = count > 0;
-                }
-                else
-                {
-                    // If the parse fails, set 'isLiked' to false
-                    isLiked = false;
                 }
             }
 
-            // Pass the 'isLiked' value to the view so it can be used in the HTML
+            // Pass the 'isLiked' value to the view
             ViewBag.IsLiked = isLiked;
-
 
             return View("PlaySong");
         }
+
         [HttpPost]
         public JsonResult AddToPlaylist(int songId, int playlistId)
         {
@@ -211,47 +202,45 @@ namespace nhaccuatui.Controllers
         {
             try
             {
-                // Get the current user ID from the session
-                int userId = Convert.ToInt32(Session["UserID"]);
+                int userId = Convert.ToInt32(Session["UserID"]); // Get the current user ID
                 NhaccuatuiModel db = new NhaccuatuiModel();
 
-                // Check if the user has already liked the song
                 var checkQuery = $@"
         SELECT * 
         FROM Likes 
         WHERE UserID = {userId} AND SongID = {songId}";
 
-                var checkResult = db.get(checkQuery); // Execute the query
+                var checkResult = db.get(checkQuery); // Check if the user has liked the song
 
                 bool isLiked = false;
                 if (checkResult != null && checkResult.Count > 0)
                 {
-                    // If the song is already liked, remove the like (unlike)
                     var deleteQuery = $@"
-            DELETE FROM Likes
+            DELETE FROM Likes 
             WHERE UserID = {userId} AND SongID = {songId}";
-                    db.get(deleteQuery); // Execute the delete query
+                    db.get(deleteQuery); // Execute delete query
 
-                    isLiked = false; // After deleting, it's unliked
+                    isLiked = false; // Unliked the song
                 }
                 else
                 {
-                    // If the song is not liked, add a like
                     var insertQuery = $@"
             INSERT INTO Likes (UserID, SongID, LikedDate) 
             VALUES ({userId}, {songId}, GETDATE())";
-                    db.get(insertQuery); // Execute the insert query
+                    db.get(insertQuery); // Insert like into the database
 
-                    isLiked = true; // After inserting, it's liked
+                    isLiked = true; // Liked the song
                 }
 
-                return Json(new { success = true, isLiked = isLiked }); // Return the updated like state
+                // Return the updated like state
+                return Json(new { success = true, isLiked = isLiked });
             }
             catch (Exception ex)
             {
                 return Json(new { success = false, message = $"Error: {ex.Message}" });
             }
         }
+
 
 
 

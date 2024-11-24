@@ -54,6 +54,11 @@
 
         <!-- Page content wrapper-->
         <div class="container-fluid">
+            <!-- Search Form -->
+            <form method="get" action="~/Admin/Index">
+                <input type="text" name="title" placeholder="Search by Title..." value="@ViewBag.SearchTerm" />
+                <button type="submit">Search</button>
+            </form>
             <!-- Songs Management and List Section -->
             <div id="songs-section" class="section" style="display: none;">
                 <div id="manage-songs">
@@ -101,26 +106,29 @@
                         <th>Album</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var song in ViewBag.list)
+                    @if (ViewBag.List != null && ViewBag.List.Count > 0)
                     {
-                        <tr>
-                            <td><img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" /></td>
-                            <td>
-                                <audio controls>
-                                    <source src="~/Audio/@song[6]" type="audio/mp3">
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </td>
-                            <td>@song[3]</td>
-                            <td>@song[4]</td>
-                            <td>@song[5]</td>
-                            <td>@song[2]</td>
-                            <td>@song[1]</td>
-                            <td>
-                                <a href="~/Song/DeleteSong?songId=@song[0]">Xóa</a> |
-                                <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
-                            </td>
-                        </tr>
+                        foreach (var song in ViewBag.list)
+                        {
+                            <tr>
+                                <td><img src="~/Image/Data/@song[7]" alt="@song[7]" style="width:100px;height:auto;" /></td>
+                                <td>
+                                    <audio controls>
+                                        <source src="~/Audio/@song[6]" type="audio/mp3">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </td>
+                                <td>@song[3]</td>
+                                <td>@song[4]</td>
+                                <td>@song[5]</td>
+                                <td>@song[2]</td>
+                                <td>@song[1]</td>
+                                <td>
+                                    <a href="~/Song/DeleteSong?songId=@song[0]">Xóa</a> |
+                                    <a href="~/Song/GetSongUpdate?id=@song[0]">Update</a>
+                                </td>
+                            </tr>
+                        }
                     }
                 </table>
             </div>
@@ -145,16 +153,19 @@
                         <th>Tên Thể Loại</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var genre in ViewBag.ListGe)
+                    @if (ViewBag.ListGe != null && ViewBag.ListGe.Count > 0)
                     {
-                        <tr>
-                            <td>@genre[1]</td>
-                            <td>
-                                <a href="~/Genre/DeleteGenre?genreId=@genre[0]">Xóa</a> |
-                                <a href="~/Genre/GetGenreUpdate?id=@genre[0]">Cập Nhật</a>
-                            </td>
+                        foreach (var genre in ViewBag.ListGe)
+                        {
+                            <tr>
+                                <td>@genre[1]</td>
+                                <td>
+                                    <a href="~/Genre/DeleteGenre?genreId=@genre[0]">Xóa</a> |
+                                    <a href="~/Genre/GetGenreUpdate?id=@genre[0]">Cập Nhật</a>
+                                </td>
 
-                        </tr>
+                            </tr>
+                        }
                     }
                 </table>
             </div>
@@ -182,19 +193,22 @@
                         <th>Quốc Gia</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var artist in ViewBag.ListAr)
+                    @if (ViewBag.ListAr != null && ViewBag.ListAr.Count > 0)
                     {
-                        <tr>
-                            <td>@artist[1]</td> <!-- Artist Name -->
-                            <td>@artist[3]</td> <!-- Country -->
-                            <td>
-                                <a href="~/Artist/DeleteArtist?artistId=@artist[0]">Xóa</a> |
-                                <a href="~/Artist/GetArtistUpdate?id=@artist[0]">Cập Nhật</a>
-                            </td>
+                        foreach (var artist in ViewBag.ListAr)
+                        {
+                            <tr>
+                                <td>@artist[1]</td> <!-- Artist Name -->
+                                <td>@artist[3]</td> <!-- Country -->
+                                <td>
+                                    <a href="~/Artist/DeleteArtist?artistId=@artist[0]">Xóa</a> |
+                                    <a href="~/Artist/GetArtistUpdate?id=@artist[0]">Cập Nhật</a>
+                                </td>
 
-                        </tr>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
             <!-- Albums Management and List Section -->
@@ -233,24 +247,27 @@
                         <th>Ảnh Bìa</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var album in ViewBag.ListAl)
+                    @if (ViewBag.ListAl != null && ViewBag.ListAl.Count > 0)
                     {
-                        <tr>
-                            <td>@album[2]</td> <!-- Album Title -->
-                            <td>@album[3]</td> <!-- Release Date -->
-                            <td>
-                                @if (!string.IsNullOrEmpty(album[4]?.ToString()))
-                                {
-                                    <img src="~/Image/Data/@album[4]" width="50" height="50" />
-                                }
-                            </td>
-                            <td>
-                                <a href="~/Album/DeleteAlbum?albumId=@album[0]">Xóa</a> |
-                                <a href="~/Album/GetAlbumUpdate?id=@album[0]">Cập Nhật</a>
-                            </td>
-                        </tr>
+                        foreach (var album in ViewBag.ListAl)
+                        {
+                            <tr>
+                                <td>@album[2]</td> <!-- Album Title -->
+                                <td>@album[3]</td> <!-- Release Date -->
+                                <td>
+                                    @if (!string.IsNullOrEmpty(album[4]?.ToString()))
+                                    {
+                                        <img src="~/Image/Data/@album[4]" width="50" height="50" />
+                                    }
+                                </td>
+                                <td>
+                                    <a href="~/Album/DeleteAlbum?albumId=@album[0]">Xóa</a> |
+                                    <a href="~/Album/GetAlbumUpdate?id=@album[0]">Cập Nhật</a>
+                                </td>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
             <!-- Users Management and List Section -->
@@ -277,19 +294,22 @@
                         <th>Ngày Tham Gia</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var user in ViewBag.ListUs)
+                    @if (ViewBag.ListUs != null && ViewBag.ListUs.Count > 0)
                     {
-                        <tr>
-                            <td>@user[1]</td> <!-- Username -->
-                            <td>@user[2]</td> <!-- Email -->
-                            <td>@user[4]</td> <!-- DateJoined -->
-                            <td>
-                                <a href="~/User/DeleteUser?userId=@user[0]">Xóa</a> |
-                                <a href="~/User/GetUserUpdate?id=@user[0]">Cập Nhật</a>
-                            </td>
-                        </tr>
+                        foreach (var user in ViewBag.ListUs)
+                        {
+                            <tr>
+                                <td>@user[1]</td> <!-- Username -->
+                                <td>@user[2]</td> <!-- Email -->
+                                <td>@user[4]</td> <!-- DateJoined -->
+                                <td>
+                                    <a href="~/User/DeleteUser?userId=@user[0]">Xóa</a> |
+                                    <a href="~/User/GetUserUpdate?id=@user[0]">Cập Nhật</a>
+                                </td>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
             <!-- Playlists Management and List Section -->
@@ -322,18 +342,21 @@
                         <th>Ngày Tạo</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var playlist in ViewBag.ListPl)
+                    @if (ViewBag.ListPl != null && ViewBag.ListPl.Count > 0)
                     {
-                        <tr>
-                            <td>@playlist[2]</td> <!-- Playlist Name -->
-                            <td>@playlist[3]</td> <!-- Created Date -->
-                            <td>
-                                <a href="~/Playlist/DeletePlaylist?playlistId=@playlist[0]">Xóa</a> |
-                                <a href="~/Playlist/GetPlaylistUpdate?id=@playlist[0]">Cập Nhật</a>
-                            </td>
-                        </tr>
+                        foreach (var playlist in ViewBag.ListPl)
+                        {
+                            <tr>
+                                <td>@playlist[2]</td> <!-- Playlist Name -->
+                                <td>@playlist[3]</td> <!-- Created Date -->
+                                <td>
+                                    <a href="~/Playlist/DeletePlaylist?playlistId=@playlist[0]">Xóa</a> |
+                                    <a href="~/Playlist/GetPlaylistUpdate?id=@playlist[0]">Cập Nhật</a>
+                                </td>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
             <!-- Playlist Songs Management and List Section -->
@@ -381,20 +404,23 @@
                         <th>Ngày Thêm</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var item in ViewBag.listPlS)
+                    @if (ViewBag.ListPlS != null && ViewBag.ListPlS.Count > 0)
                     {
-                        <tr>
-                            <td>@item[1]</td> <!-- Playlist Name -->
-                            <td>@item[3]</td> <!-- Song Title -->
-                            <td>@item[4]</td> <!-- Added Date -->
-                            <td>
-                                <a href="~/PlaylistSong/DeleteSongFromPlaylist?playlistId=@item[0]&songId=@item[2]">Xóa</a>
-                                <a href="~/PlaylistSong/GetPlaylistSongUpdate?playlistId=@item[0]&songId=@item[2]">Cập Nhật</a>
-                                <!-- Assuming PlaylistID at index 0, Playlist Name at index 1, SongID at index 2, Song Title at index 3 -->
-                            </td>
-                        </tr>
+                        foreach (var item in ViewBag.listPlS)
+                        {
+                            <tr>
+                                <td>@item[1]</td> <!-- Playlist Name -->
+                                <td>@item[3]</td> <!-- Song Title -->
+                                <td>@item[4]</td> <!-- Added Date -->
+                                <td>
+                                    <a href="~/PlaylistSong/DeleteSongFromPlaylist?playlistId=@item[0]&songId=@item[2]">Xóa</a>
+                                    <a href="~/PlaylistSong/GetPlaylistSongUpdate?playlistId=@item[0]&songId=@item[2]">Cập Nhật</a>
+                                    <!-- Assuming PlaylistID at index 0, Playlist Name at index 1, SongID at index 2, Song Title at index 3 -->
+                                </td>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
             <!-- Like Management Section -->
@@ -441,20 +467,23 @@
                         <th>Ngày Like</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var item in ViewBag.listLi)
+                    @if (ViewBag.ListLi != null && ViewBag.ListLi.Count > 0)
                     {
-                        <tr>
-                            <td>@item[1]</td> <!-- User Name -->
-                            <td>@item[2]</td> <!-- Song Title -->
-                            <td>@item[3]</td> <!-- Liked Date -->
-                            <td>
-                                <a href="~/Like/DeleteLike?likeId=@item[0]">Xóa</a>
-                                <a href="~/Like/GetLikeDetails?likeId=@item[0]">Cập Nhật</a>
-                                <!-- Assuming LikeID at index 0, UserID at index 1, SongID at index 2, Song Title at index 3 -->
-                            </td>
-                        </tr>
+                        foreach (var item in ViewBag.listLi)
+                        {
+                            <tr>
+                                <td>@item[1]</td> <!-- User Name -->
+                                <td>@item[2]</td> <!-- Song Title -->
+                                <td>@item[3]</td> <!-- Liked Date -->
+                                <td>
+                                    <a href="~/Like/DeleteLike?likeId=@item[0]">Xóa</a>
+                                    <a href="~/Like/GetLikeDetails?likeId=@item[0]">Cập Nhật</a>
+                                    <!-- Assuming LikeID at index 0, UserID at index 1, SongID at index 2, Song Title at index 3 -->
+                                </td>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
             <!-- Comment Management Section -->
@@ -506,21 +535,24 @@
                         <th>Ngày Bình Luận</th>
                         <th>Hành Động</th>
                     </tr>
-                    @foreach (var item in ViewBag.listCo)
+                    @if (ViewBag.ListCo != null && ViewBag.ListCo.Count > 0)
                     {
-                        <tr>
-                            <td>@item[1]</td> <!-- User Name -->
-                            <td>@item[2]</td> <!-- Song Title -->
-                            <td>@item[3]</td> <!-- Comment Text -->
-                            <td>@item[4]</td> <!-- Comment Date -->
-                            <td>
-                                <a href="~/Comment/DeleteComment?commentId=@item[0]">Xóa</a>
-                                <a href="~/Comment/GetCommentDetails?commentId=@item[0]">Cập Nhật</a>
-                                <!-- Assuming CommentID at index 0, UserID at index 1, SongID at index 2, Comment Text at index 3, Comment Date at index 4 -->
-                            </td>
-                        </tr>
+                        foreach (var item in ViewBag.listCo)
+                        {
+                            <tr>
+                                <td>@item[1]</td> <!-- User Name -->
+                                <td>@item[2]</td> <!-- Song Title -->
+                                <td>@item[3]</td> <!-- Comment Text -->
+                                <td>@item[4]</td> <!-- Comment Date -->
+                                <td>
+                                    <a href="~/Comment/DeleteComment?commentId=@item[0]">Xóa</a>
+                                    <a href="~/Comment/GetCommentDetails?commentId=@item[0]">Cập Nhật</a>
+                                    <!-- Assuming CommentID at index 0, UserID at index 1, SongID at index 2, Comment Text at index 3, Comment Date at index 4 -->
+                                </td>
+                            </tr>
+                        }
                     }
-                </table>
+                    </table>
             </div>
 
 

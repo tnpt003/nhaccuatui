@@ -34,7 +34,7 @@
                 </div>
                 <div class="section-title">QUỐC TẾ NỔI BẬT</div>
                 <div class="playlist">
-                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums1 ?? new ArrayList())
                     {
                         // Ensure there is data at the expected indices
                         string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
@@ -51,7 +51,7 @@
 
                 <div class="section-title">TÂM TRẠNG HÔM NAY</div>
                 <div class="playlist">
-                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums2 ?? new ArrayList())
                     {
                         // Ensure there is data at the expected indices
                         string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
@@ -68,7 +68,7 @@
 
                 <div class="section-title">MỚI PHÁT HÀNH</div>
                 <div class="playlist">
-                    @foreach (ArrayList album in ViewBag.listRandomAlbums ?? new ArrayList())
+                    @foreach (ArrayList album in ViewBag.listRandomAlbums3 ?? new ArrayList())
                     {
                         // Ensure there is data at the expected indices
                         string albumId = album.Count > 0 ? album[0]?.ToString() : "0"; // AlbumID, defaulting to "0" if unavailable
@@ -97,7 +97,7 @@
                     {
                         int songID = song.Count > 0 ? Convert.ToInt32(song[0]) : 0; // Assuming SongID is at index 0
                         string songTitle = song.Count > 1 ? song[1]?.ToString() : "Unknown Title";
-                        string artistName = song.Count > 5 ? song[5]?.ToString() : "Unknown Artist";
+                        string artistName = song.Count > 6 ? song[6]?.ToString() : "Unknown Artist";
                         string coverImageUrl = song.Count > 2 ? song[3]?.ToString() : "default.jpg";
 
                         <div class="song-item" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">

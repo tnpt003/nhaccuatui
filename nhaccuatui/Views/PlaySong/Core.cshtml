@@ -86,7 +86,7 @@
                     {
                         int songID = ranksong.Count > 0 ? Convert.ToInt32(ranksong[0]) : 0; // Assuming SongID is at index 0
                         string songTitle = ranksong.Count > 1 ? ranksong[1]?.ToString() : "Unknown Title";
-                        string artistName = ranksong.Count > 5 ? ranksong[5]?.ToString() : "Unknown Artist";
+                        string artistName = ranksong.Count > 5 ? ranksong[6]?.ToString() : "Unknown Artist";
                         string coverImageUrl = ranksong.Count > 2 ? ranksong[3]?.ToString() : "default.jpg";
 
                         <div class="song-item" onclick="location.href='@Url.Action("PlaySong", "PlaySong", new { id = songID })';">

@@ -15,6 +15,12 @@ namespace nhaccuatui.Controllers
             NhaccuatuiModel db = new NhaccuatuiModel();
             // Pass the result to the view
             ViewBag.listRandomAlbums = db.get("SELECT TOP 5 * FROM Albums ORDER BY NEWID()");
+            // Pass the result to the view
+            ViewBag.listRandomAlbums1 = db.get("SELECT TOP 5 * FROM Albums ORDER BY NEWID()");
+            // Pass the result to the view
+            ViewBag.listRandomAlbums2 = db.get("SELECT TOP 5 * FROM Albums ORDER BY NEWID()");
+            // Pass the result to the view
+            ViewBag.listRandomAlbums3 = db.get("SELECT TOP 5 * FROM Albums ORDER BY NEWID()");
             // SQL query to get top 5 songs by like count
             ViewBag.rank1Song = db.get(@"
         SELECT TOP 1 
@@ -56,12 +62,6 @@ namespace nhaccuatui.Controllers
         GROUP BY s.SongID, s.Title, s.FileUrl, s.AlbumID, s.ReleaseDate, a.Name
         ORDER BY LikeCount DESC
         OFFSET 1 ROWS FETCH NEXT 9 ROWS ONLY");
-
-            return View();
-        }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
